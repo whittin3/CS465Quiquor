@@ -7,18 +7,24 @@
 }
 
 .cup {
-  -fx-background-color: #2f4f4f;
-  -fx-background-image: url("images/cup.jpg");
+    -fx-background-color: white;
+    -fx-background-image: url("images/cup.jpg");
+    -fx-background-size: 500, 500;
+    -fx-background-repeat: no-repeat;
+    -fx-border-color: #2e8b57;
+    -fx-border-width: 2px;
+    -fx-padding: 10;
+    -fx-spacing: 8;
 }
 
 /*CSS for the GUIDrinkController*/
 .drink-cell-0 {
-     -fx-fill: yellow;
-     -fx-stroke: green;
-     -fx-stroke-width: 5;
-     -fx-stroke-dash-array: 12 2 4 2;
-     -fx-stroke-dash-offset: 6;
-     -fx-stroke-line-cap: butt;
+    -fx-fill: yellow;
+    -fx-stroke: green;
+    -fx-stroke-width: 5;
+    -fx-stroke-dash-array: 12 2 4 2;
+    -fx-stroke-dash-offset: 6;
+    -fx-stroke-line-cap: butt;
  }
 
 .drink-cell-1{

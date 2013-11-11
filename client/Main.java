@@ -24,7 +24,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
         root.getStylesheets().add(styleSheet);
         primaryStage.setTitle("Welcome to Quiqour");
-        primaryStage.setScene(new Scene(root, 600, 675));
+        primaryStage.setScene(new Scene(root, 550, 550));
         primaryStage.show();
     }
 
@@ -36,7 +36,7 @@ public class Main extends Application {
         GUIDrinkController guiDrinkController = new GUIDrinkController();
         guiDrinkController.addIngredient(test1);
         guiDrinkController.addIngredient(test2);
-        Scene root = new Scene(guiDrinkController, 600, 600);
+        Scene root = new Scene(guiDrinkController, 550, 550);
         root.getStylesheets().add(styleSheet);
         primaryStage.setScene(root);
         primaryStage.show();

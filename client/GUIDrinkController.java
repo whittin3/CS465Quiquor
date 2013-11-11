@@ -22,8 +22,8 @@ import java.util.List;
 public class GUIDrinkController extends AnchorPane{
     private static final int MAX_HEIGHT = 400;
     private static final int MAX_WIDTH = Cell.MAX_WIDTH + 30;
-    private static final double CUP_BOTTOM_OFFSET = 10.0;
-    private static final double CUP_LEFT_OFFSET = 10.0;
+    private static final double CUP_BOTTOM_OFFSET = 150.0;
+    private static final double CUP_LEFT_OFFSET = 140.0;
     List<String> ingredientList;
     private final VBox vBox = new VBox();
 
@@ -62,9 +62,9 @@ public class GUIDrinkController extends AnchorPane{
      */
     private static class Cell extends StackPane {
 
-        private static final int MAX_WIDTH = 200;
+        private static final int MAX_WIDTH = 282;
         private static final double MIN_HEIGHT = 20;
-        private static final int STARTING_HEIGHT = 150;
+        private static final int STARTING_HEIGHT = 50;
         private static final int HORIZONTAL_MARGIN = 7;
         private double y;
         private boolean dragging;
