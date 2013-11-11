@@ -22,7 +22,6 @@ public class Main extends Application {
 
     private void init(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
-
         root.getStylesheets().add(styleSheet);
         primaryStage.setTitle("Welcome to Quiqour");
         primaryStage.setScene(new Scene(root, 600, 675));
@@ -30,11 +29,16 @@ public class Main extends Application {
     }
 
     private void demo(Stage primaryStage) {
-        pumpMap.put(new Ingredient("test1"), 0);
-        pumpMap.put(new Ingredient("test2"), 1);
+        Ingredient test1 = new Ingredient("test1");
+        Ingredient test2 = new Ingredient("test2");
+        pumpMap.put(test1, 0);
+        pumpMap.put(test2, 1);
         GUIDrinkController guiDrinkController = new GUIDrinkController();
-        Scene root = guiDrinkController.init(primaryStage);
+        guiDrinkController.addIngredient(test1);
+        guiDrinkController.addIngredient(test2);
+        Scene root = new Scene(guiDrinkController, 600, 600);
         root.getStylesheets().add(styleSheet);
+        primaryStage.setScene(root);
         primaryStage.show();
     }
 

@@ -1,14 +1,14 @@
 .dark-gradientpane {
   -fx-background-radius: 10;
-  -fx-background-color:
-         radial-gradient(radius 100%,
-                          derive(-fx-base,-60%),
-                          derive(-fx-base,-80%)),
+  -fx-background-color: radial-gradient(radius 100%, derive(-fx-base,-60%), derive(-fx-base,-80%)),
          derive(-fx-base,-40%),
-         radial-gradient(radius 100%,
-                          derive(-fx-base,-60%),
-                          derive(-fx-base,-80%));
+         radial-gradient(radius 100%, derive(-fx-base,-60%), derive(-fx-base,-80%));
   -fx-background-insets: 0,1,2;
+}
+
+.cup {
+  -fx-background-color: #2f4f4f;
+  -fx-background-image: url("images/cup.jpg");
 }
 
 /*CSS for the GUIDrinkController*/
@@ -20,13 +20,22 @@
      -fx-stroke-dash-offset: 6;
      -fx-stroke-line-cap: butt;
  }
- .drink-cell-1 {
-      -fx-fill: red;
-      -fx-stroke: black;
-      -fx-stroke-width: 5;
-      -fx-stroke-dash-array: 12 2 4 2;
-      -fx-stroke-dash-offset: 6;
-      -fx-stroke-line-cap: butt;
-  }
+
+.drink-cell-1{
+    -fx-fill  : linear-gradient(from 50% 0% to 50% 100%,rgb(207, 0, 58) 0%, rgb(129, 0, 33) 100%);
+    -fx-stroke: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+}
+
+.drink-cell-3 {
+    -fx-fill: red;
+    -fx-stroke: black;
+    -fx-stroke-width: 5;
+    -fx-stroke-dash-array: 12 2 4 2;
+    -fx-stroke-dash-offset: 6;
+    -fx-stroke-line-cap: butt;
+}
 
  /*CSS for the GUIDrinkController*/
