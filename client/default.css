@@ -1,0 +1,29 @@
+.dark-gradientpane {
+  -fx-background-radius: 10;
+  -fx-background-color:
+         radial-gradient(radius 100%,
+                          derive(-fx-base,-60%),
+                          derive(-fx-base,-80%)),
+         derive(-fx-base,-40%),
+         radial-gradient(radius 100%,
+                          derive(-fx-base,-60%),
+                          derive(-fx-base,-80%));
+  -fx-background-insets: 0,1,2;
+}
+.rounded {
+       -fx-border-color: dodgerblue;
+       -fx-border-width: 2px;
+       -fx-border-radius: 15px;
+       -fx-padding: 20px;
+}
+#hiddenSplitter {
+    -fx-background-color: null;
+    -fx-padding: 5px;
+}
+#hiddenSplitter *.split-pane-divider,
+        #hiddenSplitter *.vertical-grabber,
+        #hiddenSplitter *.horizontal-grabber {
+    -fx-background-color: null;
+    -fx-border-color: null;
+    -fx-padding: 4px;
+}
