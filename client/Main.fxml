@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-stylesheet style.css?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.Controller">
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.Welcome">
   <children>
     <StackPane minHeight="300.0" minWidth="300.0" prefHeight="300.0" prefWidth="300.0" styleClass="dark-gradientpane">
       <children>

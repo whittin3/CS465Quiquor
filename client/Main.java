@@ -21,7 +21,7 @@ public class Main extends Application {
     }
 
     private void init(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         root.getStylesheets().add(styleSheet);
         primaryStage.setTitle("Welcome to Quiqour");
         primaryStage.setScene(new Scene(root, 550, 550));

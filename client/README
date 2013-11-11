@@ -1,0 +1,6 @@
+Following the advice seen at      :
+    http://stackoverflow.com/questions/16176701/switch-between-panes-in-javafx         AND
+    https://blogs.oracle.com/acaicedo/entry/managing_multiple_screens_in_javafx1
+I have decided that we will have one fxml containing a stackpane that will hold each view
+We will create a ScreenController Class that will manage the StackPane so that we can have
+    animations, high performance, and only one active Controller.
