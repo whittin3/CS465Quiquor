@@ -10,20 +10,23 @@
                           derive(-fx-base,-80%));
   -fx-background-insets: 0,1,2;
 }
-.rounded {
-       -fx-border-color: dodgerblue;
-       -fx-border-width: 2px;
-       -fx-border-radius: 15px;
-       -fx-padding: 20px;
-}
-#hiddenSplitter {
-    -fx-background-color: null;
-    -fx-padding: 5px;
-}
-#hiddenSplitter *.split-pane-divider,
-        #hiddenSplitter *.vertical-grabber,
-        #hiddenSplitter *.horizontal-grabber {
-    -fx-background-color: null;
-    -fx-border-color: null;
-    -fx-padding: 4px;
-}
+
+/*CSS for the GUIDrinkController*/
+.drink-cell-0 {
+     -fx-fill: yellow;
+     -fx-stroke: green;
+     -fx-stroke-width: 5;
+     -fx-stroke-dash-array: 12 2 4 2;
+     -fx-stroke-dash-offset: 6;
+     -fx-stroke-line-cap: butt;
+ }
+ .drink-cell-1 {
+      -fx-fill: red;
+      -fx-stroke: black;
+      -fx-stroke-width: 5;
+      -fx-stroke-dash-array: 12 2 4 2;
+      -fx-stroke-dash-offset: 6;
+      -fx-stroke-line-cap: butt;
+  }
+
+ /*CSS for the GUIDrinkController*/

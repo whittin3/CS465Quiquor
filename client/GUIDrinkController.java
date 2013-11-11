@@ -25,6 +25,7 @@ public class GUIDrinkController {
     List<String> ingredientList;
     private final VBox vBox = new VBox();
 
+
     public GUIDrinkController() {
         ingredientList = new ArrayList<>();
     }
@@ -37,16 +38,18 @@ public class GUIDrinkController {
 
     public void addIngredient(Ingredient ingredient) {
         ingredientList.add(ingredient.getName());
+        vBox.getChildren().add(new Cell(ingredient));
 
     }
 
-    public void init(Stage primaryStage) {
-        primaryStage.setScene(new Scene(vBox, 600, 675));
+    public Scene init(Stage primaryStage) {
+        Scene root = new Scene(vBox, 600, 675);
+        primaryStage.setScene(root);
         vBox.setAlignment(Pos.BOTTOM_CENTER);
-//        String css = Main.class.getResource("default.css").toExternalForm();
-        vBox.getChildren().add(new Cell(Color.DARKGREEN));
-        vBox.getChildren().add(new Cell(Color.GREEN));
+        addIngredient(new Ingredient("test1"));
+        addIngredient(new Ingredient("test2"));
 
+        return root;
     }
 
     /**
@@ -61,22 +64,22 @@ public class GUIDrinkController {
         private double y;
         private boolean dragging;
         private Rectangle rectangle = new Rectangle(MAX_WIDTH, STARTING_HEIGHT);
-        private Text text = new Text("Test Drink");
+        private Text text;
 
-        private Cell(Color color) {
+        private Cell(Ingredient ingredient) {
             super();
+            text = new Text(ingredient.getName());
             init(this);
-            stylize(color);
+            stylize(Main.pumpMap.get(ingredient));
         }
 
-        private void stylize(Color color) {
+        private void stylize(int color) {
             //Stackpane
             this.setAlignment(Pos.TOP_CENTER);
             this.setMaxWidth(MAX_WIDTH);
 
             //Rectangle
-            rectangle.setFill(color);
-
+            rectangle.getStyleClass().add("drink-cell-" + color);
             //Text
         }
 
