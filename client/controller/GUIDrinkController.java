@@ -1,9 +1,10 @@
-package client;
+package client.controller;
 /**
  * User: Neal Eric
  * Date: 11/10/13
  */
 
+import client.Main;
 import client.readOnly.Drink;
 import client.readOnly.Ingredient;
 import javafx.event.EventHandler;

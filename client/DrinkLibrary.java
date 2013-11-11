@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * @todo: Please note that this entire class was written by me a long time ago and I havent checked to see if it works
+ * todo @whittin3: Please note that this entire class was written by me a long time ago and I haven't checked to see if it works
  */
 public class DrinkLibrary {
 

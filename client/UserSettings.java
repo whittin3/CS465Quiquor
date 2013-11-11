@@ -11,6 +11,10 @@ import java.util.logging.Logger;
  * User: Neal Eric
  * Date: 11/10/13
  */
+
+/**
+ * todo: @whittin3 Please note that this entire class was written by me a long time ago and I haven't checked to see if it works
+ */
 public class UserSettings {
     private Boolean StartInFullScreen;
     private Boolean EnableAddNewDrinkButton;
