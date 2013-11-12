@@ -20,7 +20,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         styleSheet = getClass().getResource("default.css").toExternalForm();
-        init(primaryStage);
+//        init(primaryStage);
+        demo(primaryStage);
     }
 
     private void init(Stage primaryStage) throws IOException {
@@ -43,7 +44,7 @@ public class Main extends Application {
         GUIDrinkController guiDrinkController = new GUIDrinkController();
         guiDrinkController.addIngredient(test1);
         guiDrinkController.addIngredient(test2);
-        Scene root = new Scene(guiDrinkController, 550, 550);
+        Scene root = new Scene(guiDrinkController, 800, 600);
         root.getStylesheets().add(styleSheet);
         primaryStage.setScene(root);
         primaryStage.show();

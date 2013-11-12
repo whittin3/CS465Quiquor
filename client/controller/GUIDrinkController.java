@@ -20,7 +20,7 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GUIDrinkController extends AnchorPane{
+public class GUIDrinkController extends AnchorPane {
     private static final int MAX_HEIGHT = 400;
     private static final int MAX_WIDTH = Cell.MAX_WIDTH + 30;
     private static final double CUP_BOTTOM_OFFSET = 150.0;
@@ -43,7 +43,7 @@ public class GUIDrinkController extends AnchorPane{
     }
 
     /**
-     * @todo Create a GUIController from a drink? or should we just remove all the ingredients from the current one. Probably the latter.
+     * todo @whittin3 Create a GUIController from a drink? or should we just remove all the ingredients from the current one. Probably the latter.
      */
 
     public GUIDrinkController(Drink drink) {
@@ -68,6 +68,7 @@ public class GUIDrinkController extends AnchorPane{
         private static final int STARTING_HEIGHT = 50;
         private static final int HORIZONTAL_MARGIN = 7;
         private double y;
+        private boolean resizing;
         private boolean dragging;
         private Rectangle rectangle = new Rectangle(MAX_WIDTH, STARTING_HEIGHT);
         private Text text;
@@ -118,12 +119,13 @@ public class GUIDrinkController extends AnchorPane{
         }
 
         private void mouseReleased(MouseEvent event) {
+            resizing = false;
             dragging = false;
             this.setCursor(Cursor.DEFAULT);
         }
 
         private void mouseOver(MouseEvent event) {
-            if (isInResizableMargin(event) || dragging) {
+            if (isInResizableMargin(event) || resizing) {
                 this.setCursor(Cursor.S_RESIZE);
             } else {
                 this.setCursor(Cursor.DEFAULT);
@@ -135,26 +137,35 @@ public class GUIDrinkController extends AnchorPane{
         }
 
         private void mouseDragged(MouseEvent event) {
-            if (!dragging) {
-                return;
+            if (resizing) {
+                double mouseY = event.getSceneY();
+                double newHeight = rectangle.getHeight() - mouseY + y;
+                if (newHeight > MIN_HEIGHT) {
+                    rectangle.setHeight(newHeight);
+                    y = mouseY;
+                }
+            } else if (dragging) {
+                double mouseY = event.getScreenY();
+                double newPosition = mouseY  - 500;
+                setLayoutY(newPosition);
+                y = mouseY
+                        ;
             }
 
-            double mouseY = event.getSceneY();
-            double newHeight = rectangle.getHeight() - mouseY + y;
-            if (newHeight > MIN_HEIGHT) {
-                rectangle.setHeight(newHeight);
-                y = mouseY;
-            }
         }
 
         private void mousePressed(MouseEvent event) {
 
-            // @todo Create a DraggableZone
-            if (!isInResizableMargin(event)) {
-                return;
+            if (isInResizableMargin(event)) {
+                resizing = true;
+                y = event.getSceneY();
+            } else {
+                dragging = true;
+                y = event.getSceneY();
+
             }
-            dragging = true;
-            y = event.getSceneY();
+
+
         }
     }
 }
