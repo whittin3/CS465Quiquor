@@ -16,49 +16,41 @@ import java.util.List;
  */
 
 public class Drink {
-    private String name;
-    private HashMap<Ingredient, Double> ingredients;
+	private String name;
+	private HashMap<Ingredient, Double> ingredients;
 
-    public Drink(String name, HashMap<Ingredient, Double> ingredients)
-    {
-        this.name = name;
-        this.ingredients = ingredients;
-    }
+	public Drink(String name, HashMap<Ingredient, Double> ingredients) {
+		this.name = name;
+		this.ingredients = ingredients;
+	}
 
-    public double getTotalMetricWeight()
-    {
-        double totalVolume = 0;
-        for (Double volume : ingredients.values())
-        {
-            totalVolume += volume;
-        }
+	public double getTotalMetricWeight() {
+		double totalVolume = 0;
+		for (Double volume : ingredients.values()) {
+			totalVolume += volume;
+		}
 
-        // TODO: Density.
-        return totalVolume;
-    }
+		// TODO: Density.
+		return totalVolume;
+	}
 
-    public String getName()
-    {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public HashMap<Ingredient, Double> getIngredientMap()
-    {
-        return ingredients;
-    }
+	public HashMap<Ingredient, Double> getIngredientMap() {
+		return ingredients;
+	}
 
-    public boolean satisfy()
-    {
-        for (Ingredient ingredient : getIngredients())
-        {
-            if (!Main.pumpMap.containsKey(ingredient))
-                return false;
-        }
-        return true;
-    }
+	public boolean satisfy() {
+		for (Ingredient ingredient : getIngredients()) {
+			if (!Main.pumpMap.containsKey(ingredient))
+				return false;
+		}
+		return true;
+	}
 
-    public List<Ingredient> getIngredients()
-    {
-        return new ArrayList<>(this.ingredients.keySet());
-    }
+	public List<Ingredient> getIngredients() {
+		return new ArrayList<>(this.ingredients.keySet());
+	}
 }

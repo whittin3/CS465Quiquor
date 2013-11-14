@@ -18,55 +18,53 @@ import java.util.HashMap;
  * If you ever want to change from one (view, frame, fxml, screen, etc) to another, please use
  * this class and object.
  */
-public class ViewController extends StackPane{
+public class ViewController extends StackPane {
 
-    // Please define any Views/Controllers you have created here
-    // For ease of use, please keep the FXML and the Controller name the same
-    public static final String Welcome = "Welcome";
-    public static final String Home = "Home";
-    public static final String CreateADrink = "CreateADrink";
+	// Please define any Views/Controllers you have created here
+	// For ease of use, please keep the FXML and the Controller name the same
+	public static final String Welcome = "Welcome";
+	public static final String Home = "Home";
+	public static final String CreateADrink = "CreateADrink";
 
-    public HashMap<String, Node> getViews() {
-        return views;
-    }
+	public HashMap<String, Node> getViews() {
+		return views;
+	}
 
-    private HashMap<String, Node> views = new HashMap<>();
+	private HashMap<String, Node> views = new HashMap<>();
 
-    public ViewController() {
-        super();
-        loadScreen(Welcome);
-        loadScreen(Home);
-        loadScreen(CreateADrink);
+	public ViewController() {
+		super();
+		loadScreen(Welcome);
+		loadScreen(Home);
+		loadScreen(CreateADrink);
 
-    }
+	}
 
-    public void addView(String id, Node node)
-    {
-        views.put(id, node);
-    }
+	public void addView(String id, Node node) {
+		views.put(id, node);
+	}
 
-    public void loadScreen(String name)
-    {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(GUIDrinkController.class.getResource(name + ".fxml"));
-            Parent stage = (Parent) fxmlLoader.load();
-            View view = fxmlLoader.getController();
-            view.setViewController(this);
-            addView(name, stage);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+	public void loadScreen(String name) {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(GUIDrinkController.class.getResource(name + ".fxml"));
+			Parent stage = (Parent) fxmlLoader.load();
+			View view = fxmlLoader.getController();
+			view.setViewController(this);
+			addView(name, stage);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
-    public void setScreen(final String name, ViewTransition viewTransition) {
-        if (views.containsKey(name)) {
-            if (!getChildren().isEmpty()) {
-                viewTransition.out(name, this);
-            } else {
-                viewTransition.in(name, this);
-            }
-        } else {
-            System.out.println("The view " + name + " doesn't exist \n");
-        }
-    }
+	public void setScreen(final String name, ViewTransition viewTransition) {
+		if (views.containsKey(name)) {
+			if (!getChildren().isEmpty()) {
+				viewTransition.out(name, this);
+			} else {
+				viewTransition.in(name, this);
+			}
+		} else {
+			System.out.println("The view " + name + " doesn't exist \n");
+		}
+	}
 }
