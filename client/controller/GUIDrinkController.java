@@ -7,9 +7,11 @@ package client.controller;
 import client.Main;
 import client.readOnly.Drink;
 import client.readOnly.Ingredient;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -121,25 +123,25 @@ public class GUIDrinkController extends AnchorPane {
 			resizing = false;
 			this.setCursor(Cursor.DEFAULT);
 			if (dragging) {
-//				todo: @whittin3 Get dragging working
-//                double targetY = getBoundsInParent().getMinY();
-//                VBox vbox = (VBox) getParent();
-//                ObservableList<Node> children = vbox.getChildren();
-//				  double[] minYOfCells = new double[children.size()];
-//				int i = 0;
-//				for (Node child : children)
-//                {
-//					minYOfCells[i] = child.getBoundsInParent().getMinY();
-//					i++;
-//				}
-//                for (double minY : minYOfCells) {
-//					if (targetY < minY) {
-//						Cell temp = this;
-//						children.remove(this);
-//                        children.add(i, temp);
-//                    }
-//                    i++;
-//                }
+				double targetY = getBoundsInParent().getMinY();
+				VBox vbox = (VBox) getParent();
+				ObservableList<Node> children = vbox.getChildren();
+				double[] minYOfCells = new double[children.size()];
+				int i = 0;
+				for (Node child : children) {
+					minYOfCells[i] = child.getBoundsInParent().getMinY();
+					i++;
+				}
+				i=0;
+				for (double minY : minYOfCells) {
+					if (targetY < minY) {
+						Cell temp = this;
+						children.remove(this);
+						children.add(i, temp);
+						break;
+					}
+					i++;
+				}
 			}
 			dragging = false;
 		}
@@ -150,7 +152,6 @@ public class GUIDrinkController extends AnchorPane {
 			} else {
 				this.setCursor(Cursor.DEFAULT);
 			}
-			System.out.println(text.getText() + ": " + event.getY());
 		}
 
 		private boolean isInResizableMargin(MouseEvent event) {
