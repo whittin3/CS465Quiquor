@@ -13,25 +13,30 @@ import java.util.HashMap;
 
 public class Main extends Application {
 	public static HashMap<Ingredient, Integer> pumpMap = new HashMap<>();
+
+	public static String userPassword;
+
 	private String styleSheet;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		styleSheet = getClass().getResource("default.css").toExternalForm();
-//        init(primaryStage);
-		demo(primaryStage);
+        gotoHome(primaryStage);
+//		demo(primaryStage);
 	}
-
-	private void init(Stage primaryStage) throws IOException {
+	private void gotoHome(Stage primaryStage) throws IOException {
 		ViewController stage = new ViewController();
 		stage.setScreen(ViewController.Welcome, new FadeTransition());
 		Group root = new Group();
 		root.getStylesheets().add(styleSheet);
 		root.getChildren().addAll(stage);
 		Scene scene = new Scene(root);
+//		primaryStage.setFullScreen(true);
 		primaryStage.setTitle("Welcome to Quiqour");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		//
+//		todo @whittin3 init function for welcome
 	}
 
 	private void demo(Stage primaryStage) {
@@ -56,6 +61,22 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	private static String getUserPassword() {
+		return userPassword;
+	}
+
+	public static String setUserPassword(String userPassword) {
+		if (userPassword!= null)
+		{
+		 	return "Error";
+		}
+		else
+		{
+			userPassword = userPassword;
+			return "Success";
+		}
 	}
 
 

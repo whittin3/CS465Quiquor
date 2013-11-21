@@ -46,11 +46,12 @@ public class ViewController extends StackPane {
 
 	public void loadScreen(String name) {
 		try {
+			// todo:whittin3 - add some init function for each window to set up
 			FXMLLoader fxmlLoader = new FXMLLoader(GUIDrinkController.class.getResource(name + ".fxml"));
-			Parent stage = (Parent) fxmlLoader.load();
+			Parent parent = (Parent) fxmlLoader.load();
 			View view = fxmlLoader.getController();
 			view.setViewController(this);
-			addView(name, stage);
+			addView(name, parent);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

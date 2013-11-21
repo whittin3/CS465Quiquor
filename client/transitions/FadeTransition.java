@@ -7,6 +7,7 @@ import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.util.Duration;
 
 /**
@@ -19,7 +20,8 @@ public class FadeTransition implements ViewTransition {
 	public void in(String name, ViewController viewController) {
 		final DoubleProperty opacity = viewController.opacityProperty();
 		viewController.setOpacity(0.0);
-		viewController.getChildren().add(viewController.getViews().get(name));
+		Node parentNode = viewController.getViews().get(name);
+		viewController.getChildren().add(parentNode);
 		Timeline fadeIn = new Timeline(
 				new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.0)),
 				new KeyFrame(new Duration(500), new KeyValue(opacity, 1.0)));
