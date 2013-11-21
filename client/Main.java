@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class Main extends Application {
 	public static HashMap<Ingredient, Integer> pumpMap = new HashMap<>();
-
+	public static DrinkLibrary drinkLibrary;
 	public static String userPassword;
 
 	private String styleSheet;
@@ -21,7 +21,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		styleSheet = getClass().getResource("default.css").toExternalForm();
-        gotoHome(primaryStage);
+		drinkLibrary = DrinkLibrary.parseDrinkFile();
+		gotoHome(primaryStage);
 //		demo(primaryStage);
 	}
 	private void gotoHome(Stage primaryStage) throws IOException {
