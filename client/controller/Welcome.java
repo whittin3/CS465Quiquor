@@ -29,13 +29,10 @@ public class Welcome implements View {
 
 	@FXML
 	private void gotoHome() {
-		if (Main.userPassword == null)
-		{
+		if (Main.userPassword == null) {
 			passwordStatus.setText("");
 			passwordModal.setVisible(true);
-		}
-		else
-		{
+		} else {
 			viewController.setScreen(ViewController.Home, new FadeTransition());
 			Home.init();
 		}
@@ -51,12 +48,9 @@ public class Welcome implements View {
 	private void confirmPassword() {
 		String password = passwordField1.getText();
 		String password2 = passwordField2.getText();
-		if (!password.equals(password2))
-		{
+		if (!password.equals(password2)) {
 			passwordStatus.setText("Passwords do not match");
-		}
-		else
-		{
+		} else {
 			Main.userPassword = password;
 			passwordStatus.setText("Success");
 			gotoHome();

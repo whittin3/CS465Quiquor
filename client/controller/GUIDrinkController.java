@@ -132,7 +132,7 @@ public class GUIDrinkController extends AnchorPane {
 					minYOfCells[i] = child.getBoundsInParent().getMinY();
 					i++;
 				}
-				i=0;
+				i = 0;
 				for (double minY : minYOfCells) {
 					if (targetY <= minY) {
 						Cell temp = this;

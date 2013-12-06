@@ -25,6 +25,7 @@ public class Main extends Application {
 		gotoHome(primaryStage);
 //		demo(primaryStage);
 	}
+
 	private void gotoHome(Stage primaryStage) throws IOException {
 		ViewController stage = new ViewController();
 		stage.setScreen(ViewController.Welcome, new FadeTransition());
@@ -69,12 +70,9 @@ public class Main extends Application {
 	}
 
 	public static String setUserPassword(String userPassword) {
-		if (userPassword!= null)
-		{
-		 	return "Error";
-		}
-		else
-		{
+		if (userPassword != null) {
+			return "Error";
+		} else {
 			userPassword = userPassword;
 			return "Success";
 		}
