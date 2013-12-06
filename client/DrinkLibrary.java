@@ -48,8 +48,7 @@ public class DrinkLibrary {
 	}
 
 	public static DrinkLibrary parseDrinkFile() throws FileNotFoundException, URISyntaxException {
-//		File file = new File("src/data/DrinkLibrary.csv");
-		File file = new File("src/data/DrinkLibrary.csv");
+		File file = new File("data/DrinkLibrary.csv");
 		DrinkLibrary drinkLibrary = new DrinkLibrary();
 		try (Scanner scanner = new Scanner(file).useDelimiter("[\\n]+")) {
 			boolean errorFlag = false;
