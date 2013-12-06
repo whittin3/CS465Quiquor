@@ -41,7 +41,6 @@ public class Welcome implements View {
 			passwordModal.setVisible(true);
 		} else {
 			viewController.setScreen(ViewController.Home, new FadeTransition());
-//			Home.init();
 		}
 	}
 
