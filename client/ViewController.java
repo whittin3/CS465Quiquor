@@ -25,6 +25,7 @@ public class ViewController extends StackPane {
 	public static final String Welcome = "Welcome";
 	public static final String Home = "Home";
 	public static final String CreateADrink = "CreateADrink";
+	public static final String SetupBar = "SetupBar";
 
 	public HashMap<String, Node> getViews() {
 		return views;
@@ -38,6 +39,7 @@ public class ViewController extends StackPane {
 		loadScreen(Welcome);
 		loadScreen(Home);
 		loadScreen(CreateADrink);
+		loadScreen(SetupBar);
 	}
 
 	public void addView(String id, Node node) {

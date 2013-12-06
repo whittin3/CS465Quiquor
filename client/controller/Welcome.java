@@ -35,12 +35,12 @@ public class Welcome implements View {
 	 * Called when you click order a drink
 	 */
 	@FXML
-	private void gotoHome() {
+	private void gotoBarSetup() {
 		if (Main.userPassword == null) {
 			passwordStatus.setText("");
 			passwordModal.setVisible(true);
 		} else {
-			viewController.setScreen(ViewController.Home, new FadeTransition());
+			viewController.setScreen(ViewController.SetupBar, new FadeTransition());
 		}
 	}
 
@@ -59,7 +59,7 @@ public class Welcome implements View {
 		} else {
 			Main.userPassword = password;
 			passwordStatus.setText("Success");
-			gotoHome();
+			gotoBarSetup();
 		}
 
 	}

@@ -26,7 +26,7 @@
                                 <Font size="12.0"/>
                             </font>
                         </Text>
-                        <Button mnemonicParsing="false" onAction="#gotoHome" text="Order a Drink!"/>
+                        <Button mnemonicParsing="false" onAction="#gotoBarSetup" text="Order a Drink!"/>
                     </children>
                 </VBox>
                 <AnchorPane fx:id="passwordModal" prefHeight="338.0" prefWidth="645.0" visible="false">

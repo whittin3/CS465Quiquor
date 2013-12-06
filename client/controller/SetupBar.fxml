@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/8"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controller.SetupBar">
-    <children>
-        <StackPane prefHeight="338.0" prefWidth="645.0" styleClass="dark-gradientpane">
-            <children>
-                <VBox>
-                    <children>
-                        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="185.0">
-                            <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create A Drink!" textAlignment="LEFT"
-                                      textOrigin="TOP"/>
-                                <TextField promptText="Name..."/>
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-            </children>
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-            </padding>
-        </StackPane>
-    </children>
-    <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-    </padding>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.SetupBar">
+  <children>
+    <StackPane prefHeight="338.0" prefWidth="645.0" styleClass="dark-gradientpane">
+      <children>
+        <VBox>
+          <children>
+            <AnchorPane prefHeight="48.0" prefWidth="625.0">
+              <children>
+                <Text layoutX="104.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Your Bar" textAlignment="LEFT" textOrigin="TOP" />
+                <Button layoutX="0.0" layoutY="4.0" mnemonicParsing="false" onAction="#addPump" text="+" />
+                <Button layoutX="36.0" layoutY="4.0" mnemonicParsing="false" onAction="#removePump" text="-" />
+              </children>
+            </AnchorPane>
+            <FlowPane id="PimpPane" prefHeight="256.0" prefWidth="625.0" />
+            <AnchorPane prefHeight="40.0" prefWidth="625.0">
+              <children>
+                <Button layoutX="555.0" layoutY="8.0" mnemonicParsing="false" onAction="#gotoHome" text="Save" />
+              </children>
+            </AnchorPane>
+          </children>
+        </VBox>
+      </children>
+      <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+    </StackPane>
+  </children>
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
 </GridPane>
