@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.Welcome">
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.Home">
   <children>
     <StackPane minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="dark-gradientpane">
       <children>
@@ -20,7 +20,8 @@
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
               <children>
-                <ListView layoutX="14.0" layoutY="0.0" prefHeight="291.0" prefWidth="205.0" />
+                <TextField layoutX="14.0" layoutY="14.0" prefWidth="205.0" />
+                <ListView fx:id="drinkListView" layoutX="14.0" layoutY="51.0" prefHeight="291.0" prefWidth="205.0" />
               </children>
             </AnchorPane>
           </children>

@@ -25,6 +25,11 @@ public class DrinkLibrary {
 
 	public static final String LAST_BAR_SETUP_TXT = "LastBarSetup.txt";
 	public HashMap<String, Ingredient> ingredients = new HashMap<>();
+
+	public List<Drink> getDrinkList() {
+		return drinkList;
+	}
+
 	public List<Drink> drinkList = new ArrayList<>();
 
 

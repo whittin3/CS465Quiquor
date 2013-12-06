@@ -37,6 +37,7 @@ public class Welcome implements View {
 		else
 		{
 			viewController.setScreen(ViewController.Home, new FadeTransition());
+			Home.init();
 		}
 	}
 
