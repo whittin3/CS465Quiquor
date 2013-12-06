@@ -10,4 +10,10 @@ public class CreateADrink implements View {
 	public void setViewController(ViewController viewController) {
 		this.viewController = viewController;
 	}
+
+
+
+	@Override
+	public void init() {
+	}
 }

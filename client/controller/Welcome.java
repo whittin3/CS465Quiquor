@@ -27,6 +27,13 @@ public class Welcome implements View {
 		this.viewController = viewController;
 	}
 
+	@Override
+	public void init() {
+		System.out.println("Welcome init was called");	}
+
+	/**
+	 * Called when you click order a drink
+	 */
 	@FXML
 	private void gotoHome() {
 		if (Main.userPassword == null) {
@@ -34,7 +41,7 @@ public class Welcome implements View {
 			passwordModal.setVisible(true);
 		} else {
 			viewController.setScreen(ViewController.Home, new FadeTransition());
-			Home.init();
+//			Home.init();
 		}
 	}
 

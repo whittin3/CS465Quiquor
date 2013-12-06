@@ -23,7 +23,12 @@ public class Home implements View {
 		this.viewController = viewController;
 	}
 
-	public static void init() {
+	/**
+	 * This function will be called whenever this screen loads
+	 */
+	@Override
+	public void init() {
+		System.out.println("asdasd");
 		List<Drink> drinkList = Main.drinkLibrary.getDrinkList();
 		ObservableList<String> observableDrinkList = FXCollections.observableArrayList();
 		for (Drink drink : drinkList) {

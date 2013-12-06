@@ -31,27 +31,31 @@ public class ViewController extends StackPane {
 	}
 
 	private HashMap<String, Node> views = new HashMap<>();
+	private HashMap<String, View> controllers = new HashMap<>();
 
 	public ViewController() {
 		super();
 		loadScreen(Welcome);
 		loadScreen(Home);
 		loadScreen(CreateADrink);
-
 	}
 
 	public void addView(String id, Node node) {
 		views.put(id, node);
 	}
 
+	public void addController(String id, View view) {
+		controllers.put(id, view);
+	}
+
 	public void loadScreen(String name) {
 		try {
-			// todo:whittin3 - add some init function for each window to set up
 			FXMLLoader fxmlLoader = new FXMLLoader(GUIDrinkController.class.getResource(name + ".fxml"));
 			Parent parent = (Parent) fxmlLoader.load();
 			View view = fxmlLoader.getController();
 			view.setViewController(this);
 			addView(name, parent);
+			addController(name, view);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -64,6 +68,8 @@ public class ViewController extends StackPane {
 			} else {
 				viewTransition.in(name, this);
 			}
+			View view = controllers.get(name);
+			view.init();
 		} else {
 			System.out.println("The view " + name + " doesn't exist \n");
 		}

@@ -22,11 +22,16 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		styleSheet = getClass().getResource("default.css").toExternalForm();
 		drinkLibrary = DrinkLibrary.parseDrinkFile();
-		gotoHome(primaryStage);
+		init(primaryStage);
 //		demo(primaryStage);
 	}
 
-	private void gotoHome(Stage primaryStage) throws IOException {
+	/**
+	 * Called by FXML
+	 * @param primaryStage
+	 * @throws IOException
+	 */
+	private void init(Stage primaryStage) throws IOException {
 		ViewController stage = new ViewController();
 		stage.setScreen(ViewController.Welcome, new FadeTransition());
 		Group root = new Group();

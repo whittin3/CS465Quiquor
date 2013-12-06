@@ -6,4 +6,5 @@ package client;
  */
 public interface View {
 	public void setViewController(ViewController viewController);
+	public void init();
 }
