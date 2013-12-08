@@ -25,19 +25,20 @@ public class DrinkLibrary {
 
 	public static final String LAST_BAR_SETUP_TXT = "LastBarSetup.txt";
 	public HashMap<String, Ingredient> ingredients = new HashMap<>();
+	public List<Drink> drinkList = new ArrayList<>();
+
+	public HashMap<String, Ingredient> getIngredients() {
+		return ingredients;
+	}
 
 	public List<Drink> getDrinkList() {
 		return drinkList;
 	}
 
-	public List<Drink> drinkList = new ArrayList<>();
-
-
 	public void addDrink(String name, HashMap<Ingredient, Double> ingredientMap) {
 		Drink newDrink = new Drink(name, ingredientMap);
 		drinkList.add(newDrink);
 	}
-
 
 	public ObservableList<String> parseLastBarSetup(String path) throws URISyntaxException, FileNotFoundException {
 		File file = new File(path);

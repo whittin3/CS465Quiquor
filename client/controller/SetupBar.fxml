@@ -12,24 +12,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
+<?scenebuilder-stylesheet ../default.css?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.SetupBar">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="540.0" prefWidth="980.0" styleClass="dark-gradientpane" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.SetupBar">
   <children>
-    <StackPane prefHeight="338.0" prefWidth="645.0" styleClass="dark-gradientpane">
+    <StackPane prefHeight="-1.0" prefWidth="-1.0">
       <children>
         <VBox>
           <children>
             <AnchorPane prefHeight="48.0" prefWidth="625.0">
               <children>
-                <Text layoutX="104.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Your Bar" textAlignment="LEFT" textOrigin="TOP" />
+                <Text fill="WHITE" layoutX="104.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Your Bar" textAlignment="LEFT" textOrigin="TOP">
+                  <font>
+                    <Font size="44.0" />
+                  </font>
+                </Text>
                 <Button layoutX="0.0" layoutY="4.0" mnemonicParsing="false" onAction="#addPump" text="+" />
                 <Button layoutX="36.0" layoutY="4.0" mnemonicParsing="false" onAction="#removePump" text="-" />
               </children>
             </AnchorPane>
-            <FlowPane id="" fx:id="pumpLayout" hgap="20.0" orientation="VERTICAL" prefHeight="256.0" prefWidth="625.0" vgap="30.0" />
+            <FlowPane id="" fx:id="pumpLayout" hgap="20.0" orientation="VERTICAL" prefHeight="451.0" prefWidth="960.0" vgap="30.0" />
             <AnchorPane prefHeight="40.0" prefWidth="625.0">
               <children>
-                <Button layoutX="555.0" layoutY="8.0" mnemonicParsing="false" onAction="#gotoHome" text="Save" />
+                <Button layoutX="901.0" layoutY="5.0" mnemonicParsing="false" onAction="#gotoHome" text="Save" />
               </children>
             </AnchorPane>
           </children>

@@ -1,11 +1,17 @@
 package client.controller;
 
+import client.Main;
 import client.View;
 import client.ViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.text.Text;
+import np.com.ngopal.control.AutoFillTextBox;
+
+import java.util.Set;
 
 /**
  * User: Neal Eric
@@ -17,6 +23,7 @@ public class SetupBar implements View {
 
 	@FXML
 	FlowPane pumpLayout;
+	private ObservableList<String> ingredients;
 
 	@Override
 	public void setViewController(ViewController viewController) {
@@ -25,16 +32,22 @@ public class SetupBar implements View {
 
 	@Override
 	public void init() {
-		//To change body of implemented methods use File | Settings | File Templates.
+		addPump();
+		Set<String> ingredientNames = Main.drinkLibrary.getIngredients().keySet();
+		ingredients = FXCollections.observableArrayList(ingredientNames);
 	}
 
 	@FXML
 	public void addPump() {
-		pumpLayout.getChildren().add(new PumpItem());
+		pumpLayout.getChildren().add(new PumpItem(ingredients));
+		numberOfPumps++;
 	}
 
 	@FXML
 	public void removePump() {
+		ObservableList<Node> children = pumpLayout.getChildren();
+		children.remove(children.size() - 1);
+		numberOfPumps--;
 
 	}
 
@@ -44,9 +57,11 @@ public class SetupBar implements View {
 	}
 
 	private static class PumpItem extends AnchorPane {
-		private PumpItem() {
-		 	getChildren().add(new Text("pump"));
 
+		public PumpItem(ObservableList<String> ingredients) {
+			getStyleClass().setAll("autofill-text");
+
+			getChildren().add(new AutoFillTextBox(ingredients));
 		}
 	}
 }

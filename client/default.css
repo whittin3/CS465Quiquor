@@ -22,6 +22,10 @@
     -fx-background-color: rgba(0,0,0,0.5);
 }
 
+.autofill-text{
+    -fx-skin:"../../np.com.ngopal.control.AutoFillTextBoxSkin";
+}
+
 /*CSS for the GUIDrinkController*/
 /* http://www.colourlovers.com/business/trends/branding/7880/Papeterie_Haute-Ville_Logo */
 .drink-cell-0 {
