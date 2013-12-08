@@ -71,11 +71,8 @@ public class AutoFillTextBox<T> extends Control implements AutoFillTextBoxFactor
 		listview = new ListView();
 		limit = 5;
 		filterMode = false;
-
 		listen();
-
 	}
-
 
 	public void requestFocus() {
 		super.requestFocus();
@@ -93,16 +90,11 @@ public class AutoFillTextBox<T> extends Control implements AutoFillTextBoxFactor
 
 	public void addData(T data) {
 		this.data.add(data);
-
 	}
 
-    
-    
-    /*--------------------
+	/*--------------------
 	 * OVERRIDEN METHODS *
-     --------------------*/
-
-
+	 --------------------*/
 	@Override
 	public void setData(ObservableList<T> data) {
 		this.data = data;
@@ -123,12 +115,9 @@ public class AutoFillTextBox<T> extends Control implements AutoFillTextBoxFactor
 		return textbox;
 	}
 
-
 	@Override
 	public void setListLimit(int limit) {
-
 		this.limit = limit;
-
 	}
 
 	@Override
@@ -168,9 +157,7 @@ public class AutoFillTextBox<T> extends Control implements AutoFillTextBoxFactor
 	public void setMaxSize(double d, double d1) {
 		super.setMaxSize(d, d1);
 		textbox.setMaxSize(d, d1);
-
 	}
-
 
 	private void listen() {
 		this.prefHeightProperty().addListener(new ChangeListener<Number>() {

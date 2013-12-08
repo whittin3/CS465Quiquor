@@ -105,4 +105,8 @@ public class DrinkLibrary {
 		FXCollections.sort(drinkNames);
 		return drinkNames;
 	}
+
+	public Ingredient getIngredient(String ingredient) {
+		return ingredients.get(ingredient);
+	}
 }

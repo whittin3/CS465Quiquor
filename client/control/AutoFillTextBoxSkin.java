@@ -97,8 +97,6 @@ public class AutoFillTextBoxSkin<T> extends SkinBase<AutoFillTextBox<T>, AutoFil
 					hidePopup();
 				}
 			}
-
-
 		});
 		//listview.getItems().addListener(this);
 		listview.setOnMouseReleased(this);
@@ -109,11 +107,9 @@ public class AutoFillTextBoxSkin<T> extends SkinBase<AutoFillTextBox<T>, AutoFil
 			@Override
 			public ListCell<T> call(ListView<T> p) {
 				//A simple ListCell containing only Label
-
 				final ListCell cell = new ListCell() {
 					@Override
-					public void updateItem(Object item,
-										   boolean empty) {
+					public void updateItem(Object item, boolean empty) {
 						super.updateItem(item, empty);
 						if (item != null) {
 							setText(item.toString());
@@ -269,7 +265,7 @@ public class AutoFillTextBoxSkin<T> extends SkinBase<AutoFillTextBox<T>, AutoFil
 		 ********************************/
 
 		if (evt.getEventType() == KeyEvent.KEY_PRESSED) {
-            /*--------------------------------
+			/*--------------------------------
              - KeyEvent Handling for Textbox -
              --------------------------------*/
 			KeyEvent t = (KeyEvent) evt;

@@ -35,7 +35,7 @@ public class Home implements View {
 	 */
 	@Override
 	public void init() {
-		observableDrinkList = Main.drinkLibrary.getDrinkList();
+		observableDrinkList = Main.getDrinkables();
 		drinkListView.setItems(observableDrinkList);
 		drinkSearchField.textProperty().addListener(new ChangeListener<String>() {
 			@Override

@@ -63,14 +63,33 @@ public class SetupBar implements View {
 
 	@FXML
 	public void gotoHome() {
+		savePumpSelections();
 		viewController.setScreen(ViewController.Home, new FadeTransition());
+	}
+
+	private void savePumpSelections() {
+		ObservableList<Node> children = pumpLayout.getChildren();
+		int i = 0;
+		for (Node node : children) {
+			PumpItem pumpItem = (PumpItem) node;
+			String ingredient = pumpItem.getIngredient();
+			Main.pumpMap.put(Main.drinkLibrary.getIngredient(ingredient), i);
+			i++;
+		}
 	}
 
 	private static class PumpItem extends HBox {
 
+		private final AutoFillTextBox autoFillTextBox;
+
 		public PumpItem(ObservableList<String> ingredients, int number) {
 			getChildren().add(new Text("Pump " + String.valueOf(number) + ": "));
-			getChildren().add(new AutoFillTextBox(ingredients));
+			autoFillTextBox = new AutoFillTextBox(ingredients);
+			getChildren().add(autoFillTextBox);
+		}
+
+		public String getIngredient() {
+			return autoFillTextBox.getText();
 		}
 	}
 }
