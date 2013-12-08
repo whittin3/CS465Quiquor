@@ -3,10 +3,13 @@ package client.controller;
 import client.Main;
 import client.View;
 import client.ViewController;
+import client.readOnly.Ingredient;
 import client.transitions.FadeTransition;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
@@ -21,6 +24,7 @@ public class CreateADrink implements View {
 	FlowPane flowPane;
 	@FXML
 	AnchorPane guiControllerPane;
+	private GUIDrinkController guiDrinkController;
 
 	@Override
 	public void setViewController(ViewController viewController) {
@@ -29,11 +33,13 @@ public class CreateADrink implements View {
 
 	@Override
 	public void init() {
+		guiDrinkController = new GUIDrinkController(true);
+		guiControllerPane.getChildren().add(guiDrinkController);
+
 		ObservableList<String> ingredients = Main.getIngredients();
 		for (String ingredient : ingredients) {
-			flowPane.getChildren().add(new IngredientCell(ingredient));
+			flowPane.getChildren().add(new IngredientCell(guiDrinkController, ingredient));
 		}
-		guiControllerPane.getChildren().add(new GUIDrinkController(true));
 	}
 
 	@FXML
@@ -47,18 +53,48 @@ public class CreateADrink implements View {
 	}
 
 	private static class IngredientCell extends StackPane {
+		private final GUIDrinkController guiDrinkController;
+		Rectangle rectangle;
+		private boolean selected = false;
+		private final Text text;
 
-		public IngredientCell(String ingredient) {
-			Text text = TextBuilder.create().text(ingredient).styleClass("ingredientItem").build();
+		public IngredientCell(final GUIDrinkController guiDrinkController, final String ingredient) {
+			this.guiDrinkController = guiDrinkController;
+
+			text = TextBuilder.create().text(ingredient).styleClass("ingredientItem").build();
 			Bounds rectBounds = text.getBoundsInParent();
 
-			Rectangle rectangle = new Rectangle(rectBounds.getWidth(), rectBounds.getHeight());
-			int index = Main.getIngredients().indexOf(ingredient);
-			rectangle.getStyleClass().setAll("drink-cell-" + String.valueOf(index));
+			rectangle = new Rectangle(rectBounds.getWidth(), rectBounds.getHeight());
+			rectangle.getStyleClass().setAll("drink-cell-unselected");
 			getChildren().add(rectangle);
-
 			getChildren().add(text);
 
+			final IngredientCell cell = this;
+			this.setOnMouseReleased(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					cell.mouseReleased(event);
+				}
+			});
+		}
+
+		private void mouseReleased(MouseEvent event) {
+			IngredientCell source = (IngredientCell) event.getSource();
+			source.toggleSelected();
+		}
+
+		public void toggleSelected() {
+			selected = !selected;
+			ObservableList<String> styleClass = rectangle.getStyleClass();
+			styleClass.clear();
+			if (selected) {
+				String ingredientName = text.getText();
+				guiDrinkController.addIngredient(ingredientName);
+				Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
+				styleClass.setAll("drink-cell-" + String.valueOf(Main.pumpMap.get(ingredient)));
+			} else {
+				styleClass.setAll("drink-cell-unselected");
+			}
 		}
 	}
 }

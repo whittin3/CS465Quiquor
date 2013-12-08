@@ -36,6 +36,11 @@
 
 /*CSS for the GUIDrinkController*/
 /* http://www.colourlovers.com/business/trends/branding/7880/Papeterie_Haute-Ville_Logo */
+.drink-cell-unselected {
+  	-fx-fill: transparent;
+  	-fx-stroke-width: 0;
+}
+
 .drink-cell-0 {
     -fx-fill: #D0D102;
     -fx-stroke: green;
@@ -73,7 +78,7 @@
 }
 
 .drink-cell-4 {
-    -fx-fill: #F18D05;
+    -fx-fill: #FF0000;
     -fx-stroke: black;
     -fx-stroke-width: 5;
     -fx-stroke-dash-array: 12 2 4 2;
@@ -82,7 +87,7 @@
 }
 
 .drink-cell-5 {
-    -fx-fill: #F18D05;
+    -fx-fill: #CECECE;
     -fx-stroke: black;
     -fx-stroke-width: 5;
     -fx-stroke-dash-array: 12 2 4 2;
@@ -91,7 +96,7 @@
 }
 
 .drink-cell-6 {
-    -fx-fill: #F18D05;
+    -fx-fill: #0000FF;
     -fx-stroke: black;
     -fx-stroke-width: 5;
     -fx-stroke-dash-array: 12 2 4 2;
@@ -100,7 +105,7 @@
 }
 
 .drink-cell-7 {
-    -fx-fill: #F18D05;
+    -fx-fill: #00FF00;
     -fx-stroke: black;
     -fx-stroke-width: 5;
     -fx-stroke-dash-array: 12 2 4 2;
@@ -109,7 +114,7 @@
 }
 
 .drink-cell-8 {
-    -fx-fill: #F18D05;
+    -fx-fill: #FF0D05;
     -fx-stroke: black;
     -fx-stroke-width: 5;
     -fx-stroke-dash-array: 12 2 4 2;
@@ -118,7 +123,7 @@
 }
 
 .drink-cell-9 {
-    -fx-fill: #F18D05;
+    -fx-fill: #FF00FF;
     -fx-stroke: black;
     -fx-stroke-width: 5;
     -fx-stroke-dash-array: 12 2 4 2;

@@ -57,6 +57,12 @@ public class GUIDrinkController extends AnchorPane {
 		vBox.getChildren().add(new Cell(ingredient, draggable));
 	}
 
+	public void addIngredient(String ingredientName) {
+		ingredientList.add(ingredientName);
+		Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
+		vBox.getChildren().add(new Cell(ingredient, draggable));
+	}
+
 	public void clear() {
 		ingredientList.clear();
 		vBox.getChildren().clear();
