@@ -2,7 +2,7 @@
 
  * 
  */
-package np.com.ngopal.control;
+package client.control;
 
 //IMPORT DIRECTIVES
 import com.sun.javafx.scene.control.skin.SkinBase;
@@ -85,7 +85,7 @@ public class AutoFillTextBoxSkin<T> extends SkinBase<AutoFillTextBox<T>,AutoFill
 
             @Override
             public void changed(ObservableValue ov, Object t, Object t1) {                
-                System.out.println("Changed:"+t1);
+//                System.out.println("Changed:"+t1);
                 if(listview.getItems().size()>0 && listview.getItems() !=null){  
                     showPopup();
                 }    
@@ -147,8 +147,8 @@ public class AutoFillTextBoxSkin<T> extends SkinBase<AutoFillTextBox<T>,AutoFill
                             //textbox.rawTextProperty().addListener(AutoFillTextBoxSkin.this); 
                             textbox.textProperty().addListener(AutoFillTextBoxSkin.this); 
                             textbox.selectRange(prev.length(), cell.getItem().toString().length());                       
-                            System.out.println(temporaryTxt.length()+"="+textbox.getText().length()+"::"+
-                                    cell.getItem().toString().length());
+//                            System.out.println(temporaryTxt.length()+"="+textbox.getText().length()+"::"+
+//                                    cell.getItem().toString().length());
                         }
                     }
 
@@ -424,7 +424,7 @@ public class AutoFillTextBoxSkin<T> extends SkinBase<AutoFillTextBox<T>,AutoFill
         
         if(ov.getValue().toString().length()>0){            
                     String txtdata = (textbox.getText()).trim();
-                    System.out.println("["+txtdata+"]");
+//                    System.out.println("["+txtdata+"]");
                     
                     //Limit of data cell to be shown in ListView 
                     int limit=0;
@@ -435,14 +435,14 @@ public class AutoFillTextBoxSkin<T> extends SkinBase<AutoFillTextBox<T>,AutoFill
                             String str = dat.toString().toLowerCase();
                             
                             if(str.startsWith(compare)){ 
-                                System.out.print("added one,");
+//                                System.out.print("added one,");
                                 list.add(dat);                                
                                 limit++;
                             }
                             if(limit==autofillTextbox.getListLimit())   
                                 break;
                         }
-                        System.out.println();
+//                        System.out.println();
                         if(listview.getItems().containsAll(list) && 
                                 listview.getItems().size()== list.size() && listview.getItems()!=null)
                             showPopup();

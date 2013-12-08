@@ -23,7 +23,7 @@
 }
 
 .autofill-text{
-    -fx-skin:"../../np.com.ngopal.control.AutoFillTextBoxSkin";
+    -fx-skin:"client.control.AutoFillTextBoxSkin";
 }
 
 /*CSS for the GUIDrinkController*/

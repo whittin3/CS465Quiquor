@@ -1,5 +1,5 @@
 
-package np.com.ngopal.control;
+package client.control;
 
 import com.sun.javafx.scene.control.behavior.BehaviorBase;
 

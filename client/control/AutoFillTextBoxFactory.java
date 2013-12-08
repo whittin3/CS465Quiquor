@@ -1,5 +1,5 @@
 
-package np.com.ngopal.control;
+package client.control;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;

@@ -1,17 +1,14 @@
-package np.com.ngopal.control;
+package client.control;
 
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.control.ListView;
 //import javafx.scene.control.TextBox;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.paint.Color;
 
 /**
  * This class is main Control class which extends from Control <br>
@@ -48,9 +45,6 @@ public class AutoFillTextBox<T> extends Control implements AutoFillTextBoxFactor
     private boolean filterMode;
     private int limit;
     
-    
-    
-    
     /**
      * Constructor
      */
@@ -71,7 +65,8 @@ public class AutoFillTextBox<T> extends Control implements AutoFillTextBoxFactor
      * Initialize the AutoFillTextBox *
      *================================*/
     private void init() {
-        setStyle("-fx-skin:\"" + AutoFillTextBoxSkin.class.getName() + "\"");
+//        setStyle("-fx-skin:\"" + AutoFillTextBoxSkin.class.getName() + "\"");
+		getStyleClass().setAll("autofill-text");
         textbox = new TextField();     
         listview = new ListView();    
         limit=5;

@@ -3,13 +3,17 @@ package client.controller;
 import client.Main;
 import client.View;
 import client.ViewController;
+import client.transitions.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import np.com.ngopal.control.AutoFillTextBox;
+import client.control.AutoFillTextBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 import java.util.Set;
 
@@ -32,14 +36,13 @@ public class SetupBar implements View {
 
 	@Override
 	public void init() {
-		addPump();
 		Set<String> ingredientNames = Main.drinkLibrary.getIngredients().keySet();
 		ingredients = FXCollections.observableArrayList(ingredientNames);
 	}
 
 	@FXML
 	public void addPump() {
-		pumpLayout.getChildren().add(new PumpItem(ingredients));
+		pumpLayout.getChildren().add(new PumpItem(ingredients, numberOfPumps + 1));
 		numberOfPumps++;
 	}
 
@@ -53,14 +56,13 @@ public class SetupBar implements View {
 
 	@FXML
 	public void gotoHome() {
-
+		viewController.setScreen(ViewController.Home, new FadeTransition());
 	}
 
-	private static class PumpItem extends AnchorPane {
+	private static class PumpItem extends HBox {
 
-		public PumpItem(ObservableList<String> ingredients) {
-			getStyleClass().setAll("autofill-text");
-
+		public PumpItem(ObservableList<String> ingredients, int number) {
+			getChildren().add(new Text("Pump " + String.valueOf(number) + ": "));
 			getChildren().add(new AutoFillTextBox(ingredients));
 		}
 	}
