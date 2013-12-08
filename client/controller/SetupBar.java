@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,7 +92,7 @@ public class SetupBar implements View {
 		private final Text pumpText;
 
 		public PumpItem(ObservableList<String> ingredients, int number) {
-			pumpText = new Text("Pump " + String.valueOf(number) + ": ");
+			pumpText = TextBuilder.create().text("Pump " + String.valueOf(number) + ": ").styleClass("pumpItem").build();
 			autoFillTextBox = new AutoFillTextBox(ingredients);
 			getChildren().add(pumpText);
 			getChildren().add(autoFillTextBox);

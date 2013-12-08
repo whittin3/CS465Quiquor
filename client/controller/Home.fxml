@@ -17,9 +17,10 @@
                         <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0"
                                     prefWidth="900.0">
                             <children>
-                                <HBox alignment="TOP_RIGHT" layoutX="44.0" layoutY="0.0" prefHeight="100.0"
-                                      prefWidth="474.0"/>
-                                <Button layoutX="863.0" layoutY="14.0" mnemonicParsing="false" text="C"/>
+                                <HBox fx:id="topHboxBar" alignment="TOP_RIGHT" layoutX="44.0" layoutY="0.0"
+                                      prefHeight="100.0" prefWidth="474.0"/>
+                                <Button layoutX="863.0" layoutY="14.0" mnemonicParsing="false"
+                                        onAction="#gotoCreateYourOwnDrink" text="C"/>
                                 <Text fill="WHITE" layoutX="726.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0"
                                       text="Create Your Own Drink!"/>
                                 <Text fx:id="drinkNameText" fill="WHITE" layoutX="539.0" layoutY="81.0"
@@ -52,33 +53,33 @@
                         </AnchorPane>
                     </children>
                 </VBox>
+                <AnchorPane id="passwordModal" fx:id="modal" prefHeight="338.0" prefWidth="645.0" styleClass="overlay"
+                            visible="false">
+                    <children>
+                        <AnchorPane layoutX="301.0" layoutY="176.0" prefHeight="208.0" prefWidth="338.0"
+                                    styleClass="dark-gradientpane">
+                            <children>
+                                <PasswordField id="passwordField1" fx:id="password" layoutX="71.0" layoutY="82.0"
+                                               prefWidth="200.0"/>
+                                <Button layoutX="208.0" layoutY="117.0" mnemonicParsing="false" text="Confirm"/>
+                                <Text fx:id="passwordStatus" fill="WHITE" layoutX="98.0" layoutY="132.0" scaleX="1.0"
+                                      scaleY="0.9999923519334313" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="This is the status"/>
+                                <Text fill="WHITE" layoutX="71.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Please enter a password to unlock...">
+                                    <font>
+                                        <Font name="System Italic" size="11.0"/>
+                                    </font>
+                                </Text>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
             </children>
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
         </StackPane>
-        <AnchorPane id="passwordModal" fx:id="modal" prefHeight="338.0" prefWidth="645.0" styleClass="overlay"
-                    visible="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
-            <children>
-                <AnchorPane layoutX="301.0" layoutY="176.0" prefHeight="208.0" prefWidth="338.0"
-                            styleClass="dark-gradientpane">
-                    <children>
-                        <PasswordField id="passwordField1" fx:id="password" layoutX="71.0" layoutY="82.0"
-                                       prefWidth="200.0"/>
-                        <Button layoutX="208.0" layoutY="117.0" mnemonicParsing="false" text="Confirm"/>
-                        <Text fx:id="passwordStatus" fill="WHITE" layoutX="98.0" layoutY="132.0" scaleX="1.0"
-                              scaleY="0.9999923519334313" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="This is the status"/>
-                        <Text fill="WHITE" layoutX="71.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Please enter a password to unlock...">
-                            <font>
-                                <Font name="System Italic" size="11.0"/>
-                            </font>
-                        </Text>
-                    </children>
-                </AnchorPane>
-            </children>
-        </AnchorPane>
     </children>
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>

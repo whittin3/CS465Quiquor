@@ -266,7 +266,7 @@ public class AutoFillTextBoxSkin<T> extends SkinBase<AutoFillTextBox<T>, AutoFil
 
 		if (evt.getEventType() == KeyEvent.KEY_PRESSED) {
 			/*--------------------------------
-             - KeyEvent Handling for Textbox -
+			 - KeyEvent Handling for Textbox -
              --------------------------------*/
 			KeyEvent t = (KeyEvent) evt;
 			if (t.getSource() == textbox) {
@@ -286,7 +286,7 @@ public class AutoFillTextBoxSkin<T> extends SkinBase<AutoFillTextBox<T>, AutoFil
 		 * EVENT HANDLING FOR 'LISTVIEW'
 		 ********************************/
 		else if (evt.getEventType() == KeyEvent.KEY_RELEASED) {
-            /*---------------------------------
+			/*---------------------------------
              - KeyEvent Handling for ListView -
              ----------------------------------*/
 			KeyEvent t = (KeyEvent) evt;

@@ -3,6 +3,7 @@ package client.controller;
 import client.Main;
 import client.View;
 import client.ViewController;
+import client.transitions.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 
@@ -36,6 +38,8 @@ public class Home implements View {
 	TextField password;
 	@FXML
 	Text passwordStatus;
+	@FXML
+	HBox topHboxBar;
 
 	private GUIDrinkController guiDrinkController;
 
@@ -105,10 +109,24 @@ public class Home implements View {
 		return subentries;
 	}
 
+	private void initFavoritesBar() {
+
+	}
+
 	@FXML
 	public void promptForPassword() {
 		passwordStatus.setText("");
 		password.setText("");
 		modal.setVisible(true);
+	}
+
+	@FXML
+	public void gotoCreateYourOwnDrink() {
+		viewController.setScreen(ViewController.CreateADrink, new FadeTransition());
+	}
+
+	@FXML
+	public void pourMyDrink() {
+
 	}
 }

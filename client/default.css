@@ -7,12 +7,12 @@
 }
 
 .cup {
-    -fx-background-color: white;
+    /*-fx-background-color: white;  */
     -fx-background-image: url("images/cup.png");
     -fx-background-size: 400, 400;
     -fx-background-repeat: no-repeat;
-    -fx-border-color: #2e8b57;
-    -fx-border-width: 2px;
+    /*-fx-border-color: #2e8b57;   */
+    /*-fx-border-width: 2px;*/
     -fx-padding: 10;
     -fx-spacing: 8;
 }
@@ -24,6 +24,10 @@
 
 .autofill-text{
     -fx-skin:"client.control.AutoFillTextBoxSkin";
+}
+
+.pumpItem {
+	-fx-fill: white;
 }
 
 /*CSS for the GUIDrinkController*/
