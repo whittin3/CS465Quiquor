@@ -11,12 +11,12 @@
           xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
           fx:controller="client.controller.SetupBar">
     <children>
-        <StackPane minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0"
+        <StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="900.0"
                    styleClass="dark-gradientpane">
             <children>
-                <VBox>
+                <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0">
                     <children>
-                        <AnchorPane prefHeight="120.0" prefWidth="940.0">
+                        <AnchorPane prefHeight="120.0" prefWidth="900.0">
                             <children>
                                 <Text fill="WHITE" layoutX="104.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0"
                                       text="Create Your Bar" textAlignment="LEFT" textOrigin="TOP">
@@ -31,15 +31,15 @@
                             </children>
                         </AnchorPane>
                         <FlowPane id="" fx:id="pumpLayout" alignment="TOP_LEFT" columnHalignment="LEFT" hgap="150.0"
-                                  minWidth="960.0" orientation="VERTICAL" prefHeight="451.0" prefWidth="960.0"
+                                  minWidth="-Infinity" orientation="VERTICAL" prefHeight="422.0" prefWidth="900.0"
                                   prefWrapLength="560.0" rowValignment="TOP" vgap="30.0">
                             <padding>
                                 <Insets left="40.0"/>
                             </padding>
                         </FlowPane>
-                        <AnchorPane prefHeight="40.0" prefWidth="625.0">
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="900.0">
                             <children>
-                                <Button layoutX="901.0" layoutY="5.0" mnemonicParsing="false" onAction="#gotoHome"
+                                <Button layoutX="838.0" layoutY="5.0" mnemonicParsing="false" onAction="#gotoHome"
                                         text="Save"/>
                             </children>
                         </AnchorPane>

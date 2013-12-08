@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 
 public class Home implements View {
@@ -23,6 +24,9 @@ public class Home implements View {
 	TextField drinkSearchField;
 	@FXML
 	AnchorPane guiControllerPane;
+	@FXML
+	Text drinkNameText;
+
 	private GUIDrinkController guiDrinkController;
 
 	@Override
@@ -48,10 +52,10 @@ public class Home implements View {
 		guiControllerPane.getChildren().add(guiDrinkController);
 		drinkListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
-			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
-				if (new_val != null && observableDrinkList.contains(new_val)) {
-					guiDrinkController.addDrink(Main.drinkLibrary.getDrink(new_val));
-					System.out.println(new_val);
+			public void changed(ObservableValue<? extends String> ov, String old_val, String selection) {
+				if (selection != null && observableDrinkList.contains(selection)) {
+					guiDrinkController.addDrink(Main.drinkLibrary.getDrink(selection));
+					drinkNameText.setText(selection);
 				}
 //				drinkListView.getSelectionModel().clearSelection();
 			}

@@ -9,7 +9,7 @@
 <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1"
           xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.Welcome">
     <children>
-        <StackPane minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0"
+        <StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="900.0"
                    styleClass="dark-gradientpane">
             <children>
                 <AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="940.0">
@@ -28,7 +28,7 @@
                                 <Font size="55.0"/>
                             </font>
                         </Text>
-                        <Button id="settingsButton" layoutX="863.0" layoutY="14.0" mnemonicParsing="false"
+                        <Button id="settingsButton" layoutX="815.0" layoutY="14.0" mnemonicParsing="false"
                                 text="Settings" textAlignment="LEFT"/>
                     </children>
                 </AnchorPane>
