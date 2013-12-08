@@ -3,15 +3,13 @@ package client.controller;
 import client.Main;
 import client.View;
 import client.ViewController;
+import client.control.AutoFillTextBox;
 import client.transitions.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import client.control.AutoFillTextBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
@@ -38,6 +36,15 @@ public class SetupBar implements View {
 	public void init() {
 		Set<String> ingredientNames = Main.drinkLibrary.getIngredients().keySet();
 		ingredients = FXCollections.observableArrayList(ingredientNames);
+
+		testingSetup();
+	}
+
+	private void testingSetup() {
+		addPump();
+		addPump();
+		addPump();
+
 	}
 
 	@FXML

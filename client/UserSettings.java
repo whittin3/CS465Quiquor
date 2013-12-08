@@ -16,9 +16,10 @@ import java.util.logging.Logger;
  * todo: @whittin3 Please note that this entire class was written by me a long time ago and I haven't checked to see if it works
  */
 public class UserSettings {
-	private Boolean StartInFullScreen;
-	private Boolean EnableAddNewDrinkButton;
-	private Boolean AlwaysStartWithAnEmptyBar;
+	public Boolean StartInFullScreen;
+	public Boolean EnableAddNewDrinkButton;
+	public Boolean AlwaysStartWithAnEmptyBar;
+	public Boolean DefaultNumberOfPumps;
 
 	public void parseConfigFile() throws FileNotFoundException, URISyntaxException {
 		CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();

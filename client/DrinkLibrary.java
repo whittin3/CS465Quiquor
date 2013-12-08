@@ -13,7 +13,8 @@ import javafx.collections.ObservableList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * todo @whittin3: Please note that this entire class was written by me a long time ago and I haven't checked to see if it works

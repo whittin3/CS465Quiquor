@@ -28,6 +28,7 @@ public class Main extends Application {
 
 	/**
 	 * Called by FXML
+	 *
 	 * @param primaryStage
 	 * @throws IOException
 	 */

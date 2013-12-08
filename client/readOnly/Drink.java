@@ -15,7 +15,7 @@ import java.util.List;
  * PLEASE DO NOT CHANGE AS IT IS A REQUIRED CLASS TO INTERACT WITH THE BARTENDER
  */
 
-public class Drink implements Comparable{
+public class Drink implements Comparable {
 	private String name;
 	private HashMap<Ingredient, Double> ingredients;
 

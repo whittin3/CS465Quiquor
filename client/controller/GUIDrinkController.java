@@ -24,7 +24,7 @@ import java.util.List;
 
 public class GUIDrinkController extends AnchorPane {
 	private static final int MAX_HEIGHT = 400;
-	private static final int MAX_WIDTH = 400 ;
+	private static final int MAX_WIDTH = 400;
 	private static final double CUP_BOTTOM_OFFSET = 40.0;
 	private static final double CUP_LEFT_OFFSET = 96.0;
 	List<String> ingredientList;

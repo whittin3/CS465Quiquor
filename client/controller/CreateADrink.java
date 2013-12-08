@@ -12,7 +12,6 @@ public class CreateADrink implements View {
 	}
 
 
-
 	@Override
 	public void init() {
 	}

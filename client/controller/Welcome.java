@@ -29,7 +29,8 @@ public class Welcome implements View {
 
 	@Override
 	public void init() {
-		System.out.println("Welcome init was called");	}
+		System.out.println("Welcome init was called");
+	}
 
 	/**
 	 * Called when you click order a drink

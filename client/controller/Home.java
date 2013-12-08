@@ -3,7 +3,6 @@ package client.controller;
 import client.Main;
 import client.View;
 import client.ViewController;
-import client.readOnly.Drink;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,8 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
-import java.util.List;
 
 
 public class Home implements View {
@@ -52,7 +49,7 @@ public class Home implements View {
 		drinkListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
-				if (new_val != null && !observableDrinkList.contains(new_val)) {
+				if (new_val != null && observableDrinkList.contains(new_val)) {
 					guiDrinkController.addDrink(Main.drinkLibrary.getDrink(new_val));
 					System.out.println(new_val);
 				}
