@@ -44,7 +44,7 @@ public class Home implements View {
 				drinkListView.setItems(searchResults);
 			}
 		});
-		guiDrinkController = new GUIDrinkController();
+		guiDrinkController = new GUIDrinkController(false);
 		guiControllerPane.getChildren().add(guiDrinkController);
 		drinkListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override

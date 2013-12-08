@@ -29,9 +29,10 @@ public class GUIDrinkController extends AnchorPane {
 	private static final double CUP_LEFT_OFFSET = 96.0;
 	List<String> ingredientList;
 	private final VBox vBox = new VBox();
+	boolean draggable;
 
 
-	public GUIDrinkController() {
+	public GUIDrinkController(boolean draggable) {
 		super();
 		getStyleClass().add("cup");
 		ingredientList = new ArrayList<>();
@@ -41,12 +42,8 @@ public class GUIDrinkController extends AnchorPane {
 		setLeftAnchor(vBox, CUP_LEFT_OFFSET);
 		getChildren().add(vBox);
 		vBox.setAlignment(Pos.BOTTOM_CENTER);
-
+		this.draggable = draggable;
 	}
-
-	/**
-	 * todo @whittin3 Create a GUIController from a drink? or should we just remove all the ingredients from the current one. Probably the latter.
-	 */
 
 	public void addDrink(Drink drink) {
 		clear();
@@ -57,7 +54,7 @@ public class GUIDrinkController extends AnchorPane {
 
 	public void addIngredient(Ingredient ingredient) {
 		ingredientList.add(ingredient.getName());
-		vBox.getChildren().add(new Cell(ingredient));
+		vBox.getChildren().add(new Cell(ingredient, draggable));
 	}
 
 	public void clear() {
@@ -74,17 +71,19 @@ public class GUIDrinkController extends AnchorPane {
 		private static final double MIN_HEIGHT = 20;
 		private static final int STARTING_HEIGHT = 50;
 		private static final int HORIZONTAL_MARGIN = 7;
+		private final boolean draggable;
 		private double y;
 		private boolean resizing;
 		private boolean dragging;
 		private Rectangle rectangle = new Rectangle(MAX_WIDTH, STARTING_HEIGHT);
 		private Text text;
 
-		private Cell(Ingredient ingredient) {
+		private Cell(Ingredient ingredient, boolean draggable) {
 			super();
 			text = new Text(ingredient.getName());
 			init(this);
 			stylize(Main.pumpMap.get(ingredient));
+			this.draggable = draggable;
 		}
 
 		private void stylize(int color) {
@@ -94,7 +93,6 @@ public class GUIDrinkController extends AnchorPane {
 
 			//Rectangle
 			rectangle.getStyleClass().add("drink-cell-" + color);
-			//Text
 		}
 
 		public void init(final Cell cell) {
@@ -153,7 +151,7 @@ public class GUIDrinkController extends AnchorPane {
 		}
 
 		private void mouseOver(MouseEvent event) {
-			if (isInResizableMargin(event) || resizing) {
+			if ((isInResizableMargin(event) || resizing) && draggable) {
 				this.setCursor(Cursor.S_RESIZE);
 			} else {
 				this.setCursor(Cursor.DEFAULT);
@@ -181,17 +179,16 @@ public class GUIDrinkController extends AnchorPane {
 		}
 
 		private void mousePressed(MouseEvent event) {
-
-			if (isInResizableMargin(event)) {
-				resizing = true;
-				y = event.getSceneY();
-			} else {
-				dragging = true;
-				y = event.getSceneY();
-				toFront();
+			if (draggable) {
+				if (isInResizableMargin(event)) {
+					resizing = true;
+					y = event.getSceneY();
+				} else {
+					dragging = true;
+					y = event.getSceneY();
+					toFront();
+				}
 			}
-
-
 		}
 	}
 }

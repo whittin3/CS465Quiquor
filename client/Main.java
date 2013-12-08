@@ -59,7 +59,7 @@ public class Main extends Application {
 		pumpMap.put(test2, 1);
 		pumpMap.put(test3, 2);
 		pumpMap.put(test4, 3);
-		GUIDrinkController guiDrinkController = new GUIDrinkController();
+		GUIDrinkController guiDrinkController = new GUIDrinkController(true);
 		guiDrinkController.addIngredient(test1);
 		guiDrinkController.addIngredient(test2);
 		guiDrinkController.addIngredient(test3);
