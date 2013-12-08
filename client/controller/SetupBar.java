@@ -13,6 +13,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,6 +24,7 @@ import java.util.Set;
  */
 public class SetupBar implements View {
 	private ViewController viewController;
+	private List<PumpItem> pumpItemList;
 	public int numberOfPumps = 0;
 
 	@FXML
@@ -36,29 +40,32 @@ public class SetupBar implements View {
 	public void init() {
 		Set<String> ingredientNames = Main.drinkLibrary.getIngredients().keySet();
 		ingredients = FXCollections.observableArrayList(ingredientNames);
-
-		testingSetup();
+		pumpItemList = new ArrayList<>();
+		testAndDemoSetup();
 	}
 
-	private void testingSetup() {
-		addPump();
-		addPump();
-		addPump();
-
+	private void testAndDemoSetup() {
+		List<String> testIngredients = Arrays.asList("Vodka", "Water", "Sprite", "Cola", "Amaretto", "Red Bull", "Spiced Rum");
+		for (int i = 0; i < testIngredients.size(); i++) {
+			addPump();
+			pumpItemList.get(i).setIngredient(testIngredients.get(i));
+		}
 	}
 
 	@FXML
 	public void addPump() {
-		pumpLayout.getChildren().add(new PumpItem(ingredients, numberOfPumps + 1));
+		PumpItem pumpItem = new PumpItem(ingredients, numberOfPumps + 1);
+		pumpLayout.getChildren().add(pumpItem);
+		pumpItemList.add(pumpItem);
 		numberOfPumps++;
 	}
 
 	@FXML
 	public void removePump() {
 		ObservableList<Node> children = pumpLayout.getChildren();
-		children.remove(children.size() - 1);
+		children.remove(numberOfPumps - 1);
+		pumpItemList.remove(numberOfPumps - 1);
 		numberOfPumps--;
-
 	}
 
 	@FXML
@@ -70,26 +77,36 @@ public class SetupBar implements View {
 	private void savePumpSelections() {
 		ObservableList<Node> children = pumpLayout.getChildren();
 		int i = 0;
-		for (Node node : children) {
-			PumpItem pumpItem = (PumpItem) node;
+		for (PumpItem pumpItem : pumpItemList) {
 			String ingredient = pumpItem.getIngredient();
 			Main.pumpMap.put(Main.drinkLibrary.getIngredient(ingredient), i);
 			i++;
 		}
 	}
 
+
 	private static class PumpItem extends HBox {
 
 		private final AutoFillTextBox autoFillTextBox;
+		private final Text pumpText;
 
 		public PumpItem(ObservableList<String> ingredients, int number) {
-			getChildren().add(new Text("Pump " + String.valueOf(number) + ": "));
+			pumpText = new Text("Pump " + String.valueOf(number) + ": ");
 			autoFillTextBox = new AutoFillTextBox(ingredients);
+			getChildren().add(pumpText);
 			getChildren().add(autoFillTextBox);
 		}
 
 		public String getIngredient() {
 			return autoFillTextBox.getText();
+		}
+
+		public void setIngredient(String ingredient) {
+			if (Main.drinkLibrary.ingredients.keySet().contains(ingredient)) {
+				autoFillTextBox.setText(ingredient);
+			} else {
+				System.out.println("When setting " + pumpText.getText() + "we could not locate the ingredient " + ingredient);
+			}
 		}
 	}
 }

@@ -30,8 +30,9 @@
                                         text="-"/>
                             </children>
                         </AnchorPane>
-                        <FlowPane id="" fx:id="pumpLayout" hgap="20.0" orientation="VERTICAL" prefHeight="451.0"
-                                  prefWidth="960.0" vgap="30.0">
+                        <FlowPane id="" fx:id="pumpLayout" alignment="TOP_LEFT" columnHalignment="LEFT" hgap="150.0"
+                                  minWidth="960.0" orientation="VERTICAL" prefHeight="451.0" prefWidth="960.0"
+                                  prefWrapLength="560.0" rowValignment="TOP" vgap="30.0">
                             <padding>
                                 <Insets left="40.0"/>
                             </padding>

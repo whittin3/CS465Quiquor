@@ -49,6 +49,7 @@ public class GUIDrinkController extends AnchorPane {
 	 */
 
 	public void addDrink(Drink drink) {
+		clear();
 		for (Ingredient ingredient : drink.getIngredients()) {
 			addIngredient(ingredient);
 		}
@@ -57,6 +58,11 @@ public class GUIDrinkController extends AnchorPane {
 	public void addIngredient(Ingredient ingredient) {
 		ingredientList.add(ingredient.getName());
 		vBox.getChildren().add(new Cell(ingredient));
+	}
+
+	public void clear() {
+		ingredientList.clear();
+		vBox.getChildren().clear();
 	}
 
 	/**

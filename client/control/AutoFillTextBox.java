@@ -40,17 +40,9 @@ public class AutoFillTextBox<T> extends Control implements AutoFillTextBoxFactor
 	private TextField textbox;
 	private ListView<T> listview;
 	private ObservableList<T> data = FXCollections.observableArrayList();
-	;
 	private boolean filterMode;
 	private int limit;
 
-	/**
-	 * Constructor
-	 */
-  /*  public AutoFillTextBox() {
-		init();
-    }
-    */
 	public AutoFillTextBox(ObservableList<T> data) {
 		//this();
 		init();
@@ -86,6 +78,10 @@ public class AutoFillTextBox<T> extends Control implements AutoFillTextBoxFactor
 
 	public String getText() {
 		return textbox.getText();
+	}
+
+	public void setText(String text) {
+		textbox.setText(text);
 	}
 
 	public void addData(T data) {
