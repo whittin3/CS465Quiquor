@@ -27,8 +27,12 @@
 }
 
 .pumpItem {
-	-fx-fill: white;
-}
+ 	-fx-fill: white;
+ }
+
+ .ingredientItem{
+ 	-fx-fill: white;
+ }
 
 /*CSS for the GUIDrinkController*/
 /* http://www.colourlovers.com/business/trends/branding/7880/Papeterie_Haute-Ville_Logo */

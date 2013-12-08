@@ -97,4 +97,13 @@ public class Main extends Application {
 		FXCollections.sort(drinkable);
 		return drinkable;
 	}
+
+	public static ObservableList<String> getIngredients() {
+		ObservableList<String> ingredients = FXCollections.observableArrayList();
+		for (Ingredient ingredient : pumpMap.keySet()) {
+			ingredients.add(ingredient.getName());
+		}
+		FXCollections.sort(ingredients);
+		return ingredients;
+	}
 }
