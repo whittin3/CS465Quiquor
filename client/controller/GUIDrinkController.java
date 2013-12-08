@@ -20,6 +20,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GUIDrinkController extends AnchorPane {
@@ -45,22 +46,22 @@ public class GUIDrinkController extends AnchorPane {
 		this.draggable = draggable;
 	}
 
+	public void addIngredient(Ingredient ingredient, double volume) {
+		ingredientList.add(ingredient.getName());
+		vBox.getChildren().add(new Cell(ingredient, volume, draggable));
+	}
+
+	public void addIngredient(String ingredientName, double volume) {
+		Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
+		addIngredient(ingredient, volume);
+	}
+
 	public void addDrink(Drink drink) {
 		clear();
+		HashMap<Ingredient, Double> ingredientMap = drink.getIngredientMap();
 		for (Ingredient ingredient : drink.getIngredients()) {
-			addIngredient(ingredient);
+			addIngredient(ingredient, ingredientMap.get(ingredient));
 		}
-	}
-
-	public void addIngredient(Ingredient ingredient) {
-		ingredientList.add(ingredient.getName());
-		vBox.getChildren().add(new Cell(ingredient, draggable));
-	}
-
-	public void addIngredient(String ingredientName) {
-		ingredientList.add(ingredientName);
-		Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
-		vBox.getChildren().add(new Cell(ingredient, draggable));
 	}
 
 	public void clear() {
@@ -92,15 +93,16 @@ public class GUIDrinkController extends AnchorPane {
 		private double y;
 		private boolean resizing;
 		private boolean dragging;
-		private Rectangle rectangle = new Rectangle(MAX_WIDTH, STARTING_HEIGHT);
+		private Rectangle rectangle;
 		private Text text;
 
-		private Cell(Ingredient ingredient, boolean draggable) {
+		private Cell(Ingredient ingredient, double volume, boolean draggable) {
 			super();
 			text = new Text(ingredient.getName());
+			rectangle = new Rectangle(MAX_WIDTH, (STARTING_HEIGHT * volume) * .7);
+			this.draggable = draggable;
 			init(this);
 			stylize(Main.pumpMap.get(ingredient));
-			this.draggable = draggable;
 		}
 
 		private void stylize(int color) {

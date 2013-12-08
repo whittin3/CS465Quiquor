@@ -31,7 +31,8 @@
  }
 
  .ingredientItem{
- 	-fx-fill: black;
+ 	-fx-fill: white;
+ 	-fx-font-size: 32px;
  }
 
 /*CSS for the GUIDrinkController*/

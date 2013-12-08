@@ -9,11 +9,13 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBuilder;
 
@@ -54,6 +56,7 @@ public class CreateADrink implements View {
 
 	private static class IngredientCell extends StackPane {
 		private final GUIDrinkController guiDrinkController;
+		private static final int padding = 20;
 		Rectangle rectangle;
 		private boolean selected = false;
 		private final Text text;
@@ -61,13 +64,17 @@ public class CreateADrink implements View {
 		public IngredientCell(final GUIDrinkController guiDrinkController, final String ingredient) {
 			this.guiDrinkController = guiDrinkController;
 
-			text = TextBuilder.create().text(ingredient).styleClass("ingredientItem").build();
+			// whittin3 - I set the font here and not in the CSS because I must set the bounds of the rectangle.
+			text = TextBuilder.create().text(ingredient).font(new Font(32)).styleClass("ingredientItem").build();
 			Bounds rectBounds = text.getBoundsInParent();
 
-			rectangle = new Rectangle(rectBounds.getWidth(), rectBounds.getHeight());
+			int rectPadding = padding / 2;
+			rectangle = new Rectangle(rectBounds.getWidth() + rectPadding, rectBounds.getHeight() + rectPadding);
 			rectangle.getStyleClass().setAll("drink-cell-unselected");
+			setAlignment(Pos.CENTER);
 			getChildren().add(rectangle);
 			getChildren().add(text);
+			setMinSize(rectBounds.getWidth() + padding, rectBounds.getHeight() + padding);
 
 			final IngredientCell cell = this;
 			this.setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -90,7 +97,7 @@ public class CreateADrink implements View {
 			String ingredientName = text.getText();
 			Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
 			if (selected) {
-				guiDrinkController.addIngredient(ingredientName);
+				guiDrinkController.addIngredient(ingredientName, 1);
 				styleClass.setAll("drink-cell-" + String.valueOf(Main.pumpMap.get(ingredient)));
 			} else {
 				guiDrinkController.removeIngredient(ingredientName);

@@ -53,8 +53,8 @@
                         </AnchorPane>
                     </children>
                 </VBox>
-                <AnchorPane id="passwordModal" fx:id="modal" prefHeight="338.0" prefWidth="645.0" styleClass="overlay"
-                            visible="false">
+                <AnchorPane id="passwordModal" fx:id="modal" minHeight="-Infinity" minWidth="-Infinity"
+                            prefHeight="600.0" prefWidth="920.0" styleClass="overlay" visible="false">
                     <children>
                         <AnchorPane layoutX="301.0" layoutY="176.0" prefHeight="208.0" prefWidth="338.0"
                                     styleClass="dark-gradientpane">
