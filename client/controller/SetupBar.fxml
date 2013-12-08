@@ -14,13 +14,13 @@
 <?import javafx.scene.text.Text?>
 <?scenebuilder-stylesheet ../default.css?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="540.0" prefWidth="980.0" styleClass="dark-gradientpane" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.SetupBar">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="-1.0" prefWidth="-1.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.SetupBar">
   <children>
-    <StackPane prefHeight="-1.0" prefWidth="-1.0">
+    <StackPane minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="dark-gradientpane">
       <children>
         <VBox>
           <children>
-            <AnchorPane prefHeight="48.0" prefWidth="625.0">
+            <AnchorPane prefHeight="120.0" prefWidth="940.0">
               <children>
                 <Text fill="WHITE" layoutX="104.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Your Bar" textAlignment="LEFT" textOrigin="TOP">
                   <font>
@@ -31,7 +31,11 @@
                 <Button layoutX="36.0" layoutY="4.0" mnemonicParsing="false" onAction="#removePump" text="-" />
               </children>
             </AnchorPane>
-            <FlowPane id="" fx:id="pumpLayout" hgap="20.0" orientation="VERTICAL" prefHeight="451.0" prefWidth="960.0" vgap="30.0" />
+            <FlowPane id="" fx:id="pumpLayout" hgap="20.0" orientation="VERTICAL" prefHeight="451.0" prefWidth="960.0" vgap="30.0">
+              <padding>
+                <Insets left="40.0" />
+              </padding>
+            </FlowPane>
             <AnchorPane prefHeight="40.0" prefWidth="625.0">
               <children>
                 <Button layoutX="901.0" layoutY="5.0" mnemonicParsing="false" onAction="#gotoHome" text="Save" />

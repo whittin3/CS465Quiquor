@@ -15,7 +15,7 @@ import java.util.List;
  * PLEASE DO NOT CHANGE AS IT IS A REQUIRED CLASS TO INTERACT WITH THE BARTENDER
  */
 
-public class Drink {
+public class Drink implements Comparable{
 	private String name;
 	private HashMap<Ingredient, Double> ingredients;
 
@@ -52,5 +52,11 @@ public class Drink {
 
 	public List<Ingredient> getIngredients() {
 		return new ArrayList<>(this.ingredients.keySet());
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Drink drink = (Drink) o;
+		return this.getName().compareTo(drink.getName());  //To change body of implemented methods use File | Settings | File Templates.
 	}
 }

@@ -24,9 +24,9 @@ import java.util.List;
 
 public class GUIDrinkController extends AnchorPane {
 	private static final int MAX_HEIGHT = 400;
-	private static final int MAX_WIDTH = Cell.MAX_WIDTH + 30;
-	private static final double CUP_BOTTOM_OFFSET = 150.0;
-	private static final double CUP_LEFT_OFFSET = 140.0;
+	private static final int MAX_WIDTH = 400 ;
+	private static final double CUP_BOTTOM_OFFSET = 40.0;
+	private static final double CUP_LEFT_OFFSET = 96.0;
 	List<String> ingredientList;
 	private final VBox vBox = new VBox();
 
@@ -35,8 +35,8 @@ public class GUIDrinkController extends AnchorPane {
 		super();
 		getStyleClass().add("cup");
 		ingredientList = new ArrayList<>();
-		setMinSize(MAX_HEIGHT, MAX_WIDTH);
-		setMaxSize(MAX_HEIGHT, MAX_WIDTH);
+		setMinSize(MAX_WIDTH, MAX_HEIGHT);
+		setMaxSize(MAX_WIDTH, MAX_HEIGHT);
 		setBottomAnchor(vBox, CUP_BOTTOM_OFFSET);
 		setLeftAnchor(vBox, CUP_LEFT_OFFSET);
 		getChildren().add(vBox);
@@ -48,7 +48,7 @@ public class GUIDrinkController extends AnchorPane {
 	 * todo @whittin3 Create a GUIController from a drink? or should we just remove all the ingredients from the current one. Probably the latter.
 	 */
 
-	public GUIDrinkController(Drink drink) {
+	public void addDrink(Drink drink) {
 		for (Ingredient ingredient : drink.getIngredients()) {
 			addIngredient(ingredient);
 		}
@@ -64,7 +64,7 @@ public class GUIDrinkController extends AnchorPane {
 	 */
 	private static class Cell extends StackPane {
 
-		private static final int MAX_WIDTH = 282;
+		private static final int MAX_WIDTH = 252;
 		private static final double MIN_HEIGHT = 20;
 		private static final int STARTING_HEIGHT = 50;
 		private static final int HORIZONTAL_MARGIN = 7;

@@ -60,7 +60,7 @@ public class Main extends Application {
 		guiDrinkController.addIngredient(test2);
 		guiDrinkController.addIngredient(test3);
 		guiDrinkController.addIngredient(test4);
-		Scene root = new Scene(guiDrinkController, 800, 600);
+		Scene root = new Scene(guiDrinkController, 500, 400);
 		root.getStylesheets().add(styleSheet);
 		primaryStage.setScene(root);
 		primaryStage.show();

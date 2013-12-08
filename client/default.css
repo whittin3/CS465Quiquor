@@ -8,8 +8,8 @@
 
 .cup {
     -fx-background-color: white;
-    -fx-background-image: url("images/cup.jpg");
-    -fx-background-size: 500, 500;
+    -fx-background-image: url("images/cup.png");
+    -fx-background-size: 400, 400;
     -fx-background-repeat: no-repeat;
     -fx-border-color: #2e8b57;
     -fx-border-width: 2px;

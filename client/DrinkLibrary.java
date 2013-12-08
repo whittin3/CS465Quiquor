@@ -13,10 +13,7 @@ import javafx.collections.ObservableList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * todo @whittin3: Please note that this entire class was written by me a long time ago and I haven't checked to see if it works
@@ -25,19 +22,15 @@ public class DrinkLibrary {
 
 	public static final String LAST_BAR_SETUP_TXT = "LastBarSetup.txt";
 	public HashMap<String, Ingredient> ingredients = new HashMap<>();
-	public List<Drink> drinkList = new ArrayList<>();
+	public HashMap<String, Drink> drinks = new HashMap<>();
 
 	public HashMap<String, Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-	public List<Drink> getDrinkList() {
-		return drinkList;
-	}
-
 	public void addDrink(String name, HashMap<Ingredient, Double> ingredientMap) {
 		Drink newDrink = new Drink(name, ingredientMap);
-		drinkList.add(newDrink);
+		drinks.put(newDrink.getName(), newDrink);
 	}
 
 	public ObservableList<String> parseLastBarSetup(String path) throws URISyntaxException, FileNotFoundException {
@@ -100,5 +93,15 @@ public class DrinkLibrary {
 		}
 
 		return ingredients.get(name);
+	}
+
+	public Drink getDrink(String drinkName) {
+		return drinks.get(drinkName);
+	}
+
+	public ObservableList<String> getDrinkList() {
+		ObservableList<String> drinkNames = FXCollections.observableArrayList(drinks.keySet());
+		FXCollections.sort(drinkNames);
+		return drinkNames;
 	}
 }
