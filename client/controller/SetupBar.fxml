@@ -26,7 +26,7 @@
                 <Button layoutX="36.0" layoutY="4.0" mnemonicParsing="false" onAction="#removePump" text="-" />
               </children>
             </AnchorPane>
-            <FlowPane id="PimpPane" prefHeight="256.0" prefWidth="625.0" />
+            <FlowPane id="" fx:id="pumpLayout" hgap="20.0" orientation="VERTICAL" prefHeight="256.0" prefWidth="625.0" vgap="30.0" />
             <AnchorPane prefHeight="40.0" prefWidth="625.0">
               <children>
                 <Button layoutX="555.0" layoutY="8.0" mnemonicParsing="false" onAction="#gotoHome" text="Save" />

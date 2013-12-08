@@ -3,7 +3,9 @@ package client.controller;
 import client.View;
 import client.ViewController;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
 
 /**
  * User: Neal Eric
@@ -11,6 +13,10 @@ import javafx.scene.control.Button;
  */
 public class SetupBar implements View {
 	private ViewController viewController;
+	public int numberOfPumps = 0;
+
+	@FXML
+	FlowPane pumpLayout;
 
 	@Override
 	public void setViewController(ViewController viewController) {
@@ -23,20 +29,24 @@ public class SetupBar implements View {
 	}
 
 	@FXML
-	public void addPump()
-	{
+	public void addPump() {
+		pumpLayout.getChildren().add(new PumpItem());
+	}
+
+	@FXML
+	public void removePump() {
 
 	}
 
 	@FXML
-	public void removePump()
-	{
+	public void gotoHome() {
 
 	}
 
-	@FXML
-	public void gotoHome()
-	{
+	private static class PumpItem extends AnchorPane {
+		private PumpItem() {
+		 	getChildren().add(new Text("pump"));
 
+		}
 	}
 }

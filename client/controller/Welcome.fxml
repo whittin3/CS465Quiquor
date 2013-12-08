@@ -1,61 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?scenebuilder-stylesheet ../default.css?>
-
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1"
-          xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.Welcome">
-    <children>
-        <StackPane minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0"
-                   styleClass="dark-gradientpane">
-            <children>
-                <VBox prefHeight="200.0" prefWidth="100.0">
-                    <children>
-                        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                            <children>
-                                <Button id="settingsButton" mnemonicParsing="false" text="Settings"
-                                        textAlignment="LEFT"/>
-                            </children>
-                        </HBox>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to"/>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quiquor">
-                            <font>
-                                <Font size="12.0"/>
-                            </font>
-                        </Text>
-                        <Button mnemonicParsing="false" onAction="#gotoBarSetup" text="Order a Drink!"/>
-                    </children>
-                </VBox>
-                <AnchorPane fx:id="passwordModal" prefHeight="338.0" prefWidth="645.0" visible="false">
-                    <children>
-                        <AnchorPane layoutX="163.0" layoutY="130.0" prefHeight="208.0" prefWidth="338.0">
-                            <children>
-                                <PasswordField id="passwordField1" fx:id="passwordField2" layoutX="124.0" layoutY="89.0"
-                                               prefWidth="200.0"/>
-                                <PasswordField fx:id="passwordField1" layoutX="124.0" layoutY="60.0" prefWidth="200.0"/>
-                                <Text fill="WHITE" layoutX="56.0" layoutY="76.0" scaleX="1.1987958523804214"
-                                      scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:"/>
-                                <Text fill="WHITE" layoutX="19.0" layoutY="105.0" scaleX="1.1987958523804214"
-                                      scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retype Password:"/>
-                                <Button layoutX="261.0" layoutY="129.0" mnemonicParsing="false"
-                                        onAction="#confirmPassword" text="Confirm"/>
-                                <Text fx:id="passwordStatus" fill="WHITE" layoutX="40.0" layoutY="136.0" scaleX="1.0"
-                                      scaleY="0.9999923519334313" strokeType="OUTSIDE" strokeWidth="0.0"
-                                      text="This is the status"/>
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </AnchorPane>
-            </children>
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-            </padding>
-        </StackPane>
-    </children>
-    <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-    </padding>
+
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.Welcome">
+  <children>
+    <StackPane minHeight="540.0" minWidth="960.0" prefHeight="540.0" prefWidth="960.0" styleClass="dark-gradientpane">
+      <children>
+        <AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="940.0">
+          <children>
+            <Button layoutX="475.0" layoutY="278.0" mnemonicParsing="false" onAction="#gotoBarSetup" text="Order a Drink!" />
+            <Text fill="WHITE" layoutX="311.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to">
+              <font>
+                <Font size="44.0" />
+              </font>
+            </Text>
+            <Text fill="WHITE" layoutX="370.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quiquor">
+              <font>
+                <Font size="55.0" />
+              </font>
+            </Text>
+            <Button id="settingsButton" layoutX="863.0" layoutY="14.0" mnemonicParsing="false" text="Settings" textAlignment="LEFT" />
+          </children>
+        </AnchorPane>
+        <AnchorPane fx:id="passwordModal" prefHeight="338.0" prefWidth="645.0" styleClass="overlay" visible="false">
+          <children>
+            <AnchorPane layoutX="301.0" layoutY="176.0" prefHeight="208.0" prefWidth="338.0" styleClass="dark-gradientpane">
+              <children>
+                <PasswordField id="passwordField1" fx:id="passwordField2" layoutX="124.0" layoutY="89.0" prefWidth="200.0" />
+                <PasswordField fx:id="passwordField1" layoutX="124.0" layoutY="60.0" prefWidth="200.0" />
+                <Text fill="WHITE" layoutX="56.0" layoutY="76.0" scaleX="1.1987958523804214" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
+                <Text fill="WHITE" layoutX="19.0" layoutY="105.0" scaleX="1.1987958523804214" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retype Password:" />
+                <Button layoutX="261.0" layoutY="129.0" mnemonicParsing="false" onAction="#confirmPassword" text="Confirm" />
+                <Text fx:id="passwordStatus" fill="WHITE" layoutX="40.0" layoutY="136.0" scaleX="1.0" scaleY="0.9999923519334313" strokeType="OUTSIDE" strokeWidth="0.0" text="This is the status" />
+                <Text fill="WHITE" layoutX="121.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter a password to secure your bar">
+                  <font>
+                    <Font name="System Italic" size="11.0" />
+                  </font>
+                </Text>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+      </children>
+      <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+    </StackPane>
+  </children>
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
 </GridPane>
