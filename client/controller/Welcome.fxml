@@ -14,15 +14,15 @@
             <children>
                 <AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="940.0">
                     <children>
-                        <Button layoutX="475.0" layoutY="278.0" mnemonicParsing="false" onAction="#gotoBarSetup"
+                        <Button layoutX="460.0" layoutY="339.0" mnemonicParsing="false" onAction="#gotoBarSetup"
                                 text="Order a Drink!"/>
-                        <Text fill="WHITE" layoutX="311.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        <Text fill="WHITE" layoutX="296.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0"
                               text="Welcome to">
                             <font>
                                 <Font size="44.0"/>
                             </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="370.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        <Text fill="WHITE" layoutX="355.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0"
                               text="Quiquor">
                             <font>
                                 <Font size="55.0"/>
@@ -33,7 +33,7 @@
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="passwordModal" prefHeight="338.0" prefWidth="645.0" styleClass="overlay"
-                            visible="false">
+                            visible="true">
                     <children>
                         <AnchorPane layoutX="301.0" layoutY="176.0" prefHeight="208.0" prefWidth="338.0"
                                     styleClass="dark-gradientpane">

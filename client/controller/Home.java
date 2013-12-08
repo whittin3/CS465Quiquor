@@ -7,9 +7,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -26,6 +30,12 @@ public class Home implements View {
 	AnchorPane guiControllerPane;
 	@FXML
 	Text drinkNameText;
+	@FXML
+	AnchorPane modal;
+	@FXML
+	TextField password;
+	@FXML
+	Text passwordStatus;
 
 	private GUIDrinkController guiDrinkController;
 
@@ -39,6 +49,8 @@ public class Home implements View {
 	 */
 	@Override
 	public void init() {
+		modal.setVisible(false);
+		drinkNameText.setText("");
 		observableDrinkList = Main.getDrinkables();
 		drinkListView.setItems(observableDrinkList);
 		drinkSearchField.textProperty().addListener(new ChangeListener<String>() {
@@ -60,6 +72,22 @@ public class Home implements View {
 //				drinkListView.getSelectionModel().clearSelection();
 			}
 		});
+
+		//Create handler for Modal De-Selection from Overlay
+		modal.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				AnchorPane passwordModal = (AnchorPane) mouseEvent.getSource();
+				Node dialog = passwordModal.getChildren().get(0);
+				Bounds dialogBounds = dialog.getBoundsInParent();
+				double x = mouseEvent.getX();
+				double y = mouseEvent.getY();
+				if (!(x > dialogBounds.getMinX() && x < dialogBounds.getMaxX() &&
+						y > dialogBounds.getMinY() && y < dialogBounds.getMaxY())) {
+					modal.setVisible(false);
+				}
+			}
+		});
 	}
 
 	private ObservableList<String> search(final String oldQuery, final String newQuery) {
@@ -75,5 +103,12 @@ public class Home implements View {
 			}
 		}
 		return subentries;
+	}
+
+	@FXML
+	public void promptForPassword() {
+		passwordStatus.setText("");
+		password.setText("");
+		modal.setVisible(true);
 	}
 }

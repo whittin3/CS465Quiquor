@@ -29,7 +29,7 @@ public class Welcome implements View {
 
 	@Override
 	public void init() {
-		System.out.println("Welcome init was called");
+		passwordModal.setVisible(false);
 	}
 
 	/**
