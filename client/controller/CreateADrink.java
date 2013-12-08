@@ -87,12 +87,13 @@ public class CreateADrink implements View {
 			selected = !selected;
 			ObservableList<String> styleClass = rectangle.getStyleClass();
 			styleClass.clear();
+			String ingredientName = text.getText();
+			Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
 			if (selected) {
-				String ingredientName = text.getText();
 				guiDrinkController.addIngredient(ingredientName);
-				Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
 				styleClass.setAll("drink-cell-" + String.valueOf(Main.pumpMap.get(ingredient)));
 			} else {
+				guiDrinkController.removeIngredient(ingredientName);
 				styleClass.setAll("drink-cell-unselected");
 			}
 		}

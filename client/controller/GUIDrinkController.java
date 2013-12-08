@@ -68,6 +68,17 @@ public class GUIDrinkController extends AnchorPane {
 		vBox.getChildren().clear();
 	}
 
+	public void removeIngredient(String ingredient) {
+		ingredientList.remove(ingredient);
+		for (Node node : vBox.getChildren()) {
+			Cell cell = (Cell) node;
+			if (cell.text.getText().equals(ingredient)) {
+				vBox.getChildren().remove(node);
+				break;
+			}
+		}
+	}
+
 	/**
 	 * Each Cell is a (drink) row in the GUIDrinkController
 	 */
