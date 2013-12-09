@@ -19,6 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBuilder;
 
+import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -38,6 +39,8 @@ public class CreateADrink implements View {
 	@FXML
 	AnchorPane guiControllerPane;
 	private GUIDrinkController guiDrinkController;
+    @FXML
+    javafx.scene.control.TextField drinkName;
 
 	@Override
 	public void setViewController(ViewController viewController) {
@@ -57,17 +60,15 @@ public class CreateADrink implements View {
 
 	@FXML
 	public void saveDrink() throws IOException {
-      CSVWriter writer = new CSVWriter(new FileWriter("data/drink.csv"), '\t');
+      CSVWriter writer = new CSVWriter(new FileWriter("data/drink.csv",true), '\t');
       Iterator<String> iterator = newDrinkIngredients.iterator();
-        String drinks[];
-        List<String[]> list = new ArrayList<String[]>();
+        String drinks[] = new String[20];
+        drinks[0] = drinkName.getText();
+        int index =1;
         while(iterator.hasNext()) {
-            drinks = new String[1];
-            drinks[0] = iterator.next();
-            list.add(drinks);
+            drinks[index++] = iterator.next();
       }
-
-      writer.writeAll(list);
+      writer.writeNext(drinks);
       writer.close();
 	}
 
