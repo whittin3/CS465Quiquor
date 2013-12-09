@@ -19,9 +19,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBuilder;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import au.com.bytecode.opencsv.CSVWriter;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+
 public class CreateADrink implements View {
 	private ViewController viewController;
 
+    private static HashSet<String> newDrinkIngredients;
 	@FXML
 	FlowPane flowPane;
 	@FXML
@@ -37,7 +48,7 @@ public class CreateADrink implements View {
 	public void init() {
 		guiDrinkController = new GUIDrinkController(true);
 		guiControllerPane.getChildren().add(guiDrinkController);
-
+        newDrinkIngredients = new HashSet<String>();
 		ObservableList<String> ingredients = Main.getIngredients();
 		for (String ingredient : ingredients) {
 			flowPane.getChildren().add(new IngredientCell(guiDrinkController, ingredient));
@@ -45,8 +56,19 @@ public class CreateADrink implements View {
 	}
 
 	@FXML
-	public void saveDrink() {
+	public void saveDrink() throws IOException {
+      CSVWriter writer = new CSVWriter(new FileWriter("data/drink.csv"), '\t');
+      Iterator<String> iterator = newDrinkIngredients.iterator();
+        String drinks[];
+        List<String[]> list = new ArrayList<String[]>();
+        while(iterator.hasNext()) {
+            drinks = new String[1];
+            drinks[0] = iterator.next();
+            list.add(drinks);
+      }
 
+      writer.writeAll(list);
+      writer.close();
 	}
 
 	@FXML
@@ -98,9 +120,11 @@ public class CreateADrink implements View {
 			Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
 			if (selected) {
 				guiDrinkController.addIngredient(ingredientName, 1);
+                newDrinkIngredients.add(ingredientName);
 				styleClass.setAll("drink-cell-" + String.valueOf(Main.pumpMap.get(ingredient)));
 			} else {
 				guiDrinkController.removeIngredient(ingredientName);
+                newDrinkIngredients.remove(ingredientName);
 				styleClass.setAll("drink-cell-unselected");
 			}
 		}
