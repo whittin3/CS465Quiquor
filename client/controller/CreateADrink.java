@@ -45,6 +45,9 @@ public class CreateADrink implements View {
     @FXML
     javafx.scene.control.TextField drinkName;
 
+    @FXML
+    Text saveFeedback;
+
     @Override
     public void setViewController(ViewController viewController) {
         this.viewController = viewController;
@@ -66,7 +69,7 @@ public class CreateADrink implements View {
         MessageBox saveDrink = new MessageBox("Are you sure you want to save this drink?", MessageBoxType.YES_NO);
         saveDrink.showAndWait();
         if (saveDrink.getMessageBoxResult() == MessageBoxResult.YES){
-            CSVWriter writer = new CSVWriter(new FileWriter("data/drink.csv",true), '\t');
+            CSVWriter writer = new CSVWriter(new FileWriter("data/customDrinks.csv",true), '\t');
             Iterator<String> iterator = newDrinkIngredients.iterator();
             String drinks[] = new String[20];
             drinks[0] = drinkName.getText();
@@ -76,9 +79,11 @@ public class CreateADrink implements View {
             }
             writer.writeNext(drinks);
             writer.close();
+            saveFeedback.setText("Drink Saved Successfully");
         }
         else{
             //do nothing
+            saveFeedback.setText("Custom Drink not Saved");
         }
     }
     @FXML
