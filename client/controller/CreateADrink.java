@@ -34,109 +34,109 @@ import java.util.List;
 
 
 public class CreateADrink implements View {
-	private ViewController viewController;
+    private ViewController viewController;
 
     private static HashSet<String> newDrinkIngredients;
-	@FXML
-	FlowPane flowPane;
-	@FXML
-	AnchorPane guiControllerPane;
-	private GUIDrinkController guiDrinkController;
+    @FXML
+    FlowPane flowPane;
+    @FXML
+    AnchorPane guiControllerPane;
+    private GUIDrinkController guiDrinkController;
     @FXML
     javafx.scene.control.TextField drinkName;
 
-	@Override
-	public void setViewController(ViewController viewController) {
-		this.viewController = viewController;
-	}
+    @Override
+    public void setViewController(ViewController viewController) {
+        this.viewController = viewController;
+    }
 
-	@Override
-	public void init() {
-		guiDrinkController = new GUIDrinkController(true);
-		guiControllerPane.getChildren().add(guiDrinkController);
+    @Override
+    public void init() {
+        guiDrinkController = new GUIDrinkController(true);
+        guiControllerPane.getChildren().add(guiDrinkController);
         newDrinkIngredients = new HashSet<String>();
-		ObservableList<String> ingredients = Main.getIngredients();
-		for (String ingredient : ingredients) {
-			flowPane.getChildren().add(new IngredientCell(guiDrinkController, ingredient));
-		}
-	}
+        ObservableList<String> ingredients = Main.getIngredients();
+        for (String ingredient : ingredients) {
+            flowPane.getChildren().add(new IngredientCell(guiDrinkController, ingredient));
+        }
+    }
 
-	@FXML
-	public void saveDrink() throws IOException {
+    @FXML
+    public void saveDrink() throws IOException {
         MessageBox saveDrink = new MessageBox("Are you sure you want to save this drink?", MessageBoxType.YES_NO);
         saveDrink.showAndWait();
         if (saveDrink.getMessageBoxResult() == MessageBoxResult.YES){
-        CSVWriter writer = new CSVWriter(new FileWriter("data/drink.csv",true), '\t');
-        Iterator<String> iterator = newDrinkIngredients.iterator();
-        String drinks[] = new String[20];
-        drinks[0] = drinkName.getText();
-        int index =1;
-        while(iterator.hasNext()) {
-            drinks[index++] = iterator.next();
-      }
-      writer.writeNext(drinks);
-      writer.close();
-	}
-    else{
-
+            CSVWriter writer = new CSVWriter(new FileWriter("data/drink.csv",true), '\t');
+            Iterator<String> iterator = newDrinkIngredients.iterator();
+            String drinks[] = new String[20];
+            drinks[0] = drinkName.getText();
+            int index =1;
+            while(iterator.hasNext()) {
+                drinks[index++] = iterator.next();
+            }
+            writer.writeNext(drinks);
+            writer.close();
+        }
+        else{
+            //do nothing
+        }
     }
+    @FXML
+    public void gotoHome() {
+        viewController.setScreen(ViewController.Home, new FadeTransition());
     }
-	@FXML
-	public void gotoHome() {
-		viewController.setScreen(ViewController.Home, new FadeTransition());
-	}
 
-	private static class IngredientCell extends StackPane {
-		private final GUIDrinkController guiDrinkController;
-		private static final int padding = 20;
-		Rectangle rectangle;
-		private boolean selected = false;
-		private final Text text;
+    private static class IngredientCell extends StackPane {
+        private final GUIDrinkController guiDrinkController;
+        private static final int padding = 20;
+        Rectangle rectangle;
+        private boolean selected = false;
+        private final Text text;
 
-		public IngredientCell(final GUIDrinkController guiDrinkController, final String ingredient) {
-			this.guiDrinkController = guiDrinkController;
+        public IngredientCell(final GUIDrinkController guiDrinkController, final String ingredient) {
+            this.guiDrinkController = guiDrinkController;
 
-			// whittin3 - I set the font here and not in the CSS because I must set the bounds of the rectangle.
-			text = TextBuilder.create().text(ingredient).font(new Font(32)).styleClass("ingredientItem").build();
-			Bounds rectBounds = text.getBoundsInParent();
+            // whittin3 - I set the font here and not in the CSS because I must set the bounds of the rectangle.
+            text = TextBuilder.create().text(ingredient).font(new Font(32)).styleClass("ingredientItem").build();
+            Bounds rectBounds = text.getBoundsInParent();
 
-			int rectPadding = padding / 2;
-			rectangle = new Rectangle(rectBounds.getWidth() + rectPadding, rectBounds.getHeight() + rectPadding);
-			rectangle.getStyleClass().setAll("drink-cell-unselected");
-			setAlignment(Pos.CENTER);
-			getChildren().add(rectangle);
-			getChildren().add(text);
-			setMinSize(rectBounds.getWidth() + padding, rectBounds.getHeight() + padding);
+            int rectPadding = padding / 2;
+            rectangle = new Rectangle(rectBounds.getWidth() + rectPadding, rectBounds.getHeight() + rectPadding);
+            rectangle.getStyleClass().setAll("drink-cell-unselected");
+            setAlignment(Pos.CENTER);
+            getChildren().add(rectangle);
+            getChildren().add(text);
+            setMinSize(rectBounds.getWidth() + padding, rectBounds.getHeight() + padding);
 
-			final IngredientCell cell = this;
-			this.setOnMouseReleased(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent event) {
-					cell.mouseReleased(event);
-				}
-			});
-		}
+            final IngredientCell cell = this;
+            this.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    cell.mouseReleased(event);
+                }
+            });
+        }
 
-		private void mouseReleased(MouseEvent event) {
-			IngredientCell source = (IngredientCell) event.getSource();
-			source.toggleSelected();
-		}
+        private void mouseReleased(MouseEvent event) {
+            IngredientCell source = (IngredientCell) event.getSource();
+            source.toggleSelected();
+        }
 
-		public void toggleSelected() {
-			selected = !selected;
-			ObservableList<String> styleClass = rectangle.getStyleClass();
-			styleClass.clear();
-			String ingredientName = text.getText();
-			Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
-			if (selected) {
-				guiDrinkController.addIngredient(ingredientName, 1);
+        public void toggleSelected() {
+            selected = !selected;
+            ObservableList<String> styleClass = rectangle.getStyleClass();
+            styleClass.clear();
+            String ingredientName = text.getText();
+            Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
+            if (selected) {
+                guiDrinkController.addIngredient(ingredientName, 1);
                 newDrinkIngredients.add(ingredientName);
-				styleClass.setAll("drink-cell-" + String.valueOf(Main.pumpMap.get(ingredient)));
-			} else {
-				guiDrinkController.removeIngredient(ingredientName);
+                styleClass.setAll("drink-cell-" + String.valueOf(Main.pumpMap.get(ingredient)));
+            } else {
+                guiDrinkController.removeIngredient(ingredientName);
                 newDrinkIngredients.remove(ingredientName);
-				styleClass.setAll("drink-cell-unselected");
-			}
-		}
-	}
+                styleClass.setAll("drink-cell-unselected");
+            }
+        }
+    }
 }
