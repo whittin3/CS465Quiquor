@@ -24,11 +24,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import au.com.bytecode.opencsv.CSVWriter;
-
+import se.mbaeumer.fxmessagebox.MessageBox;
+import se.mbaeumer.fxmessagebox.MessageBoxType;
+import se.mbaeumer.fxmessagebox.MessageBoxResult;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+
 
 public class CreateADrink implements View {
 	private ViewController viewController;
@@ -60,8 +63,11 @@ public class CreateADrink implements View {
 
 	@FXML
 	public void saveDrink() throws IOException {
-      CSVWriter writer = new CSVWriter(new FileWriter("data/drink.csv",true), '\t');
-      Iterator<String> iterator = newDrinkIngredients.iterator();
+        MessageBox saveDrink = new MessageBox("Are you sure you want to save this drink?", MessageBoxType.YES_NO);
+        saveDrink.showAndWait();
+        if (saveDrink.getMessageBoxResult() == MessageBoxResult.YES){
+        CSVWriter writer = new CSVWriter(new FileWriter("data/drink.csv",true), '\t');
+        Iterator<String> iterator = newDrinkIngredients.iterator();
         String drinks[] = new String[20];
         drinks[0] = drinkName.getText();
         int index =1;
@@ -71,7 +77,10 @@ public class CreateADrink implements View {
       writer.writeNext(drinks);
       writer.close();
 	}
+    else{
 
+    }
+    }
 	@FXML
 	public void gotoHome() {
 		viewController.setScreen(ViewController.Home, new FadeTransition());
