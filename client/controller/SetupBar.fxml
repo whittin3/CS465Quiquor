@@ -24,10 +24,10 @@
                                         <Font size="44.0"/>
                                     </font>
                                 </Text>
-                                <Button layoutX="0.0" layoutY="4.0" mnemonicParsing="false" onAction="#addPump"
-                                        text="+"/>
-                                <Button layoutX="36.0" layoutY="4.0" mnemonicParsing="false" onAction="#removePump"
-                                        text="-"/>
+                                <Button fx:id="addButton" layoutX="0.0" layoutY="4.0" mnemonicParsing="false"
+                                        onAction="#addPump" styleClass="std-button" text="+" textFill="WHITE"/>
+                                <Button fx:id="removeButton" layoutX="36.0" layoutY="4.0" mnemonicParsing="false"
+                                        onAction="#removePump" styleClass="std-button" text="-" textFill="WHITE"/>
                             </children>
                         </AnchorPane>
                         <FlowPane id="" fx:id="pumpLayout" alignment="TOP_LEFT" columnHalignment="LEFT" hgap="150.0"

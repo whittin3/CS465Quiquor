@@ -10,12 +10,13 @@
           xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.Welcome">
     <children>
         <StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="900.0"
-                   styleClass="dark-gradientpane">
+                   styleClass="dark-gradientpane" visible="true">
             <children>
                 <AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="940.0">
                     <children>
-                        <Button layoutX="460.0" layoutY="339.0" mnemonicParsing="false" onAction="#gotoBarSetup"
-                                text="Order a Drink!"/>
+                        <Button fx:id="orderADrinkButton" layoutX="460.0" layoutY="339.0" mnemonicParsing="false"
+                                onAction="#gotoBarSetup" styleClass="std-button" text="Order a Drink!"
+                                textFill="WHITE"/>
                         <Text fill="WHITE" layoutX="296.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0"
                               text="Welcome to">
                             <font>
@@ -28,12 +29,12 @@
                                 <Font size="55.0"/>
                             </font>
                         </Text>
-                        <Button id="settingsButton" layoutX="815.0" layoutY="14.0" mnemonicParsing="false"
-                                text="Settings" textAlignment="LEFT"/>
+                        <Button id="" fx:id="settingsButton" graphicTextGap="2.0" layoutX="789.0" layoutY="14.0"
+                                mnemonicParsing="false" styleClass="std-button" text="Settings" textAlignment="LEFT"/>
                     </children>
                 </AnchorPane>
                 <AnchorPane fx:id="passwordModal" prefHeight="338.0" prefWidth="645.0" styleClass="overlay"
-                            visible="true">
+                            visible="false">
                     <children>
                         <AnchorPane layoutX="301.0" layoutY="176.0" prefHeight="208.0" prefWidth="338.0"
                                     styleClass="dark-gradientpane">

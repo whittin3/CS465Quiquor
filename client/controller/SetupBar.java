@@ -5,10 +5,14 @@ import client.View;
 import client.ViewController;
 import client.control.AutoFillTextBox;
 import client.transitions.FadeTransition;
+import de.jensd.fx.fontawesome.AwesomeDude;
+import de.jensd.fx.fontawesome.AwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -29,6 +33,11 @@ public class SetupBar implements View {
 	public int numberOfPumps = 0;
 
 	@FXML
+	Button addButton;
+	@FXML
+	Button removeButton;
+
+	@FXML
 	FlowPane pumpLayout;
 	private ObservableList<String> ingredients;
 
@@ -43,6 +52,13 @@ public class SetupBar implements View {
 		ingredients = FXCollections.observableArrayList(ingredientNames);
 		pumpItemList = new ArrayList<>();
 		testAndDemoSetup();
+		stylize();
+	}
+
+	private void stylize() {
+		AwesomeDude.setIcon(addButton, AwesomeIcon.PLUS, "1em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(removeButton, AwesomeIcon.MINUS, "1em", ContentDisplay.GRAPHIC_ONLY);
+
 	}
 
 	private void testAndDemoSetup() {

@@ -35,6 +35,47 @@
  	-fx-font-size: 32px;
  }
 
+.root{
+  -icons-color: rgb(61,114,144);
+}
+
+.icons{
+    -fx-font-family: FontAwesome;
+    -fx-font-size: 16px;
+    -fx-effect: innershadow( three-pass-box , derive(-icons-color,-70%) , 0.1em, 0.0 , 0.07em, 0.07em );
+    -fx-text-fill: linear-gradient(to bottom, derive(-icons-color,20%) 10%, derive(-icons-color,-40%) 80%);
+}
+
+.icons:hover{
+    -fx-effect: dropshadow( three-pass-box , derive(-icons-color,0%) , 0.01em, 0.0 , 0, 0);
+}
+
+.std-button {
+
+    -fx-text-fill: white;
+     -fx-background-color:
+         rgb(5, 5, 5),
+         rgb(87, 89, 92),
+         linear-gradient(to bottom, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+     -fx-background-insets: 0, 1 1 1 0, 2 1 1 1;
+     -fx-background-radius: 0;
+     -fx-padding: 0.4em 0.4em 0.4em 0.4em;
+     -fx-effect: dropshadow(two-pass-box,black,5,.2,0,0);
+     -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.4) , 6, 0.0 , 0 , 2 );
+     -icons-color: rgb(255,255,255);
+     -fx-icons-color: white;
+ }
+.std-button:pressed {
+	-fx-text-fill: white;
+    -fx-background-color:
+        rgb(5, 5, 5),
+        rgb(55, 57, 58),
+        linear-gradient(to top, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+}
+ .std-button:hover {
+ 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+ }
+
 /*CSS for the GUIDrinkController*/
 /* http://www.colourlovers.com/business/trends/branding/7880/Papeterie_Haute-Ville_Logo */
 .drink-cell-unselected {
