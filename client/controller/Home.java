@@ -19,7 +19,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
@@ -155,25 +154,29 @@ public class Home implements View {
 	public void pourMyDrink() {
 		String selectedItem = drinkListView.getSelectionModel().getSelectedItem();
 		Drink drink = new Drink(selectedItem, guiDrinkController.getDrinkMapping());
-		DrinkItem drinkItem = new DrinkItem(selectedItem);
+		DrinkItem drinkItem = new DrinkItem(selectedItem, DrinkType.Queue);
 		topHboxBar.getChildren().add(drinkItem);
 	}
 
-	private static class DrinkItem extends StackPane {
-		private final int HEIGHT = 10;
-		private final int WIDTH = 10;
+	private static class DrinkItem extends AnchorPane {
+		private final int HEIGHT = 60;
+		private final int WIDTH = 60;
 		private ProgressBar progressBar;
-		private Rectangle rectangle;
 		private Text name;
 
-		public DrinkItem(String name) {
+		public DrinkItem(String name, DrinkType type) {
+			setMinSize(HEIGHT, WIDTH);
+			progressBar = ProgressBarBuilder.create().progress(-1).minWidth(WIDTH).maxWidth(WIDTH).prefWidth(WIDTH).build();
 			this.name = new Text(name);
-			rectangle = RectangleBuilder.create().styleClass("drinkItem").height(HEIGHT).width(WIDTH).build();
+			Rectangle rectangle = RectangleBuilder.create().styleClass("drinkItem").height(HEIGHT).width(WIDTH).build();
 			getChildren().add(rectangle);
+			getChildren().add(this.name);
+			getChildren().add(this.progressBar);
+
 		}
 	}
 
 	private static enum DrinkType {
-		Shot, Mixed, Cocktail
+		Queue, Popularity
 	}
 }
