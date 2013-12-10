@@ -3,7 +3,10 @@ package client.controller;
 import client.Main;
 import client.View;
 import client.ViewController;
+import client.readOnly.Drink;
 import client.transitions.FadeTransition;
+import de.jensd.fx.fontawesome.AwesomeDude;
+import de.jensd.fx.fontawesome.AwesomeIcon;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,11 +15,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
 
 
@@ -40,6 +45,18 @@ public class Home implements View {
 	Text passwordStatus;
 	@FXML
 	HBox topHboxBar;
+	@FXML
+	Button pourMyDrinkButton;
+	@FXML
+	Button createYourOwnDrinkButton;
+	@FXML
+	Button settings;
+	@FXML
+	Button alphabeticalSort;
+	@FXML
+	Button userCreatedSort;
+	@FXML
+	Button popularitySort;
 
 	private GUIDrinkController guiDrinkController;
 
@@ -92,6 +109,15 @@ public class Home implements View {
 				}
 			}
 		});
+		stylize();
+	}
+
+	private void stylize() {
+		AwesomeDude.setIcon(createYourOwnDrinkButton, AwesomeIcon.EDIT, "2em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(settings, AwesomeIcon.COG, "2em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(alphabeticalSort, AwesomeIcon.SORT_ALPHA_ASC, "1em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(popularitySort, AwesomeIcon.STAR, "1em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(userCreatedSort, AwesomeIcon.USER_MD, "1em", ContentDisplay.GRAPHIC_ONLY);
 	}
 
 	private ObservableList<String> search(final String oldQuery, final String newQuery) {
@@ -127,6 +153,27 @@ public class Home implements View {
 
 	@FXML
 	public void pourMyDrink() {
+		String selectedItem = drinkListView.getSelectionModel().getSelectedItem();
+		Drink drink = new Drink(selectedItem, guiDrinkController.getDrinkMapping());
+		DrinkItem drinkItem = new DrinkItem(selectedItem);
+		topHboxBar.getChildren().add(drinkItem);
+	}
 
+	private static class DrinkItem extends StackPane {
+		private final int HEIGHT = 10;
+		private final int WIDTH = 10;
+		private ProgressBar progressBar;
+		private Rectangle rectangle;
+		private Text name;
+
+		public DrinkItem(String name) {
+			this.name = new Text(name);
+			rectangle = RectangleBuilder.create().styleClass("drinkItem").height(HEIGHT).width(WIDTH).build();
+			getChildren().add(rectangle);
+		}
+	}
+
+	private static enum DrinkType {
+		Shot, Mixed, Cocktail
 	}
 }

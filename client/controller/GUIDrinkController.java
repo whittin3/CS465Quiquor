@@ -80,15 +80,30 @@ public class GUIDrinkController extends AnchorPane {
 		}
 	}
 
+	public HashMap<Ingredient, Double> getDrinkMapping() {
+		ObservableList<Node> children = vBox.getChildren();
+		HashMap<Ingredient, Double> ingredientDrinkHashMap = new HashMap<>(children.size());
+		for (Node node : children) {
+			Cell cell = (Cell) node;
+
+			ingredientDrinkHashMap.put(cell.getIngredient(), cell.getVolume());
+		}
+		return ingredientDrinkHashMap;
+	}
+
 	/**
 	 * Each Cell is a (drink) row in the GUIDrinkController
 	 */
 	private static class Cell extends StackPane {
 
+		private static final double CONVERSION_RATIO = .7;
 		private static final int MAX_WIDTH = 252;
-		private static final double MIN_HEIGHT = 20;
 		private static final int STARTING_HEIGHT = 50;
+		private static final double MIN_HEIGHT = 20;
 		private static final int HORIZONTAL_MARGIN = 7;
+
+		Ingredient ingredient;
+
 		private final boolean draggable;
 		private double y;
 		private boolean resizing;
@@ -97,9 +112,9 @@ public class GUIDrinkController extends AnchorPane {
 		private Text text;
 
 		private Cell(Ingredient ingredient, double volume, boolean draggable) {
-			super();
+			this.ingredient = ingredient;
 			text = new Text(ingredient.getName());
-			rectangle = new Rectangle(MAX_WIDTH, (STARTING_HEIGHT * volume) * .7);
+			rectangle = new Rectangle(MAX_WIDTH, (STARTING_HEIGHT * volume) * CONVERSION_RATIO);
 			this.draggable = draggable;
 			init(this);
 			stylize(Main.pumpMap.get(ingredient));
@@ -208,6 +223,14 @@ public class GUIDrinkController extends AnchorPane {
 					toFront();
 				}
 			}
+		}
+
+		private Ingredient getIngredient() {
+			return ingredient;
+		}
+
+		private double getVolume() {
+			return rectangle.getHeight() / STARTING_HEIGHT / CONVERSION_RATIO;
 		}
 	}
 }

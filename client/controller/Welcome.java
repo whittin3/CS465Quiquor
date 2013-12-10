@@ -45,6 +45,7 @@ public class Welcome implements View {
 //		ToggleButton configurationButton = AwesomeDude.createIconToggleButton(AwesomeIcon.GEARS, "Config", "3em", ContentDisplay.TOP);
 		AwesomeDude.setIcon(settingsButton, AwesomeIcon.COG, "3em", ContentDisplay.GRAPHIC_ONLY);
 		AwesomeDude.setIcon(orderADrinkButton, AwesomeIcon.BEER, "3em", ContentDisplay.LEFT);
+		settingsButton.setStyle("-fx-text-base-color: white; -fx-text-fill: white;");
 	}
 
 	/**
@@ -74,7 +75,6 @@ public class Welcome implements View {
 			passwordStatus.setText("Passwords do not match");
 		} else {
 			Main.userPassword = password;
-			passwordStatus.setText("Success");
 			gotoBarSetup();
 		}
 

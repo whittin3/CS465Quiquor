@@ -4,6 +4,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1"
@@ -15,42 +16,61 @@
                 <AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="940.0">
                     <children>
                         <Button fx:id="orderADrinkButton" layoutX="460.0" layoutY="339.0" mnemonicParsing="false"
-                                onAction="#gotoBarSetup" styleClass="std-button" text="Order a Drink!"
+                                onAction="#gotoBarSetup" styleClass="std-button, padded-button" text="Order a Drink!"
                                 textFill="WHITE"/>
                         <Text fill="WHITE" layoutX="296.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0"
                               text="Welcome to">
+                            <effect>
+                                <DropShadow>
+                                    <input>
+                                        <Glow/>
+                                    </input>
+                                </DropShadow>
+                            </effect>
                             <font>
                                 <Font size="44.0"/>
                             </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="355.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        <Text fill="WHITE" layoutX="355.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0"
                               text="Quiquor">
+                            <effect>
+                                <DropShadow>
+                                    <input>
+                                        <Glow>
+                                            <input>
+                                                <Reflection topOpacity="0.047619047619047616"/>
+                                            </input>
+                                        </Glow>
+                                    </input>
+                                </DropShadow>
+                            </effect>
                             <font>
                                 <Font size="55.0"/>
                             </font>
                         </Text>
-                        <Button id="" fx:id="settingsButton" graphicTextGap="2.0" layoutX="789.0" layoutY="14.0"
-                                mnemonicParsing="false" styleClass="std-button" text="Settings" textAlignment="LEFT"/>
+                        <Button id="" fx:id="settingsButton" graphicTextGap="2.0" layoutX="826.0" layoutY="14.0"
+                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0"
+                                prefWidth="40.0" styleClass="std-button" text="" textAlignment="LEFT"/>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="passwordModal" prefHeight="338.0" prefWidth="645.0" styleClass="overlay"
-                            visible="false">
+                <AnchorPane fx:id="passwordModal" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+                            prefWidth="920.0" styleClass="overlay" visible="false">
                     <children>
-                        <AnchorPane layoutX="301.0" layoutY="176.0" prefHeight="208.0" prefWidth="338.0"
+                        <AnchorPane layoutX="293.0" layoutY="197.0" prefHeight="189.0" prefWidth="338.0"
                                     styleClass="dark-gradientpane">
                             <children>
                                 <PasswordField id="passwordField1" fx:id="passwordField2" layoutX="124.0" layoutY="89.0"
                                                prefWidth="200.0"/>
                                 <PasswordField fx:id="passwordField1" layoutX="124.0" layoutY="60.0" prefWidth="200.0"/>
-                                <Text fill="WHITE" layoutX="56.0" layoutY="76.0" scaleX="1.1987958523804214"
-                                      scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:"/>
-                                <Text fill="WHITE" layoutX="19.0" layoutY="105.0" scaleX="1.1987958523804214"
-                                      scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retype Password:"/>
+                                <Text fill="WHITE" layoutX="65.0" layoutY="76.0" scaleX="1.0" scaleY="1.0"
+                                      strokeType="OUTSIDE" strokeWidth="0.0" text="Password:"/>
+                                <Text fill="WHITE" layoutX="25.0" layoutY="105.0" scaleX="1.0" scaleY="1.0"
+                                      strokeType="OUTSIDE" strokeWidth="0.0" text="Retype Password:"/>
                                 <Button layoutX="261.0" layoutY="129.0" mnemonicParsing="false"
-                                        onAction="#confirmPassword" text="Confirm"/>
-                                <Text fx:id="passwordStatus" fill="WHITE" layoutX="40.0" layoutY="136.0" scaleX="1.0"
-                                      scaleY="0.9999923519334313" strokeType="OUTSIDE" strokeWidth="0.0"
-                                      text="This is the status"/>
+                                        onAction="#confirmPassword" styleClass="std-button" text="Confirm"/>
+                                <Text fx:id="passwordStatus" fill="RED" layoutX="90.0" layoutY="144.0" scaleX="1.0"
+                                      scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="The Passowords Do Not Match" textAlignment="RIGHT"/>
                                 <Text fill="WHITE" layoutX="121.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0"
                                       text="Please enter a password to secure your bar">
                                     <font>
