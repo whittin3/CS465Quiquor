@@ -25,8 +25,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextBuilder;
 
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -67,9 +65,8 @@ public class Home implements View {
 	Button popularitySort;
 
 	private GUIDrinkController guiDrinkController = new GUIDrinkController(false);
-	private Queue<Drink> drinkQueue = new LinkedList();
 	private static AtomicBoolean isCurrentlyPouringDrink = new AtomicBoolean(false);
-	private static int maxFavoriteBar = 6;
+	private static int maxFavoriteBar = 5;
 
 	@Override
 	public void setViewController(ViewController viewController) {
@@ -222,7 +219,6 @@ public class Home implements View {
 	public void pourMyDrink() {
 		String selectedItem = drinkListView.getSelectionModel().getSelectedItem();
 		Drink drink = new Drink(selectedItem, guiDrinkController.getDrinkMapping(), 1.0);
-		drinkQueue.add(drink);
 		DrinkItem drinkItem = new DrinkItem(drink, DrinkType.Queue);
 		ObservableList<Node> drinkItemBoxChildren = drinkItemBox.getChildren();
 		if (!Home.isCurrentlyPouringDrink.get()) {
