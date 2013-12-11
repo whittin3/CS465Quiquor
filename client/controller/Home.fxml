@@ -57,7 +57,7 @@
                                         minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
                                         onAction="#promptForPassword" prefHeight="40.0" prefWidth="40.0"
                                         styleClass="std-button" text="S"/>
-                                <HBox fx:id="topHboxBar" alignment="TOP_LEFT" layoutX="54.0" layoutY="0.0"
+                                <HBox fx:id="drinkItemBox" alignment="TOP_LEFT" layoutX="54.0" layoutY="0.0"
                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                       minWidth="-Infinity" prefHeight="100.0" prefWidth="464.0" spacing="10.0"/>
                             </children>
