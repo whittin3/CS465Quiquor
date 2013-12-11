@@ -11,12 +11,12 @@
           xmlns="http://javafx.com/javafx/2.2" fx:controller="client.controller.Home">
     <children>
         <StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="900.0"
-                   styleClass="dark-gradientpane">
+                   styleClass="dark-gradientpane" visible="true">
             <children>
-                <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="900.0">
+                <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="900.0" visible="true">
                     <children>
                         <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0"
-                                    prefWidth="900.0">
+                                    prefWidth="900.0" visible="true">
                             <children>
                                 <Button fx:id="createYourOwnDrinkButton" focusTraversable="false" layoutX="846.0"
                                         layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
@@ -49,7 +49,7 @@
                                         </Reflection>
                                     </effect>
                                     <font>
-                                        <Font size="33.0"/>
+                                        <Font size="33.0" fx:id="x1"/>
                                     </font>
                                 </Text>
                                 <Button fx:id="settings" focusTraversable="false" layoutX="7.0" layoutY="5.0"
@@ -61,7 +61,8 @@
                                       minWidth="-Infinity" prefHeight="100.0" prefWidth="464.0" spacing="10.0"/>
                             </children>
                         </AnchorPane>
-                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0">
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0"
+                                    visible="true">
                             <children>
                                 <TextField fx:id="drinkSearchField" layoutX="50.0" layoutY="14.0" prefWidth="205.0"/>
                                 <ListView fx:id="drinkListView" focusTraversable="false" layoutX="50.0" layoutY="51.0"
@@ -92,19 +93,20 @@
                         </AnchorPane>
                     </children>
                 </VBox>
-                <AnchorPane id="passwordModal" fx:id="modal" minHeight="-Infinity" minWidth="-Infinity"
-                            prefHeight="600.0" prefWidth="920.0" styleClass="overlay" visible="false">
+                <AnchorPane fx:id="passwordModal" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+                            prefWidth="920.0" styleClass="overlay" visible="true">
                     <children>
-                        <AnchorPane layoutX="301.0" layoutY="176.0" prefHeight="208.0" prefWidth="338.0"
+                        <AnchorPane layoutX="355.0" layoutY="217.0" prefHeight="150.0" prefWidth="282.0"
                                     styleClass="dark-gradientpane">
                             <children>
-                                <PasswordField id="passwordField1" fx:id="password" layoutX="71.0" layoutY="82.0"
+                                <PasswordField id="passwordField1" fx:id="password" layoutX="41.0" layoutY="56.0"
                                                prefWidth="200.0"/>
-                                <Button layoutX="208.0" layoutY="117.0" mnemonicParsing="false" text="Confirm"/>
-                                <Text fx:id="passwordStatus" fill="WHITE" layoutX="98.0" layoutY="132.0" scaleX="1.0"
+                                <Button layoutX="178.0" layoutY="90.0" mnemonicParsing="false" onAction="#showSettings"
+                                        text="Confirm"/>
+                                <Text fx:id="passwordStatus" fill="RED" layoutX="78.0" layoutY="106.0" scaleX="1.0"
                                       scaleY="0.9999923519334313" strokeType="OUTSIDE" strokeWidth="0.0"
-                                      text="This is the status"/>
-                                <Text fill="WHITE" layoutX="71.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                      text="Invalid password!"/>
+                                <Text fill="WHITE" layoutX="41.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0"
                                       text="Please enter a password to unlock...">
                                     <font>
                                         <Font name="System Italic" size="11.0"/>
@@ -112,6 +114,34 @@
                                 </Text>
                             </children>
                         </AnchorPane>
+                    </children>
+                </AnchorPane>
+                <AnchorPane id="passwordModal" fx:id="settingsModal" minHeight="-Infinity" minWidth="-Infinity"
+                            prefHeight="600.0" prefWidth="920.0" styleClass="overlay" visible="false">
+                    <children>
+                        <AnchorPane layoutX="127.0" layoutY="39.0" prefHeight="527.0" prefWidth="666.0"
+                                    styleClass="dark-gradientpane">
+                            <children>
+                                <Button layoutX="589.0" layoutY="492.0" mnemonicParsing="false" onAction="#saveSettings"
+                                        text="Save"/>
+                                <Button layoutX="525.0" layoutY="492.0" mnemonicParsing="false" onAction="#hideSettings"
+                                        text="Quit"/>
+                            </children>
+                        </AnchorPane>
+                        <Text id="drinkNameText" fill="WHITE" font="$x1" layoutX="146.0" layoutY="94.0"
+                              strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
+                            <effect>
+                                <Reflection topOffset="-20.0" topOpacity="0.09523809523809523">
+                                    <input>
+                                        <Glow>
+                                            <input>
+                                                <DropShadow/>
+                                            </input>
+                                        </Glow>
+                                    </input>
+                                </Reflection>
+                            </effect>
+                        </Text>
                     </children>
                 </AnchorPane>
             </children>

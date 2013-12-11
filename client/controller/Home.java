@@ -44,7 +44,9 @@ public class Home implements View {
 	@FXML
 	Text drinkNameText;
 	@FXML
-	AnchorPane modal;
+	AnchorPane passwordModal;
+	@FXML
+	AnchorPane settingsModal;
 	@FXML
 	TextField password;
 	@FXML
@@ -79,7 +81,8 @@ public class Home implements View {
 	@Override
 	public void init() {
 		pourMyDrinkButton.setDisable(true);
-		modal.setVisible(false);
+		hideSettings();
+		hidePasswordModal();
 		drinkNameText.setText("");
 		observableDrinkList = Main.getDrinkables();
 		drinkListView.setItems(observableDrinkList);
@@ -109,7 +112,7 @@ public class Home implements View {
 
 
 		//Create handler for Modal De-Selection from Overlay
-		modal.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
+		passwordModal.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				AnchorPane passwordModal = (AnchorPane) mouseEvent.getSource();
@@ -119,7 +122,7 @@ public class Home implements View {
 				double y = mouseEvent.getY();
 				if (!(x > dialogBounds.getMinX() && x < dialogBounds.getMaxX() &&
 						y > dialogBounds.getMinY() && y < dialogBounds.getMaxY())) {
-					modal.setVisible(false);
+					passwordModal.setVisible(false);
 				}
 			}
 		});
@@ -168,10 +171,38 @@ public class Home implements View {
 
 	@FXML
 	public void promptForPassword() {
-		passwordStatus.setText("");
+		passwordStatus.setVisible(false);
 		password.setText("");
-		modal.setVisible(true);
+		passwordModal.setVisible(true);
 	}
+
+	@FXML
+	public void showSettings() {
+		if (password.getText().equals(Main.userPassword)) {
+			hidePasswordModal();
+			settingsModal.setVisible(true);
+		} else {
+			passwordStatus.setVisible(true);
+			password.setText("");
+		}
+	}
+
+	private void hidePasswordModal() {
+		passwordStatus.setVisible(false);
+		password.setText("");
+		passwordModal.setVisible(false);
+	}
+
+	@FXML
+	public void saveSettings() {
+		hideSettings();
+	}
+
+	@FXML
+	public void hideSettings() {
+		settingsModal.setVisible(false);
+	}
+
 
 	@FXML
 	public void gotoCreateYourOwnDrink() {

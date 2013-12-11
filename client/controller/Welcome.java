@@ -25,8 +25,6 @@ public class Welcome implements View {
 	@FXML
 	Text passwordStatus;
 	@FXML
-	Button settingsButton;
-	@FXML
 	Button orderADrinkButton;
 
 
@@ -43,9 +41,7 @@ public class Welcome implements View {
 
 	private void stylize() {
 //		ToggleButton configurationButton = AwesomeDude.createIconToggleButton(AwesomeIcon.GEARS, "Config", "3em", ContentDisplay.TOP);
-		AwesomeDude.setIcon(settingsButton, AwesomeIcon.COG, "3em", ContentDisplay.GRAPHIC_ONLY);
 		AwesomeDude.setIcon(orderADrinkButton, AwesomeIcon.BEER, "3em", ContentDisplay.LEFT);
-		settingsButton.setStyle("-fx-text-base-color: white; -fx-text-fill: white;");
 	}
 
 	/**
