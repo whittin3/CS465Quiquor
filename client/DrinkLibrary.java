@@ -25,13 +25,13 @@ public class DrinkLibrary {
 	public HashMap<String, Ingredient> ingredients = new HashMap<>();
 	public HashMap<String, Drink> drinks = new HashMap<>();
 
-	public HashMap<String, Ingredient> getIngredients() {
-		return ingredients;
+	public void addDrink(Drink drink) {
+		drinks.put(drink.getName(), drink);
 	}
 
 	public void addDrink(String name, HashMap<Ingredient, Double> ingredientMap) {
-		Drink newDrink = new Drink(name, ingredientMap, Math.random() * 10);
-		drinks.put(newDrink.getName(), newDrink);
+		Drink newDrink = new Drink(name, ingredientMap, Math.random() * 100);
+		addDrink(newDrink);
 	}
 
 	public ObservableList<String> parseLastBarSetup(String path) throws URISyntaxException, FileNotFoundException {
@@ -110,7 +110,7 @@ public class DrinkLibrary {
 		return ingredients.get(ingredient);
 	}
 
-	public void addDrink(Drink drink) {
-		drinks.put(drink.getName(), drink);
+	public HashMap<String, Ingredient> getIngredients() {
+		return ingredients;
 	}
 }

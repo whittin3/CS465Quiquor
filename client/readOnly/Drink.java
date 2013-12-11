@@ -60,9 +60,8 @@ public class Drink implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {
-		Drink drink = (Drink) o;
 		String o1 = this.getName().toLowerCase();
-		String o2 = drink.getName().toLowerCase();
+		String o2 = ((Drink) o).getName().toLowerCase();
 		return o1.compareTo(o2);  //To change body of implemented methods use File | Settings | File Templates.
 	}
 

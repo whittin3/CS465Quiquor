@@ -13,16 +13,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
 public class Main extends Application {
 	private static HashMap<Ingredient, Integer> pumpMap = new HashMap<>();
 	private static DrinkLibrary drinkLibrary;
+	private static List<Drink> userCreatedDrinks = new ArrayList<Drink>();
 	public static String userPassword;
-
-	static List<Drink> userCreatedDrinks = new ArrayList<Drink>();
 	private String styleSheet;
+	private static Comparator<String> stringComparator = new Comparator<String>() {
+		@Override
+		public int compare(String o1, String o2) {
+			o1 = o1.toLowerCase();
+			o2 = o2.toLowerCase();
+			return o1.compareTo(o2);
+		}
+	};
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -95,7 +103,7 @@ public class Main extends Application {
 		for (Drink drink : getDrinkableList()) {
 			drinkable.add(drink.getName());
 		}
-		FXCollections.sort(drinkable);
+		FXCollections.sort(drinkable, stringComparator);
 		return drinkable;
 	}
 
@@ -114,7 +122,7 @@ public class Main extends Application {
 		for (Ingredient ingredient : pumpMap.keySet()) {
 			ingredients.add(ingredient.getName());
 		}
-		FXCollections.sort(ingredients);
+		FXCollections.sort(ingredients, stringComparator);
 		return ingredients;
 	}
 
