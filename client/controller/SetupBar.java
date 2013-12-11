@@ -48,7 +48,7 @@ public class SetupBar implements View {
 
 	@Override
 	public void init() {
-		Set<String> ingredientNames = Main.drinkLibrary.getIngredients().keySet();
+		Set<String> ingredientNames = Main.getDrinkLibrary().getIngredients().keySet();
 		ingredients = FXCollections.observableArrayList(ingredientNames);
 		pumpItemList = new ArrayList<>();
 		testAndDemoSetup();
@@ -96,7 +96,7 @@ public class SetupBar implements View {
 		int i = 0;
 		for (PumpItem pumpItem : pumpItemList) {
 			String ingredient = pumpItem.getIngredient();
-			Main.pumpMap.put(Main.drinkLibrary.getIngredient(ingredient), i);
+			Main.getPumpMap().put(Main.getDrinkLibrary().getIngredient(ingredient), i);
 			i++;
 		}
 	}
@@ -119,7 +119,7 @@ public class SetupBar implements View {
 		}
 
 		public void setIngredient(String ingredient) {
-			if (Main.drinkLibrary.ingredients.keySet().contains(ingredient)) {
+			if (Main.getDrinkLibrary().ingredients.keySet().contains(ingredient)) {
 				autoFillTextBox.setText(ingredient);
 			} else {
 				System.out.println("When setting " + pumpText.getText() + "we could not locate the ingredient " + ingredient);

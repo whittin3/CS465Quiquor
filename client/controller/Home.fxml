@@ -21,7 +21,7 @@
                                 <Button fx:id="createYourOwnDrinkButton" focusTraversable="false" layoutX="846.0"
                                         layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
                                         onAction="#gotoCreateYourOwnDrink" prefHeight="40.0" prefWidth="40.0"
-                                        styleClass="std-button" text="C"/>
+                                        styleClass="std-button" text=""/>
                                 <Text fill="WHITE" layoutX="672.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0"
                                       text="Create Your Own Drink!">
                                     <effect>

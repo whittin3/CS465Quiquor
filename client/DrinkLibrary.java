@@ -109,4 +109,8 @@ public class DrinkLibrary {
 	public Ingredient getIngredient(String ingredient) {
 		return ingredients.get(ingredient);
 	}
+
+	public void addDrink(Drink drink) {
+		drinks.put(drink.getName(), drink);
+	}
 }

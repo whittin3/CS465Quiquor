@@ -3,6 +3,7 @@ package client.controller;
 import client.Main;
 import client.View;
 import client.ViewController;
+import client.readOnly.Drink;
 import client.readOnly.Ingredient;
 import client.transitions.FadeTransition;
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -19,6 +21,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBuilder;
 
+import java.util.HashMap;
+
 public class CreateADrink implements View {
 	private ViewController viewController;
 
@@ -26,7 +30,12 @@ public class CreateADrink implements View {
 	FlowPane flowPane;
 	@FXML
 	AnchorPane guiControllerPane;
-	private GUIDrinkController guiDrinkController;
+	@FXML
+	Text saveStatus;
+	@FXML
+	TextField drinkNameText;
+
+	private GUIDrinkController guiDrinkController = new GUIDrinkController(true);
 
 	@Override
 	public void setViewController(ViewController viewController) {
@@ -35,18 +44,33 @@ public class CreateADrink implements View {
 
 	@Override
 	public void init() {
-		guiDrinkController = new GUIDrinkController(true);
+		guiDrinkController.clear();
+		guiControllerPane.getChildren().clear();
 		guiControllerPane.getChildren().add(guiDrinkController);
-
 		ObservableList<String> ingredients = Main.getIngredients();
+		flowPane.getChildren().clear();
 		for (String ingredient : ingredients) {
 			flowPane.getChildren().add(new IngredientCell(guiDrinkController, ingredient));
 		}
+		saveStatus.setVisible(false);
 	}
 
 	@FXML
 	public void saveDrink() {
-
+		HashMap<Ingredient, Double> drinkMapping = guiDrinkController.getDrinkMapping();
+		String drinkName = drinkNameText.getText();
+		String sanitizedDrinkName = drinkName.replaceAll("\\s", "");
+		if (sanitizedDrinkName.equals("")) {
+			saveStatus.setText("Enter in a drink name");
+			saveStatus.setVisible(true);
+		} else if (drinkMapping.isEmpty()) {
+			saveStatus.setText("Select an ingredient");
+			saveStatus.setVisible(true);
+		} else {
+			Drink drink = new Drink(drinkName, drinkMapping, 1.0);
+			Main.addUserCreatedDrink(drink);
+			this.gotoHome();
+		}
 	}
 
 	@FXML
@@ -95,10 +119,10 @@ public class CreateADrink implements View {
 			ObservableList<String> styleClass = rectangle.getStyleClass();
 			styleClass.clear();
 			String ingredientName = text.getText();
-			Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
+			Ingredient ingredient = Main.getDrinkLibrary().getIngredient(ingredientName);
 			if (selected) {
 				guiDrinkController.addIngredient(ingredientName, 1);
-				styleClass.setAll("drink-cell-" + String.valueOf(Main.pumpMap.get(ingredient)));
+				styleClass.setAll("drink-cell-" + String.valueOf(Main.getPumpMap().get(ingredient)));
 			} else {
 				guiDrinkController.removeIngredient(ingredientName);
 				styleClass.setAll("drink-cell-unselected");

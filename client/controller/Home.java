@@ -33,6 +33,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Home implements View {
 	private ViewController viewController;
 	ObservableList<String> observableDrinkList;
+
 	@FXML
 	static ListView<String> drinkListView;
 
@@ -95,7 +96,7 @@ public class Home implements View {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String selection) {
 				if (selection != null && observableDrinkList.contains(selection)) {
-					guiDrinkController.addDrink(Main.drinkLibrary.getDrink(selection));
+					guiDrinkController.addDrink(Main.getDrinkLibrary().getDrink(selection));
 					drinkNameText.setText(selection);
 					pourMyDrinkButton.setDisable(false);
 				}
@@ -165,18 +166,6 @@ public class Home implements View {
 		return drinkableList;
 	}
 
-	private ObservableList<Drink> getUserCreated() {
-		ObservableList<Drink> drinkableList = Main.getDrinkableList();
-		FXCollections.sort(drinkableList, new Comparator<Drink>() {
-			@Override
-			public int compare(Drink o1, Drink o2) {
-				int nameCompare = o1.getName().compareTo(o2.getName());
-				return nameCompare;
-			}
-		});
-		return drinkableList;
-	}
-
 	@FXML
 	public void promptForPassword() {
 		passwordStatus.setText("");
@@ -208,21 +197,24 @@ public class Home implements View {
 		for (Drink drink : getFavorites()) {
 			favorites.add(drink.getName());
 		}
+		observableDrinkList = favorites;
 		drinkListView.setItems(favorites);
 	}
 
 	@FXML
 	private void sortByAlphabet() {
-		drinkListView.setItems(Main.getDrinkables());
+		observableDrinkList = Main.getDrinkables();
+		drinkListView.setItems(observableDrinkList);
 	}
 
 	@FXML
 	private void sortByUserCreated() {
-		ObservableList<String> favorites = FXCollections.observableArrayList();
-		for (Drink drink : getUserCreated()) {
-			favorites.add(drink.getName());
+		ObservableList<String> userCreatedDrinks = FXCollections.observableArrayList();
+		for (Drink drink : Main.getUserCreated()) {
+			userCreatedDrinks.add(drink.getName());
 		}
-		drinkListView.setItems(favorites);
+		observableDrinkList = userCreatedDrinks;
+		drinkListView.setItems(userCreatedDrinks);
 	}
 
 	private static class DrinkItem extends AnchorPane {

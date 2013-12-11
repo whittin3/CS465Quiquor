@@ -12,13 +12,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main extends Application {
-	public static HashMap<Ingredient, Integer> pumpMap = new HashMap<>();
-	public static DrinkLibrary drinkLibrary;
+	private static HashMap<Ingredient, Integer> pumpMap = new HashMap<>();
+	private static DrinkLibrary drinkLibrary;
 	public static String userPassword;
 
+	static List<Drink> userCreatedDrinks = new ArrayList<Drink>();
 	private String styleSheet;
 
 	@Override
@@ -113,5 +116,26 @@ public class Main extends Application {
 		}
 		FXCollections.sort(ingredients);
 		return ingredients;
+	}
+
+	public static void addUserCreatedDrink(Drink drink) {
+		drinkLibrary.addDrink(drink);
+		userCreatedDrinks.add(drink);
+	}
+
+	public static List<Drink> getUserCreated() {
+		return userCreatedDrinks;
+	}
+
+	public static DrinkLibrary getDrinkLibrary() {
+		return drinkLibrary;
+	}
+
+	public static HashMap<Ingredient, Integer> getPumpMap() {
+		return pumpMap;
+	}
+
+	public static List<Drink> getUserCreatedDrinks() {
+		return userCreatedDrinks;
 	}
 }
