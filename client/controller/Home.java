@@ -66,7 +66,7 @@ public class Home implements View {
 	@FXML
 	Button popularitySort;
 
-	private GUIDrinkController guiDrinkController;
+	private GUIDrinkController guiDrinkController = new GUIDrinkController(false);
 	private Queue<Drink> drinkQueue = new LinkedList();
 	private static AtomicBoolean pouring = new AtomicBoolean(false);
 
@@ -93,7 +93,8 @@ public class Home implements View {
 				drinkListView.setItems(searchResults);
 			}
 		});
-		guiDrinkController = new GUIDrinkController(false);
+		guiDrinkController.clear();
+		guiControllerPane.getChildren().clear();
 		guiControllerPane.getChildren().add(guiDrinkController);
 		drinkListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -246,6 +247,12 @@ public class Home implements View {
 		}
 		observableDrinkList = userCreatedDrinks;
 		drinkListView.setItems(userCreatedDrinks);
+	}
+
+	@FXML
+	private void gotoBarSetup() {
+		hideSettings();
+		viewController.setScreen(ViewController.SetupBar, new FadeTransition());
 	}
 
 	private static class DrinkItem extends AnchorPane {

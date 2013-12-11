@@ -31,6 +31,7 @@ public class SetupBar implements View {
 	private ViewController viewController;
 	private List<PumpItem> pumpItemList;
 	public int numberOfPumps = 0;
+	private static boolean firstInit = true;
 
 	@FXML
 	Button addButton;
@@ -48,11 +49,16 @@ public class SetupBar implements View {
 
 	@Override
 	public void init() {
-		Set<String> ingredientNames = Main.getDrinkLibrary().getIngredients().keySet();
-		ingredients = FXCollections.observableArrayList(ingredientNames);
-		pumpItemList = new ArrayList<>();
-		testAndDemoSetup();
-		stylize();
+		if (firstInit) {
+			numberOfPumps = 0;
+			pumpLayout.getChildren().clear();
+			Set<String> ingredientNames = Main.getDrinkLibrary().getIngredients().keySet();
+			ingredients = FXCollections.observableArrayList(ingredientNames);
+			pumpItemList = new ArrayList<>();
+			testAndDemoSetup();
+			stylize();
+			firstInit = false;
+		}
 	}
 
 	private void stylize() {
