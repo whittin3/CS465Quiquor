@@ -18,8 +18,9 @@
                         <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0"
                                     prefWidth="900.0" visible="true">
                             <children>
-                                <Button fx:id="createYourOwnDrinkButton" focusTraversable="false" layoutX="846.0"
-                                        layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                <Button fx:id="createYourOwnDrinkButton" focusTraversable="false" graphicTextGap="0.0"
+                                        layoutX="846.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                        minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
                                         onAction="#gotoCreateYourOwnDrink" prefHeight="40.0" prefWidth="40.0"
                                         styleClass="std-button" text=""/>
                                 <Text fill="WHITE" layoutX="672.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0"
@@ -94,7 +95,7 @@
                     </children>
                 </VBox>
                 <AnchorPane fx:id="passwordModal" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-                            prefWidth="920.0" styleClass="overlay" visible="true">
+                            prefWidth="920.0" styleClass="overlay" visible="false">
                     <children>
                         <AnchorPane layoutX="355.0" layoutY="217.0" prefHeight="150.0" prefWidth="282.0"
                                     styleClass="dark-gradientpane">

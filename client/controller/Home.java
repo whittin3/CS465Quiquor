@@ -131,7 +131,7 @@ public class Home implements View {
 	}
 
 	private void stylize() {
-		AwesomeDude.setIcon(createYourOwnDrinkButton, AwesomeIcon.EDIT, "1.8em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(createYourOwnDrinkButton, AwesomeIcon.EDIT, "1.6em", ContentDisplay.GRAPHIC_ONLY);
 		AwesomeDude.setIcon(settings, AwesomeIcon.COG, "2em", ContentDisplay.GRAPHIC_ONLY);
 		AwesomeDude.setIcon(alphabeticalSort, AwesomeIcon.SORT_ALPHA_ASC, "1em", ContentDisplay.GRAPHIC_ONLY);
 		AwesomeDude.setIcon(popularitySort, AwesomeIcon.STAR, "1em", ContentDisplay.GRAPHIC_ONLY);
