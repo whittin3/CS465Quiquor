@@ -19,9 +19,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.AnchorPaneBuilder;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBuilder;
 
@@ -166,6 +165,18 @@ public class Home implements View {
 		return drinkableList;
 	}
 
+	private ObservableList<Drink> getUserCreated() {
+		ObservableList<Drink> drinkableList = Main.getDrinkableList();
+		FXCollections.sort(drinkableList, new Comparator<Drink>() {
+			@Override
+			public int compare(Drink o1, Drink o2) {
+				int nameCompare = o1.getName().compareTo(o2.getName());
+				return nameCompare;
+			}
+		});
+		return drinkableList;
+	}
+
 	@FXML
 	public void promptForPassword() {
 		passwordStatus.setText("");
@@ -191,6 +202,29 @@ public class Home implements View {
 		}
 	}
 
+	@FXML
+	private void sortByPopularity() {
+		ObservableList<String> favorites = FXCollections.observableArrayList();
+		for (Drink drink : getFavorites()) {
+			favorites.add(drink.getName());
+		}
+		drinkListView.setItems(favorites);
+	}
+
+	@FXML
+	private void sortByAlphabet() {
+		drinkListView.setItems(Main.getDrinkables());
+	}
+
+	@FXML
+	private void sortByUserCreated() {
+		ObservableList<String> favorites = FXCollections.observableArrayList();
+		for (Drink drink : getUserCreated()) {
+			favorites.add(drink.getName());
+		}
+		drinkListView.setItems(favorites);
+	}
+
 	private static class DrinkItem extends AnchorPane {
 		private final int HEIGHT = 80;
 		private final int WIDTH = 80;
@@ -203,7 +237,7 @@ public class Home implements View {
 			setPrefSize(HEIGHT, WIDTH);
 			progressBar = ProgressBarBuilder.create().progress(-1).minWidth(WIDTH).maxWidth(WIDTH).prefWidth(WIDTH).build();
 			this.name = TextBuilder.create().text(drink.getName()).styleClass("drinkItem").wrappingWidth(WIDTH).build();
-			Rectangle rectangle = RectangleBuilder.create().styleClass("").height(HEIGHT).width(WIDTH).build();
+			AnchorPane rectangle = AnchorPaneBuilder.create().styleClass("drinkItemImage").prefHeight(HEIGHT).prefWidth(WIDTH).build();
 			getChildren().addAll(rectangle, this.name, this.progressBar);
 			setBottomAnchor(progressBar, 10.0);
 			setTopAnchor(this.name, 0.0);

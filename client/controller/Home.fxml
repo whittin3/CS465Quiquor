@@ -71,15 +71,16 @@
                                             prefWidth="400.0"/>
                                 <Button fx:id="popularitySort" focusTraversable="false" graphicTextGap="0.0"
                                         layoutX="18.0" layoutY="83.0" minHeight="-Infinity" minWidth="-Infinity"
-                                        mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0"
-                                        styleClass="std-button" text=""/>
+                                        mnemonicParsing="false" onAction="#sortByPopularity" prefHeight="32.0"
+                                        prefWidth="32.0" styleClass="std-button" text=""/>
                                 <Button fx:id="alphabeticalSort" cancelButton="false" defaultButton="false"
                                         focusTraversable="false" layoutX="18.0" layoutY="51.0" minHeight="-Infinity"
-                                        minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0"
-                                        styleClass="std-button" text=""/>
+                                        minWidth="-Infinity" mnemonicParsing="false" onAction="#sortByAlphabet"
+                                        prefHeight="32.0" prefWidth="32.0" styleClass="std-button" text=""/>
                                 <Button fx:id="userCreatedSort" focusTraversable="false" layoutX="18.0" layoutY="115.0"
                                         minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                                        prefHeight="32.0" prefWidth="32.0" styleClass="std-button" text=""/>
+                                        onAction="#sortByUserCreated" prefHeight="32.0" prefWidth="32.0"
+                                        styleClass="std-button" text=""/>
                             </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="35.0" prefWidth="940.0">
