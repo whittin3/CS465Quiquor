@@ -17,11 +17,15 @@ import java.util.List;
 
 public class Drink implements Comparable {
 	private String name;
+
+	private double popularity;
+
 	private HashMap<Ingredient, Double> ingredients;
 
-	public Drink(String name, HashMap<Ingredient, Double> ingredients) {
+	public Drink(String name, HashMap<Ingredient, Double> ingredients, double popularity) {
 		this.name = name;
 		this.ingredients = ingredients;
+		this.popularity = popularity;
 	}
 
 	public double getTotalMetricWeight() {
@@ -58,5 +62,9 @@ public class Drink implements Comparable {
 	public int compareTo(Object o) {
 		Drink drink = (Drink) o;
 		return this.getName().compareTo(drink.getName());  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	public double getPopularity() {
+		return popularity;
 	}
 }

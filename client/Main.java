@@ -89,12 +89,20 @@ public class Main extends Application {
 
 	public static ObservableList<String> getDrinkables() {
 		ObservableList<String> drinkable = FXCollections.observableArrayList();
-		for (Drink drink : drinkLibrary.drinks.values()) {
-			if (drink.satisfy()) {
-				drinkable.add(drink.getName());
-			}
+		for (Drink drink : getDrinkableList()) {
+			drinkable.add(drink.getName());
 		}
 		FXCollections.sort(drinkable);
+		return drinkable;
+	}
+
+	public static ObservableList<Drink> getDrinkableList() {
+		ObservableList<Drink> drinkable = FXCollections.observableArrayList();
+		for (Drink drink : drinkLibrary.drinks.values()) {
+			if (drink.satisfy()) {
+				drinkable.add(drink);
+			}
+		}
 		return drinkable;
 	}
 

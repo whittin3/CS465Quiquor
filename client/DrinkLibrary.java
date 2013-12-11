@@ -30,7 +30,7 @@ public class DrinkLibrary {
 	}
 
 	public void addDrink(String name, HashMap<Ingredient, Double> ingredientMap) {
-		Drink newDrink = new Drink(name, ingredientMap);
+		Drink newDrink = new Drink(name, ingredientMap, 1.0);
 		drinks.put(newDrink.getName(), newDrink);
 	}
 

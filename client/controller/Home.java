@@ -25,6 +25,7 @@ import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBuilder;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -122,7 +123,7 @@ public class Home implements View {
 				}
 			}
 		});
-		initFavoritesBar();
+		showFavoritesBar();
 		stylize();
 	}
 
@@ -149,21 +150,20 @@ public class Home implements View {
 		return subentries;
 	}
 
-	private void initFavoritesBar() {
-//		Task pourTaskListener = new Task() {
-//			@Override
-//			protected Object call() throws Exception {
-//				while (true) {
-//					if (pouring.get() && !topHboxBar.getChildren().isEmpty()) {
-//						DrinkItem drinkItem = (DrinkItem) topHboxBar.getChildren().get(0);
-//						drinkItem.pour();
-//						pouring.set(false);
-//					}
-//				}
-//			}
-//		};
-//		new Thread(pourTaskListener).start();
-//		System.out.println("Started Drink Listener");
+	private void showFavoritesBar() {
+		ObservableList<Drink> favorites = getFavorites();
+		favorites.subList(0, 4);
+	}
+
+	private ObservableList<Drink> getFavorites() {
+		ObservableList<Drink> drinkableList = Main.getDrinkableList();
+		FXCollections.sort(drinkableList, new Comparator<Drink>() {
+			@Override
+			public int compare(Drink o1, Drink o2) {
+				return Double.compare(o1.getPopularity(), o2.getPopularity());
+			}
+		});
+		return drinkableList;
 	}
 
 	@FXML
@@ -181,7 +181,7 @@ public class Home implements View {
 	@FXML
 	public void pourMyDrink() {
 		String selectedItem = drinkListView.getSelectionModel().getSelectedItem();
-		Drink drink = new Drink(selectedItem, guiDrinkController.getDrinkMapping());
+		Drink drink = new Drink(selectedItem, guiDrinkController.getDrinkMapping(), 1.0);
 		drinkQueue.add(drink);
 		DrinkItem drinkItem = new DrinkItem(drink, DrinkType.Queue);
 		topHboxBar.getChildren().add(drinkItem);
