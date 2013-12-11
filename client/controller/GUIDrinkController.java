@@ -52,7 +52,7 @@ public class GUIDrinkController extends AnchorPane {
 	}
 
 	public void addIngredient(String ingredientName, double volume) {
-		Ingredient ingredient = Main.drinkLibrary.getIngredient(ingredientName);
+		Ingredient ingredient = Main.getDrinkLibrary().getIngredient(ingredientName);
 		addIngredient(ingredient, volume);
 	}
 
@@ -80,15 +80,30 @@ public class GUIDrinkController extends AnchorPane {
 		}
 	}
 
+	public HashMap<Ingredient, Double> getDrinkMapping() {
+		ObservableList<Node> children = vBox.getChildren();
+		HashMap<Ingredient, Double> ingredientDrinkHashMap = new HashMap<>(children.size());
+		for (Node node : children) {
+			Cell cell = (Cell) node;
+
+			ingredientDrinkHashMap.put(cell.getIngredient(), cell.getVolume());
+		}
+		return ingredientDrinkHashMap;
+	}
+
 	/**
 	 * Each Cell is a (drink) row in the GUIDrinkController
 	 */
 	private static class Cell extends StackPane {
 
+		private static final double CONVERSION_RATIO = .7;
 		private static final int MAX_WIDTH = 252;
-		private static final double MIN_HEIGHT = 20;
 		private static final int STARTING_HEIGHT = 50;
+		private static final double MIN_HEIGHT = 20;
 		private static final int HORIZONTAL_MARGIN = 7;
+
+		Ingredient ingredient;
+
 		private final boolean draggable;
 		private double y;
 		private boolean resizing;
@@ -97,12 +112,12 @@ public class GUIDrinkController extends AnchorPane {
 		private Text text;
 
 		private Cell(Ingredient ingredient, double volume, boolean draggable) {
-			super();
+			this.ingredient = ingredient;
 			text = new Text(ingredient.getName());
-			rectangle = new Rectangle(MAX_WIDTH, (STARTING_HEIGHT * volume) * .7);
+			rectangle = new Rectangle(MAX_WIDTH, (STARTING_HEIGHT * volume) * CONVERSION_RATIO);
 			this.draggable = draggable;
 			init(this);
-			stylize(Main.pumpMap.get(ingredient));
+			stylize(Main.getPumpMap().get(ingredient));
 		}
 
 		private void stylize(int color) {
@@ -170,7 +185,7 @@ public class GUIDrinkController extends AnchorPane {
 		}
 
 		private void mouseOver(MouseEvent event) {
-			if ((isInResizableMargin(event) || resizing) && draggable) {
+			if ((isInResizableMargin(event) || resizing)) {
 				this.setCursor(Cursor.S_RESIZE);
 			} else {
 				this.setCursor(Cursor.DEFAULT);
@@ -198,16 +213,22 @@ public class GUIDrinkController extends AnchorPane {
 		}
 
 		private void mousePressed(MouseEvent event) {
-			if (draggable) {
-				if (isInResizableMargin(event)) {
-					resizing = true;
-					y = event.getSceneY();
-				} else {
-					dragging = true;
-					y = event.getSceneY();
-					toFront();
-				}
+			if (isInResizableMargin(event)) {
+				resizing = true;
+				y = event.getSceneY();
+			} else if (draggable) {
+				dragging = true;
+				y = event.getSceneY();
+				toFront();
 			}
+		}
+
+		private Ingredient getIngredient() {
+			return ingredient;
+		}
+
+		private double getVolume() {
+			return rectangle.getHeight() / STARTING_HEIGHT / CONVERSION_RATIO;
 		}
 	}
 }

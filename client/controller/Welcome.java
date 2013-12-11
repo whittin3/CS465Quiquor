@@ -4,7 +4,11 @@ import client.Main;
 import client.View;
 import client.ViewController;
 import client.transitions.FadeTransition;
+import de.jensd.fx.fontawesome.AwesomeDude;
+import de.jensd.fx.fontawesome.AwesomeIcon;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -20,6 +24,8 @@ public class Welcome implements View {
 	PasswordField passwordField2;
 	@FXML
 	Text passwordStatus;
+	@FXML
+	Button orderADrinkButton;
 
 
 	@Override
@@ -30,6 +36,12 @@ public class Welcome implements View {
 	@Override
 	public void init() {
 		passwordModal.setVisible(false);
+		stylize();
+	}
+
+	private void stylize() {
+//		ToggleButton configurationButton = AwesomeDude.createIconToggleButton(AwesomeIcon.GEARS, "Config", "3em", ContentDisplay.TOP);
+		AwesomeDude.setIcon(orderADrinkButton, AwesomeIcon.BEER, "3em", ContentDisplay.LEFT);
 	}
 
 	/**
@@ -59,7 +71,6 @@ public class Welcome implements View {
 			passwordStatus.setText("Passwords do not match");
 		} else {
 			Main.userPassword = password;
-			passwordStatus.setText("Success");
 			gotoBarSetup();
 		}
 

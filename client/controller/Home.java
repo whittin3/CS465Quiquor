@@ -3,26 +3,37 @@ package client.controller;
 import client.Main;
 import client.View;
 import client.ViewController;
+import client.readOnly.Drink;
 import client.transitions.FadeTransition;
+import de.jensd.fx.fontawesome.AwesomeDude;
+import de.jensd.fx.fontawesome.AwesomeIcon;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.AnchorPaneBuilder;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextBuilder;
+
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class Home implements View {
 	private ViewController viewController;
 	ObservableList<String> observableDrinkList;
+
 	@FXML
 	static ListView<String> drinkListView;
 
@@ -33,15 +44,31 @@ public class Home implements View {
 	@FXML
 	Text drinkNameText;
 	@FXML
-	AnchorPane modal;
+	AnchorPane passwordModal;
+	@FXML
+	AnchorPane settingsModal;
 	@FXML
 	TextField password;
 	@FXML
 	Text passwordStatus;
 	@FXML
-	HBox topHboxBar;
+	static HBox topHboxBar;
+	@FXML
+	Button pourMyDrinkButton;
+	@FXML
+	Button createYourOwnDrinkButton;
+	@FXML
+	Button settings;
+	@FXML
+	Button alphabeticalSort;
+	@FXML
+	Button userCreatedSort;
+	@FXML
+	Button popularitySort;
 
-	private GUIDrinkController guiDrinkController;
+	private GUIDrinkController guiDrinkController = new GUIDrinkController(false);
+	private Queue<Drink> drinkQueue = new LinkedList();
+	private static AtomicBoolean pouring = new AtomicBoolean(false);
 
 	@Override
 	public void setViewController(ViewController viewController) {
@@ -53,7 +80,9 @@ public class Home implements View {
 	 */
 	@Override
 	public void init() {
-		modal.setVisible(false);
+		pourMyDrinkButton.setDisable(true);
+		hideSettings();
+		hidePasswordModal();
 		drinkNameText.setText("");
 		observableDrinkList = Main.getDrinkables();
 		drinkListView.setItems(observableDrinkList);
@@ -64,21 +93,27 @@ public class Home implements View {
 				drinkListView.setItems(searchResults);
 			}
 		});
-		guiDrinkController = new GUIDrinkController(false);
+		guiDrinkController.clear();
+		guiControllerPane.getChildren().clear();
 		guiControllerPane.getChildren().add(guiDrinkController);
 		drinkListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String selection) {
 				if (selection != null && observableDrinkList.contains(selection)) {
-					guiDrinkController.addDrink(Main.drinkLibrary.getDrink(selection));
+					guiDrinkController.addDrink(Main.getDrinkLibrary().getDrink(selection));
 					drinkNameText.setText(selection);
+					pourMyDrinkButton.setDisable(false);
+				}
+				if (selection == null) {
+					pourMyDrinkButton.setDisable(true);
 				}
 //				drinkListView.getSelectionModel().clearSelection();
 			}
 		});
 
+
 		//Create handler for Modal De-Selection from Overlay
-		modal.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
+		passwordModal.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				AnchorPane passwordModal = (AnchorPane) mouseEvent.getSource();
@@ -88,10 +123,20 @@ public class Home implements View {
 				double y = mouseEvent.getY();
 				if (!(x > dialogBounds.getMinX() && x < dialogBounds.getMaxX() &&
 						y > dialogBounds.getMinY() && y < dialogBounds.getMaxY())) {
-					modal.setVisible(false);
+					passwordModal.setVisible(false);
 				}
 			}
 		});
+		showFavoritesBar();
+		stylize();
+	}
+
+	private void stylize() {
+		AwesomeDude.setIcon(createYourOwnDrinkButton, AwesomeIcon.EDIT, "1.6em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(settings, AwesomeIcon.COG, "2em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(alphabeticalSort, AwesomeIcon.SORT_ALPHA_ASC, "1em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(popularitySort, AwesomeIcon.STAR, "1em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(userCreatedSort, AwesomeIcon.USER_MD, "1em", ContentDisplay.GRAPHIC_ONLY);
 	}
 
 	private ObservableList<String> search(final String oldQuery, final String newQuery) {
@@ -109,16 +154,56 @@ public class Home implements View {
 		return subentries;
 	}
 
-	private void initFavoritesBar() {
+	private void showFavoritesBar() {
+		ObservableList<Drink> favorites = getFavorites();
+		favorites.subList(0, 4);
+	}
 
+	private ObservableList<Drink> getFavorites() {
+		ObservableList<Drink> drinkableList = Main.getDrinkableList();
+		FXCollections.sort(drinkableList, new Comparator<Drink>() {
+			@Override
+			public int compare(Drink o1, Drink o2) {
+				return Double.compare(o1.getPopularity(), o2.getPopularity());
+			}
+		});
+		return drinkableList;
 	}
 
 	@FXML
 	public void promptForPassword() {
-		passwordStatus.setText("");
+		passwordStatus.setVisible(false);
 		password.setText("");
-		modal.setVisible(true);
+		passwordModal.setVisible(true);
 	}
+
+	@FXML
+	public void showSettings() {
+		if (password.getText().equals(Main.userPassword)) {
+			hidePasswordModal();
+			settingsModal.setVisible(true);
+		} else {
+			passwordStatus.setVisible(true);
+			password.setText("");
+		}
+	}
+
+	private void hidePasswordModal() {
+		passwordStatus.setVisible(false);
+		password.setText("");
+		passwordModal.setVisible(false);
+	}
+
+	@FXML
+	public void saveSettings() {
+		hideSettings();
+	}
+
+	@FXML
+	public void hideSettings() {
+		settingsModal.setVisible(false);
+	}
+
 
 	@FXML
 	public void gotoCreateYourOwnDrink() {
@@ -127,6 +212,99 @@ public class Home implements View {
 
 	@FXML
 	public void pourMyDrink() {
+		String selectedItem = drinkListView.getSelectionModel().getSelectedItem();
+		Drink drink = new Drink(selectedItem, guiDrinkController.getDrinkMapping(), 1.0);
+		drinkQueue.add(drink);
+		DrinkItem drinkItem = new DrinkItem(drink, DrinkType.Queue);
+		topHboxBar.getChildren().add(drinkItem);
+		if (!pouring.get()) {
+			pouring.set(true);
+			drinkItem.pour();
+		}
+	}
 
+	@FXML
+	private void sortByPopularity() {
+		ObservableList<String> favorites = FXCollections.observableArrayList();
+		for (Drink drink : getFavorites()) {
+			favorites.add(drink.getName());
+		}
+		observableDrinkList = favorites;
+		drinkListView.setItems(favorites);
+	}
+
+	@FXML
+	private void sortByAlphabet() {
+		observableDrinkList = Main.getDrinkables();
+		drinkListView.setItems(observableDrinkList);
+	}
+
+	@FXML
+	private void sortByUserCreated() {
+		ObservableList<String> userCreatedDrinks = FXCollections.observableArrayList();
+		for (Drink drink : Main.getUserCreated()) {
+			userCreatedDrinks.add(drink.getName());
+		}
+		observableDrinkList = userCreatedDrinks;
+		drinkListView.setItems(userCreatedDrinks);
+	}
+
+	@FXML
+	private void gotoBarSetup() {
+		hideSettings();
+		viewController.setScreen(ViewController.SetupBar, new FadeTransition());
+	}
+
+	private static class DrinkItem extends AnchorPane {
+		private final int HEIGHT = 80;
+		private final int WIDTH = 80;
+		private ProgressBar progressBar;
+		private Text name;
+		private final Task pour;
+
+		public DrinkItem(Drink drink, DrinkType type) {
+			setMinSize(HEIGHT, WIDTH);
+			setPrefSize(HEIGHT, WIDTH);
+			progressBar = ProgressBarBuilder.create().progress(-1).minWidth(WIDTH).maxWidth(WIDTH).prefWidth(WIDTH).build();
+			this.name = TextBuilder.create().text(drink.getName()).styleClass("drinkItem").wrappingWidth(WIDTH).build();
+			AnchorPane rectangle = AnchorPaneBuilder.create().styleClass("drinkItemImage").prefHeight(HEIGHT).prefWidth(WIDTH).build();
+			getChildren().addAll(rectangle, this.name, this.progressBar);
+			setBottomAnchor(progressBar, 10.0);
+			setTopAnchor(this.name, 0.0);
+			pour = new Task() {
+				@Override
+				protected Object call() throws Exception {
+					System.out.println("Pouring");
+					int max = 1000000;
+					for (int i = 0; i < max; i++) {
+						if (isCancelled()) {
+							break;
+						}
+						System.out.println("Iteration " + i);
+
+						updateProgress(i, max);
+					}
+					System.out.println("Finished");
+					topHboxBar.getChildren().remove(0);
+
+					if (!topHboxBar.getChildren().isEmpty()) {
+						DrinkItem drinkItem = (DrinkItem) topHboxBar.getChildren().get(0);
+						drinkItem.pour();
+					} else {
+						pouring.set(false);
+					}
+					return null;
+				}
+			};
+			progressBar.progressProperty().bind(pour.progressProperty());
+		}
+
+		public void pour() {
+			new Thread(pour).start();
+		}
+	}
+
+	private static enum DrinkType {
+		Queue, Popularity
 	}
 }

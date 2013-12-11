@@ -5,10 +5,14 @@ import client.View;
 import client.ViewController;
 import client.control.AutoFillTextBox;
 import client.transitions.FadeTransition;
+import de.jensd.fx.fontawesome.AwesomeDude;
+import de.jensd.fx.fontawesome.AwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -27,6 +31,12 @@ public class SetupBar implements View {
 	private ViewController viewController;
 	private List<PumpItem> pumpItemList;
 	public int numberOfPumps = 0;
+	private static boolean firstInit = true;
+
+	@FXML
+	Button addButton;
+	@FXML
+	Button removeButton;
 
 	@FXML
 	FlowPane pumpLayout;
@@ -39,10 +49,22 @@ public class SetupBar implements View {
 
 	@Override
 	public void init() {
-		Set<String> ingredientNames = Main.drinkLibrary.getIngredients().keySet();
-		ingredients = FXCollections.observableArrayList(ingredientNames);
-		pumpItemList = new ArrayList<>();
-		testAndDemoSetup();
+		if (firstInit) {
+			numberOfPumps = 0;
+			pumpLayout.getChildren().clear();
+			Set<String> ingredientNames = Main.getDrinkLibrary().getIngredients().keySet();
+			ingredients = FXCollections.observableArrayList(ingredientNames);
+			pumpItemList = new ArrayList<>();
+			testAndDemoSetup();
+			stylize();
+			firstInit = false;
+		}
+	}
+
+	private void stylize() {
+		AwesomeDude.setIcon(addButton, AwesomeIcon.PLUS, "1em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(removeButton, AwesomeIcon.MINUS, "1em", ContentDisplay.GRAPHIC_ONLY);
+
 	}
 
 	private void testAndDemoSetup() {
@@ -80,7 +102,7 @@ public class SetupBar implements View {
 		int i = 0;
 		for (PumpItem pumpItem : pumpItemList) {
 			String ingredient = pumpItem.getIngredient();
-			Main.pumpMap.put(Main.drinkLibrary.getIngredient(ingredient), i);
+			Main.getPumpMap().put(Main.getDrinkLibrary().getIngredient(ingredient), i);
 			i++;
 		}
 	}
@@ -103,7 +125,7 @@ public class SetupBar implements View {
 		}
 
 		public void setIngredient(String ingredient) {
-			if (Main.drinkLibrary.ingredients.keySet().contains(ingredient)) {
+			if (Main.getDrinkLibrary().ingredients.keySet().contains(ingredient)) {
 				autoFillTextBox.setText(ingredient);
 			} else {
 				System.out.println("When setting " + pumpText.getText() + "we could not locate the ingredient " + ingredient);

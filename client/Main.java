@@ -12,14 +12,25 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main extends Application {
-	public static HashMap<Ingredient, Integer> pumpMap = new HashMap<>();
-	public static DrinkLibrary drinkLibrary;
+	private static HashMap<Ingredient, Integer> pumpMap = new HashMap<>();
+	private static DrinkLibrary drinkLibrary;
+	private static List<Drink> userCreatedDrinks = new ArrayList<Drink>();
 	public static String userPassword;
-
 	private String styleSheet;
+	private static Comparator<String> stringComparator = new Comparator<String>() {
+		@Override
+		public int compare(String o1, String o2) {
+			o1 = o1.toLowerCase();
+			o2 = o2.toLowerCase();
+			return o1.compareTo(o2);
+		}
+	};
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -89,12 +100,20 @@ public class Main extends Application {
 
 	public static ObservableList<String> getDrinkables() {
 		ObservableList<String> drinkable = FXCollections.observableArrayList();
+		for (Drink drink : getDrinkableList()) {
+			drinkable.add(drink.getName());
+		}
+		FXCollections.sort(drinkable, stringComparator);
+		return drinkable;
+	}
+
+	public static ObservableList<Drink> getDrinkableList() {
+		ObservableList<Drink> drinkable = FXCollections.observableArrayList();
 		for (Drink drink : drinkLibrary.drinks.values()) {
 			if (drink.satisfy()) {
-				drinkable.add(drink.getName());
+				drinkable.add(drink);
 			}
 		}
-		FXCollections.sort(drinkable);
 		return drinkable;
 	}
 
@@ -103,7 +122,28 @@ public class Main extends Application {
 		for (Ingredient ingredient : pumpMap.keySet()) {
 			ingredients.add(ingredient.getName());
 		}
-		FXCollections.sort(ingredients);
+		FXCollections.sort(ingredients, stringComparator);
 		return ingredients;
+	}
+
+	public static void addUserCreatedDrink(Drink drink) {
+		drinkLibrary.addDrink(drink);
+		userCreatedDrinks.add(drink);
+	}
+
+	public static List<Drink> getUserCreated() {
+		return userCreatedDrinks;
+	}
+
+	public static DrinkLibrary getDrinkLibrary() {
+		return drinkLibrary;
+	}
+
+	public static HashMap<Ingredient, Integer> getPumpMap() {
+		return pumpMap;
+	}
+
+	public static List<Drink> getUserCreatedDrinks() {
+		return userCreatedDrinks;
 	}
 }
