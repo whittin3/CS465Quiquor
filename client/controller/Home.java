@@ -11,6 +11,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -22,6 +23,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextBuilder;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class Home implements View {
@@ -43,7 +49,7 @@ public class Home implements View {
 	@FXML
 	Text passwordStatus;
 	@FXML
-	HBox topHboxBar;
+	static HBox topHboxBar;
 	@FXML
 	Button pourMyDrinkButton;
 	@FXML
@@ -58,6 +64,8 @@ public class Home implements View {
 	Button popularitySort;
 
 	private GUIDrinkController guiDrinkController;
+	private Queue<Drink> drinkQueue = new LinkedList();
+	private static AtomicBoolean pouring = new AtomicBoolean(false);
 
 	@Override
 	public void setViewController(ViewController viewController) {
@@ -69,6 +77,7 @@ public class Home implements View {
 	 */
 	@Override
 	public void init() {
+		pourMyDrinkButton.setDisable(true);
 		modal.setVisible(false);
 		drinkNameText.setText("");
 		observableDrinkList = Main.getDrinkables();
@@ -88,10 +97,15 @@ public class Home implements View {
 				if (selection != null && observableDrinkList.contains(selection)) {
 					guiDrinkController.addDrink(Main.drinkLibrary.getDrink(selection));
 					drinkNameText.setText(selection);
+					pourMyDrinkButton.setDisable(false);
+				}
+				if (selection == null) {
+					pourMyDrinkButton.setDisable(true);
 				}
 //				drinkListView.getSelectionModel().clearSelection();
 			}
 		});
+
 
 		//Create handler for Modal De-Selection from Overlay
 		modal.onMouseClickedProperty().set(new EventHandler<MouseEvent>() {
@@ -108,11 +122,12 @@ public class Home implements View {
 				}
 			}
 		});
+		initFavoritesBar();
 		stylize();
 	}
 
 	private void stylize() {
-		AwesomeDude.setIcon(createYourOwnDrinkButton, AwesomeIcon.EDIT, "2em", ContentDisplay.GRAPHIC_ONLY);
+		AwesomeDude.setIcon(createYourOwnDrinkButton, AwesomeIcon.EDIT, "1.8em", ContentDisplay.GRAPHIC_ONLY);
 		AwesomeDude.setIcon(settings, AwesomeIcon.COG, "2em", ContentDisplay.GRAPHIC_ONLY);
 		AwesomeDude.setIcon(alphabeticalSort, AwesomeIcon.SORT_ALPHA_ASC, "1em", ContentDisplay.GRAPHIC_ONLY);
 		AwesomeDude.setIcon(popularitySort, AwesomeIcon.STAR, "1em", ContentDisplay.GRAPHIC_ONLY);
@@ -135,7 +150,20 @@ public class Home implements View {
 	}
 
 	private void initFavoritesBar() {
-
+//		Task pourTaskListener = new Task() {
+//			@Override
+//			protected Object call() throws Exception {
+//				while (true) {
+//					if (pouring.get() && !topHboxBar.getChildren().isEmpty()) {
+//						DrinkItem drinkItem = (DrinkItem) topHboxBar.getChildren().get(0);
+//						drinkItem.pour();
+//						pouring.set(false);
+//					}
+//				}
+//			}
+//		};
+//		new Thread(pourTaskListener).start();
+//		System.out.println("Started Drink Listener");
 	}
 
 	@FXML
@@ -154,25 +182,61 @@ public class Home implements View {
 	public void pourMyDrink() {
 		String selectedItem = drinkListView.getSelectionModel().getSelectedItem();
 		Drink drink = new Drink(selectedItem, guiDrinkController.getDrinkMapping());
-		DrinkItem drinkItem = new DrinkItem(selectedItem, DrinkType.Queue);
+		drinkQueue.add(drink);
+		DrinkItem drinkItem = new DrinkItem(drink, DrinkType.Queue);
 		topHboxBar.getChildren().add(drinkItem);
+		if (!pouring.get()) {
+			pouring.set(true);
+			drinkItem.pour();
+		}
 	}
 
 	private static class DrinkItem extends AnchorPane {
-		private final int HEIGHT = 60;
-		private final int WIDTH = 60;
+		private final int HEIGHT = 80;
+		private final int WIDTH = 80;
 		private ProgressBar progressBar;
 		private Text name;
+		private final Task pour;
 
-		public DrinkItem(String name, DrinkType type) {
+		public DrinkItem(Drink drink, DrinkType type) {
 			setMinSize(HEIGHT, WIDTH);
+			setPrefSize(HEIGHT, WIDTH);
 			progressBar = ProgressBarBuilder.create().progress(-1).minWidth(WIDTH).maxWidth(WIDTH).prefWidth(WIDTH).build();
-			this.name = new Text(name);
-			Rectangle rectangle = RectangleBuilder.create().styleClass("drinkItem").height(HEIGHT).width(WIDTH).build();
-			getChildren().add(rectangle);
-			getChildren().add(this.name);
-			getChildren().add(this.progressBar);
+			this.name = TextBuilder.create().text(drink.getName()).styleClass("drinkItem").wrappingWidth(WIDTH).build();
+			Rectangle rectangle = RectangleBuilder.create().styleClass("").height(HEIGHT).width(WIDTH).build();
+			getChildren().addAll(rectangle, this.name, this.progressBar);
+			setBottomAnchor(progressBar, 10.0);
+			setTopAnchor(this.name, 0.0);
+			pour = new Task() {
+				@Override
+				protected Object call() throws Exception {
+					System.out.println("Pouring");
+					int max = 1000000;
+					for (int i = 0; i < max; i++) {
+						if (isCancelled()) {
+							break;
+						}
+						System.out.println("Iteration " + i);
 
+						updateProgress(i, max);
+					}
+					System.out.println("Finished");
+					topHboxBar.getChildren().remove(0);
+
+					if (!topHboxBar.getChildren().isEmpty()) {
+						DrinkItem drinkItem = (DrinkItem) topHboxBar.getChildren().get(0);
+						drinkItem.pour();
+					} else {
+						pouring.set(false);
+					}
+					return null;
+				}
+			};
+			progressBar.progressProperty().bind(pour.progressProperty());
+		}
+
+		public void pour() {
+			new Thread(pour).start();
 		}
 	}
 

@@ -35,6 +35,12 @@
  	-fx-font-size: 32px;
  }
 
+ .drinkItem{
+	-fx-fill: white;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+ }
+
 .root{
   -icons-color: rgb(61,114,144);
 }

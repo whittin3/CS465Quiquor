@@ -69,7 +69,7 @@ public class AutoFillTextBox<T> extends Control implements AutoFillTextBoxFactor
 	public void requestFocus() {
 		super.requestFocus();
 		textbox.requestFocus();
-		System.out.println("Focued");
+//		System.out.println("Focused");
 	}
 
 	public T getItem() {
