@@ -27,6 +27,8 @@ import javafx.scene.text.TextBuilder;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -52,7 +54,7 @@ public class Home implements View {
 	@FXML
 	Text passwordStatus;
 	@FXML
-	static HBox topHboxBar;
+	static HBox drinkItemBox;
 	@FXML
 	Button pourMyDrinkButton;
 	@FXML
@@ -68,7 +70,9 @@ public class Home implements View {
 
 	private GUIDrinkController guiDrinkController = new GUIDrinkController(false);
 	private Queue<Drink> drinkQueue = new LinkedList();
-	private static AtomicBoolean pouring = new AtomicBoolean(false);
+	private static AtomicBoolean isCurrentlyPouringDrink = new AtomicBoolean(false);
+	private int maxFavoriteBar = 6;
+	private ExecutorService drinkExecutorService = Executors.newSingleThreadExecutor();
 
 	@Override
 	public void setViewController(ViewController viewController) {
@@ -156,7 +160,11 @@ public class Home implements View {
 
 	private void showFavoritesBar() {
 		ObservableList<Drink> favorites = getFavorites();
-		favorites.subList(0, 4);
+		for (int i = 0; i < maxFavoriteBar; i++) {
+			Drink drink = favorites.get(i);
+			DrinkItem drinkItem = new DrinkItem(drink, DrinkType.Popularity);
+			drinkItemBox.getChildren().add(drinkItem);
+		}
 	}
 
 	private ObservableList<Drink> getFavorites() {
@@ -216,11 +224,16 @@ public class Home implements View {
 		Drink drink = new Drink(selectedItem, guiDrinkController.getDrinkMapping(), 1.0);
 		drinkQueue.add(drink);
 		DrinkItem drinkItem = new DrinkItem(drink, DrinkType.Queue);
-		topHboxBar.getChildren().add(drinkItem);
-		if (!pouring.get()) {
-			pouring.set(true);
-			drinkItem.pour();
+		ObservableList<Node> drinkItemBoxChildren = drinkItemBox.getChildren();
+		if (!Home.isCurrentlyPouringDrink.get()) {
+			if (!drinkItemBoxChildren.isEmpty()) {
+				drinkItemBoxChildren.clear();
+			}
+			Home.isCurrentlyPouringDrink.set(true);
+			drinkItem.getPourTask();
 		}
+		drinkItemBoxChildren.add(drinkItem);
+		drinkExecutorService.submit(drinkItem.getPourTask());
 	}
 
 	@FXML
@@ -260,7 +273,7 @@ public class Home implements View {
 		private final int WIDTH = 80;
 		private ProgressBar progressBar;
 		private Text name;
-		private final Task pour;
+		private Task pourTask = null;
 
 		public DrinkItem(Drink drink, DrinkType type) {
 			setMinSize(HEIGHT, WIDTH);
@@ -268,39 +281,44 @@ public class Home implements View {
 			progressBar = ProgressBarBuilder.create().progress(-1).minWidth(WIDTH).maxWidth(WIDTH).prefWidth(WIDTH).build();
 			this.name = TextBuilder.create().text(drink.getName()).styleClass("drinkItem").wrappingWidth(WIDTH).build();
 			AnchorPane rectangle = AnchorPaneBuilder.create().styleClass("drinkItemImage").prefHeight(HEIGHT).prefWidth(WIDTH).build();
-			getChildren().addAll(rectangle, this.name, this.progressBar);
+			getChildren().addAll(rectangle, this.name);
 			setBottomAnchor(progressBar, 10.0);
 			setTopAnchor(this.name, 0.0);
-			pour = new Task() {
-				@Override
-				protected Object call() throws Exception {
-					System.out.println("Pouring");
-					int max = 1000000;
-					for (int i = 0; i < max; i++) {
-						if (isCancelled()) {
-							break;
+			if (type.equals(DrinkType.Popularity)) {
+				System.out.println("fav");
+			} else {
+				pourTask = new Task() {
+					@Override
+					protected Object call() throws Exception {
+						System.out.println("Pouring");
+						int max = 1000000;
+						for (int i = 0; i < max; i++) {
+							if (isCancelled()) {
+								break;
+							}
+							System.out.println("Iteration " + i);
+
+							updateProgress(i, max);
 						}
-						System.out.println("Iteration " + i);
+						System.out.println("Finished");
+//						drinkItemBox.getChildren().remove(0);
 
-						updateProgress(i, max);
+						if (!drinkItemBox.getChildren().isEmpty()) {
+							DrinkItem drinkItem = (DrinkItem) drinkItemBox.getChildren().get(0);
+							drinkItem.getPourTask();
+						} else {
+							isCurrentlyPouringDrink.set(false);
+						}
+						return null;
 					}
-					System.out.println("Finished");
-					topHboxBar.getChildren().remove(0);
-
-					if (!topHboxBar.getChildren().isEmpty()) {
-						DrinkItem drinkItem = (DrinkItem) topHboxBar.getChildren().get(0);
-						drinkItem.pour();
-					} else {
-						pouring.set(false);
-					}
-					return null;
-				}
-			};
-			progressBar.progressProperty().bind(pour.progressProperty());
+				};
+				getChildren().add(this.progressBar);
+				progressBar.progressProperty().bind(pourTask.progressProperty());
+			}
 		}
 
-		public void pour() {
-			new Thread(pour).start();
+		public Task getPourTask() {
+			return pourTask;
 		}
 	}
 
