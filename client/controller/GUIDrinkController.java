@@ -126,6 +126,7 @@ public class GUIDrinkController extends AnchorPane {
 			this.setMaxWidth(MAX_WIDTH);
 
 			//Rectangle
+            System.out.println(color);
 			rectangle.getStyleClass().add("drink-cell-" + color);
 		}
 
