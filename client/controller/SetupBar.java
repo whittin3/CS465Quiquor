@@ -62,8 +62,9 @@ public class SetupBar implements View {
 	}
 
 	private void stylize() {
+        AwesomeDude.setIcon(removeButton, AwesomeIcon.MINUS, "1em", ContentDisplay.GRAPHIC_ONLY);
 		AwesomeDude.setIcon(addButton, AwesomeIcon.PLUS, "1em", ContentDisplay.GRAPHIC_ONLY);
-		AwesomeDude.setIcon(removeButton, AwesomeIcon.MINUS, "1em", ContentDisplay.GRAPHIC_ONLY);
+
 
 	}
 
