@@ -7,6 +7,7 @@ package client;
 
 import client.readOnly.Drink;
 import client.readOnly.Ingredient;
+import data.DataFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -48,9 +49,9 @@ public class DrinkLibrary {
 	}
 
 	public static DrinkLibrary parseDrinkFile() throws FileNotFoundException, URISyntaxException {
-		File file = new File("data/DrinkLibrary.csv");
+		// I removed the csv file for execution purposes.
 		DrinkLibrary drinkLibrary = new DrinkLibrary();
-		try (Scanner scanner = new Scanner(file).useDelimiter("[\\n]+")) {
+		try (Scanner scanner = new Scanner(DataFile.getData()).useDelimiter("[\\n]+")) {
 			boolean errorFlag = false;
 			while (scanner.hasNext()) {
 				String line = scanner.next();
