@@ -1,8 +1,6 @@
 .dark-gradientpane {
   -fx-background-radius: 10;
-  -fx-background-color: radial-gradient(radius 100%, derive(-fx-base,-60%), derive(-fx-base,-80%)),
-         derive(-fx-base,-40%),
-         radial-gradient(radius 100%, derive(-fx-base,-60%), derive(-fx-base,-80%));
+  -fx-background-color: linear-gradient(to bottom, #1e5799 1%,#7db9e8 75%);
   -fx-background-insets: 0,1,2;
 }
 
@@ -19,7 +17,7 @@
 
 
 .overlay {
-    -fx-background-color: rgba(0,0,0,0.5);
+    -fx-background-color: #2773cc;
 }
 
 .autofill-text{
@@ -53,7 +51,7 @@
  }
 
 .root{
-  -icons-color: rgb(61,114,144);
+  -icons-color: #2773cc;
 }
 
 .icons{
@@ -77,28 +75,47 @@
   -icons-color: rgb(61,114,144);
 }
 
+.icon-button {
+    -fx-background-position:center;
+    -fx-text-base-color: #000000;
+    -fx-text-fill: black;
+    -icons-color: rgb(61,114,114);
+    -fx-background-color:
+        #ffc477,
+        #eeb44f,
+        linear-gradient(to bottom, #eeb44f 2%, #eeb44f 98%);
+}
+.icon-button:pressed {
+    -fx-text-fill: white;
+}
+.icon-button:hover {
+    -fx-effect: innershadow( three-pass-box , #eeeeee , 6, 0.0 , 0 , 2 );
+}
+
 .std-button {
 	-fx-background-position:center;
-    -fx-text-base-color: white;
-    -fx-text-fill: white;
+    -fx-text-base-color: #000000;
+    -fx-text-fill: black;
+    -fx-border-bottom-right-radius:20px;
+    -fx-border-top-right-radius:20px;
      -fx-background-color:
-         rgb(5, 5, 5),
-         rgb(87, 89, 92),
-         linear-gradient(to bottom, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+         #ffc477,
+         #eeb44f,
+         linear-gradient(to bottom, #eeb44f 2%, #eeb44f 98%);
      -fx-background-radius: 0;
-     -fx-effect: dropshadow(two-pass-box,black,5,.2,0,0);
-     -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.4) , 6, 0.0 , 0 , 2 );
+     -fx-effect: dropshadow(two-pass-box,orange,5,.2,0,0);
+     -fx-effect: innershadow( three-pass-box , #eeb44f , 6, 0.0 , 0 , 2 );
      -icons-color: rgb(255,255,255);
  }
 .std-button:pressed {
 	-fx-text-fill: white;
     -fx-background-color:
-        rgb(5, 5, 5),
-        rgb(55, 57, 58),
-        linear-gradient(to top, rgb(74, 75, 78) 2%, rgb(39, 40, 40) 98%);
+        #ffe123,
+        #ffc477,
+        linear-gradient(to bottom, #ffc578 18%,#fb9d23 46%);
 }
  .std-button:hover {
- 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+ 	-fx-effect: innershadow( three-pass-box , #ffe123 , 6, 0.0 , 0 , 2 );
  }
 
 /*CSS for the GUIDrinkController*/
@@ -111,81 +128,81 @@
 .drink-cell-0 {
     -fx-fill: #D0D102;
     -fx-stroke: transparent;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-    -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(9, 69, 204, 0.62), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(9, 42, 204, 0.62), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(3, 31, 85, 0.63), 10, 0.5, 0.0, -5.0);
  }
 
 .drink-cell-1{
     -fx-fill: #E54028;
     -fx-stroke: transparent;
-   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-   -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-   -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(193, 38, 204, 0.61), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(9, 42, 204, 0.62), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(3, 31, 85, 0.63), 10, 0.5, 0.0, -5.0);
 }
 
 .drink-cell-2{
     -fx-fill: #61AE24;
     -fx-stroke: transparent;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-    -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(53, 255, 116, 0.64), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(97, 252, 255, 0.64), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(23, 255, 178, 0.64), 10, 0.5, 0.0, -5.0);
 }
 
 .drink-cell-3 {
     -fx-fill: #F18D05;
     -fx-stroke: transparent;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-    -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(39, 115, 204, 0.64), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(39, 115, 204, 0.63), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(15, 92, 204, 0.64), 10, 0.5, 0.0, -5.0);
 }
 
 .drink-cell-4 {
    -fx-fill: #FF0000;
    -fx-stroke: transparent;
-   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-   -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-   -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(9, 69, 204, 0.62), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(9, 42, 204, 0.62), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(3, 31, 85, 0.63), 10, 0.5, 0.0, -5.0);
 }
 
 .drink-cell-5 {
     -fx-fill: #CECECE;
     -fx-stroke: transparent;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-    -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(9, 69, 204, 0.62), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(9, 42, 204, 0.62), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(3, 31, 85, 0.63), 10, 0.5, 0.0, -5.0);
 }
 
 .drink-cell-6 {
     -fx-fill: #0000FF;
      -fx-stroke: transparent;
-        -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-        -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-        -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(9, 69, 204, 0.62), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(9, 42, 204, 0.62), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(3, 31, 85, 0.63), 10, 0.5, 0.0, -5.0);
 }
 
 .drink-cell-7 {
     -fx-fill: #00FF00;
     -fx-stroke: transparent;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-    -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(9, 69, 204, 0.62), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(9, 42, 204, 0.62), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(3, 31, 85, 0.63), 10, 0.5, 0.0, -5.0);
 }
 
 .drink-cell-8 {
     -fx-fill: #FF0D05;
     -fx-stroke: transparent;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-    -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(9, 69, 204, 0.62), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(9, 42, 204, 0.62), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(3, 31, 85, 0.63), 10, 0.5, 0.0, -5.0);
 }
 
 .drink-cell-9 {
    -fx-fill: #FF00FF;
    -fx-stroke: transparent;
-   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, 0.0);
-   -fx-effect: innershadow(gaussian, rgba(1, 1, 1, 0.65), 10, 0.5, 0.0, 5.0);
-   -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.65), 10, 0.5, 0.0, -5.0);
+    -fx-effect: dropshadow(gaussian, rgba(9, 69, 204, 0.62), 10, 0.5, 0.0, 0.0);
+    -fx-effect: innershadow(gaussian, rgba(9, 42, 204, 0.62), 10, 0.5, 0.0, 5.0);
+    -fx-effect: innershadow(gaussian, rgba(3, 31, 85, 0.63), 10, 0.5, 0.0, -5.0);
 }
 
 

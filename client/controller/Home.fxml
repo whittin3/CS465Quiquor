@@ -18,24 +18,6 @@
                         <AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0"
                                     prefWidth="900.0" visible="true">
                             <children>
-                                <Button fx:id="createYourOwnDrinkButton" focusTraversable="false" graphicTextGap="0.0"
-                                        layoutX="846.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                                        minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                                        onAction="#gotoCreateYourOwnDrink" prefHeight="40.0" prefWidth="40.0"
-                                        styleClass="std-button" text=""/>
-                                <Text fill="WHITE" layoutX="672.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                      text="Create Your Own Drink!">
-                                    <effect>
-                                        <Glow>
-                                            <input>
-                                                <DropShadow/>
-                                            </input>
-                                        </Glow>
-                                    </effect>
-                                    <font>
-                                        <Font size="16.0"/>
-                                    </font>
-                                </Text>
                                 <Text fx:id="drinkNameText" fill="WHITE" layoutX="539.0" layoutY="81.0"
                                       strokeType="OUTSIDE" strokeWidth="0.0" text="Some Drink">
                                     <effect>
@@ -55,8 +37,8 @@
                                 </Text>
                                 <Button fx:id="settings" focusTraversable="false" layoutX="7.0" layoutY="5.0"
                                         minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                                        onAction="#promptForPassword" prefHeight="40.0" prefWidth="40.0"
-                                        styleClass="std-button" text="S"/>
+                                        onAction="#promptForPassword"
+                                        styleClass="icon-button" text="S"/>
                                 <HBox fx:id="drinkItemBox" alignment="TOP_LEFT" layoutX="54.0" layoutY="0.0"
                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                       minWidth="-Infinity" prefHeight="100.0" prefWidth="464.0" spacing="10.0"/>
@@ -72,22 +54,26 @@
                                             minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
                                             prefWidth="400.0"/>
                                 <Button fx:id="popularitySort" focusTraversable="false" graphicTextGap="0.0"
-                                        layoutX="18.0" layoutY="83.0" minHeight="-Infinity" minWidth="-Infinity"
-                                        mnemonicParsing="false" onAction="#sortByPopularity" prefHeight="32.0"
-                                        prefWidth="32.0" styleClass="std-button" text=""/>
+                                        layoutX="13.0" layoutY="83.0" minHeight="-Infinity" minWidth="-Infinity"
+                                        mnemonicParsing="false" onAction="#sortByPopularity" styleClass="icon-button" text=""/>
                                 <Button fx:id="alphabeticalSort" cancelButton="false" defaultButton="false"
-                                        focusTraversable="false" layoutX="18.0" layoutY="51.0" minHeight="-Infinity"
+                                        focusTraversable="false" layoutX="13.0" layoutY="51.0" minHeight="-Infinity"
                                         minWidth="-Infinity" mnemonicParsing="false" onAction="#sortByAlphabet"
-                                        prefHeight="32.0" prefWidth="32.0" styleClass="std-button" text=""/>
-                                <Button fx:id="userCreatedSort" focusTraversable="false" layoutX="18.0" layoutY="115.0"
+                                        styleClass="icon-button" text=""/>
+                                <Button fx:id="userCreatedSort" focusTraversable="false" layoutX="15.0" layoutY="115.0"
                                         minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                                        onAction="#sortByUserCreated" prefHeight="32.0" prefWidth="32.0"
-                                        styleClass="std-button" text=""/>
+                                        onAction="#sortByUserCreated"
+                                        styleClass="icon-button" text=""/>
+
                             </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="35.0" prefWidth="940.0">
                             <children>
-                                <Button fx:id="pourMyDrinkButton" focusTraversable="false" layoutX="790.0"
+                                <Button fx:id="createYourOwnDrinkButton" focusTraversable="false" graphicTextGap="0.0"
+                                        layoutX="12.0" layoutY="11.0" mnemonicParsing="false"
+                                        onAction="#gotoCreateYourOwnDrink"
+                                        styleClass="icon-button" text="Create Your Own Drink!"/>
+                                <Button fx:id="pourMyDrinkButton" focusTraversable="false" layoutX="750.0"
                                         layoutY="11.0" mnemonicParsing="false" onAction="#pourMyDrink"
                                         styleClass="std-button, padded-button" text="Pour My Drink!"/>
                             </children>
